@@ -22,6 +22,19 @@ $ mysqldump -u root -p --compact --no-create-info --where="id='2095'" clientes_b
 ~~~
 
 
+### Instalando Inkspace no Ubuntu
 
+Alternativa ao Corel Draw para Linux.
+Para trabalhar com desenho vetorial e precisa do Inkscape em sua última versão, seja por algum recurso novo adicionado ou por apenas preferência.
 
+No Ubuntu tente:
 
+```bash
+sudo apt-get install inkscape
+```
+
+ou
+
+```bash
+sudo add-apt-repository ppa:inkscape.dev/stable -y && sudo apt-get update && sudo apt-get install inkscape -y
+```
