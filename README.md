@@ -38,3 +38,6 @@ ou
 ```bash
 sudo add-apt-repository ppa:inkscape.dev/stable -y && sudo apt-get update && sudo apt-get install inkscape -y
 ```
+
+git clone ssh://user@url.com.br/opt/repo/site.git
+
