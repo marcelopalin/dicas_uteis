@@ -67,7 +67,15 @@ innodb_file_format=barracuda
 innodb_file_per_table=1
 innodb_large_prefix=1
 
-### Mysql - Linux
+### Depois disso, faça o seguinte para os Banco de Dados Existentes:
+
+> For each database:
+ALTER DATABASE database_name CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
+> For each table:
+ALTER TABLE table_name CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+### Dump Mysql - Linux
 
 ```bash
 mysqldump -uusername -ppassword -c -e --default-character-set=utf8mb4 --single-transaction --skip-set-charset --add-drop-database -B dbname > dump.sql
@@ -76,54 +84,37 @@ mysqldump -uusername -ppassword -c -e --default-character-set=utf8mb4 --single-t
 cp dump.sql dump-fixed.sql
 ```
 
-Edite o arquivo com **vim**:
+Edite o arquivo com **editor de texto**:
 ```bash
 vim dump-fixed.sql
 ```
 
-Alter as linhas:
+Altere as linhas para **utf8mb4**:
 
 :%s/DEFAULT CHARACTER SET latin1/DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci/
 :%s/DEFAULT CHARSET=latin1/DEFAULT CHARSET=utf8mb4/
-:wq
+
+Depois puxe o Banco de Dados:
 
 ```bash
 **mysql -uusername -ppassword < dump-fixed.sql**
 ```
 
-**or alternatively using sed:**
+### Para alterar um Banco de Dados cheio de UTF8 para UTF8MB4 para esta codificação faça:
 
-### $1-dbusername $2-password $3-dbname
- 
-### Firstly, we dump only sql schema.
 
-```bash
-mysqldump -u$1 -p$2 -c -e --default-character-set=utf8mb4 --single-transaction --skip-set-charset --add-drop-database -B --no-data $3 > schema.sql
-```
- 
-### Depending your situation, you may have to change latin1 to utf8.
+Para cada Banco de Dados faça:
 
 ```bash
-sed -i.bak -e 's/DEFAULT CHARACTER SET latin1/DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci/' -e 's/DEFAULT CHARSET=latin1/DEFAULT CHARSET=utf8mb4/' schema.sql
+ALTER DATABASE database_name CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+``
+ou para cada tabela:
+
+```bash
+ALTER TABLE table_name CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-### This may needed if you use a Mysql version inferior to 5.7 (or in Debian 9 with MariaDB 10.0.30).
-```bash
-sed -i.bak2 's/ENGINE=InnoDB/ENGINE=InnoDB ROW_FORMAT=DYNAMIC/' schema.sql
-```
- 
-### Then we import updated sql schema.
-mysql -u$1 -p$2 < schema.sql
- 
-### Secondly, we dump only sql data
-```bash
-mysqldump -u$1 -p$2 -c -e --default-character-set=utf8mb4 --single-transaction --skip-set-charset --add-drop-database -B --no-create-info $3 > data.sql
-```
 
-### Then we import updated sql data.
-```bash
-mysql -u$1 -p$2 < data.sql
-```
 
 ### Para alterar um Banco de Dados vazio de UTF8 para UTF8MB4 para esta codificação faça:
 
