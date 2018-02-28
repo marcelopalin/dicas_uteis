@@ -69,11 +69,69 @@ innodb_large_prefix=1
 
 ### Depois disso, faça o seguinte para os Banco de Dados Existentes:
 
-> For each database:
-ALTER DATABASE database_name CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+Para alterar um Banco de Dados cheio de UTF8 para UTF8MB4 para esta codificação faça:
 
-> For each table:
+* Para cada Banco de Dados faça:
+
+```bash
+ALTER DATABASE database_name CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+``
+
+* Ou para cada tabela:
+
+```bash
 ALTER TABLE table_name CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+
+## Resultado do Procedimento
+
+```bash
+mysql> SHOW VARIABLES WHERE Variable_name LIKE 'character\_set\_%' OR Variable_name LIKE 'collation%';
++--------------------------+--------------------+
+| Variable_name            | Value              |
++--------------------------+--------------------+
+| character_set_client     | utf8mb4            |
+| character_set_connection | utf8mb4            |
+| character_set_database   | utf8mb4            |
+| character_set_filesystem | binary             |
+| character_set_results    | utf8mb4            |
+| character_set_server     | utf8mb4            |
+| character_set_system     | utf8               |
+| collation_connection     | utf8mb4_unicode_ci |
+| collation_database       | utf8mb4_unicode_ci |
+| collation_server         | utf8mb4_unicode_ci |
++--------------------------+--------------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = "nome_database";
++----------------------------+
+| default_character_set_name |
++----------------------------+
+| utf8                       |
++----------------------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER DATABASE nome_database CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = "nome_database";
++----------------------------+
+| default_character_set_name |
++----------------------------+
+| utf8mb4                    |
++----------------------------+
+1 row in set (0.00 sec)
+
+```
+
+
+Depois disso acesse o MySQL e execute a consulta para saber se foi alterado:
+
+```bash
+SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = "nome_database";
+```
+
 
 ### Dump Mysql - Linux
 
@@ -99,21 +157,6 @@ Depois puxe o Banco de Dados:
 ```bash
 **mysql -uusername -ppassword < dump-fixed.sql**
 ```
-
-### Para alterar um Banco de Dados cheio de UTF8 para UTF8MB4 para esta codificação faça:
-
-
-Para cada Banco de Dados faça:
-
-```bash
-ALTER DATABASE database_name CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
-``
-ou para cada tabela:
-
-```bash
-ALTER TABLE table_name CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
-
 
 
 ### Para alterar um Banco de Dados vazio de UTF8 para UTF8MB4 para esta codificação faça:
