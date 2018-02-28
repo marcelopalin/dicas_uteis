@@ -51,8 +51,23 @@ Se você estiver usando o MySQL com algum sabor (MySQL, MariaDB, PerconaDB, etc.
 
 ## Como fazer a conversão de **UTF-8** para **UTF8MB4**?
 
-Linux
-=====
+Configure seu arquivo **/etc/mysql/*.cnf**
+
+[client]
+default-character-set = utf8mb4
+
+[mysql]
+default-character-set = utf8mb4
+
+[mysqld]
+character_set_server=utf8mb4
+collation_server=utf8mb4_unicode_ci
+#The following should be set if you are using mysql version 5.6 or lower
+innodb_file_format=barracuda
+innodb_file_per_table=1
+innodb_large_prefix=1
+
+### Mysql - Linux
 
 ```bash
 mysqldump -uusername -ppassword -c -e --default-character-set=utf8mb4 --single-transaction --skip-set-charset --add-drop-database -B dbname > dump.sql
@@ -78,39 +93,39 @@ Alter as linhas:
 
 **or alternatively using sed:**
 
-#  $1-dbusername $2-password $3-dbname
+### $1-dbusername $2-password $3-dbname
  
-# Firstly, we dump only sql schema.
+### Firstly, we dump only sql schema.
+
 ```bash
 mysqldump -u$1 -p$2 -c -e --default-character-set=utf8mb4 --single-transaction --skip-set-charset --add-drop-database -B --no-data $3 > schema.sql
 ```
  
-# Depending your situation, you may have to change latin1 to utf8.
+### Depending your situation, you may have to change latin1 to utf8.
 
 ```bash
 sed -i.bak -e 's/DEFAULT CHARACTER SET latin1/DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci/' -e 's/DEFAULT CHARSET=latin1/DEFAULT CHARSET=utf8mb4/' schema.sql
 ```
 
-# This may needed if you use a Mysql version inferior to 5.7 (or in Debian 9 with MariaDB 10.0.30).
+### This may needed if you use a Mysql version inferior to 5.7 (or in Debian 9 with MariaDB 10.0.30).
 ```bash
 sed -i.bak2 's/ENGINE=InnoDB/ENGINE=InnoDB ROW_FORMAT=DYNAMIC/' schema.sql
 ```
  
-# Then we import updated sql schema.
+### Then we import updated sql schema.
 mysql -u$1 -p$2 < schema.sql
  
-# Secondly, we dump only sql data
+### Secondly, we dump only sql data
 ```bash
 mysqldump -u$1 -p$2 -c -e --default-character-set=utf8mb4 --single-transaction --skip-set-charset --add-drop-database -B --no-create-info $3 > data.sql
 ```
 
-# Then we import updated sql data.
+### Then we import updated sql data.
 ```bash
 mysql -u$1 -p$2 < data.sql
 ```
 
-
-## Para alterar um Banco de Dados vazio de UTF8 para UTF8MB4 para esta codificação faça:
+### Para alterar um Banco de Dados vazio de UTF8 para UTF8MB4 para esta codificação faça:
 
 ```bash
 ALTER DATABASE mydatabasename charset=utf8mb4;
@@ -122,6 +137,11 @@ ALTER DATABASE mydatabasename charset=utf8mb4;
 git archive master | bzip2 > nome_arq_saida.tar.bz2
 ```
 
+### CRIAR UM BD MYSQL com UTF8MB4
+
+```bash
+CREATE DATABASE db_name CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+```
 
 
 ### Como extrair um único registro (uma única linha da tabela) do Banco de Dados MySQL e inserí-lo em Outro Banco de Dados?
