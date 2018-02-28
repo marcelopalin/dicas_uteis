@@ -53,19 +53,24 @@ Se você estiver usando o MySQL com algum sabor (MySQL, MariaDB, PerconaDB, etc.
 
 Configure seu arquivo **/etc/mysql/*.cnf**
 
+~~~
 [client]
+
 default-character-set = utf8mb4
 
 [mysql]
+
 default-character-set = utf8mb4
 
 [mysqld]
+
 character_set_server=utf8mb4
 collation_server=utf8mb4_unicode_ci
 #The following should be set if you are using mysql version 5.6 or lower
 innodb_file_format=barracuda
 innodb_file_per_table=1
 innodb_large_prefix=1
+~~~
 
 ### Depois disso, faça o seguinte para os Banco de Dados Existentes:
 
@@ -75,9 +80,9 @@ Para alterar um Banco de Dados cheio de UTF8 para UTF8MB4 para esta codificaçã
 
 ```bash
 ALTER DATABASE database_name CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
-``
+```
 
-* Ou para cada tabela:
+**Ou para cada tabela:**
 
 ```bash
 ALTER TABLE table_name CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
