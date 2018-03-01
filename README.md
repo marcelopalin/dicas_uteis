@@ -51,7 +51,7 @@ Se você estiver usando o MySQL com algum sabor (MySQL, MariaDB, PerconaDB, etc.
 
 ## Como fazer a conversão de **UTF-8** para **UTF8MB4**?
 
-Configure seu arquivo **/etc/mysql/*.cnf**
+* Configure seu arquivo **/etc/mysql/mysql.conf.d/mysqld.cnf**
 
 ~~~
 [client]
