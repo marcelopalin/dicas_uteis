@@ -219,6 +219,11 @@ Para extrair o seu Projeto Git Limpo a pasta **dir_meu_projeto** faça:
 tar -xvjf nome_arq_saida.tar.bz2 -C ~/dir_meu_projeto
 ```
 
+### Criando um NOVO Banco de Dados
+
+```bash
+CREATE DATABASE nome_database CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+```
 
 
 
