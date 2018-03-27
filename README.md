@@ -37,6 +37,19 @@ sudo apt-get update & apt-get install <nome do pacote>
 MYSQL
 -----
 
+## Como resetar o CAMPO 'id' autoincrement (auto numeração) no MYSQL e no ACCESS?
+
+```bash
+ALTER TABLE [NOME_DA_TABELA] AUTO_INCREMENT = 1
+```
+
+e o equivalente no ACCESS:
+
+```bash
+ALTER TABLE [NOME_DA_TABELA] ALTER COLUMN id COUNTER(1,1)
+```
+
+
 ## Atenção: no MYSQL vs 5.3.x+ utilize a codificação UTF8MB4
 
 https://www.eversql.com/mysql-utf8-vs-utf8mb4-whats-the-difference-between-utf8-and-utf8mb4/
