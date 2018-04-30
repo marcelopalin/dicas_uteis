@@ -2,7 +2,8 @@
 
 - [1. VBA EXCEL](#1-vba-excel)
     - [1.1. Como inicializar sua macro para Otimizá-la?](#11-como-inicializar-sua-macro-para-otimizá-la)
-    - [Método que verifica se Aba Existe na Planilha](#método-que-verifica-se-aba-existe-na-planilha)
+    - [1.2. Método que verifica se Aba Existe na Planilha](#12-método-que-verifica-se-aba-existe-na-planilha)
+    - [1.3. Verificar se uma Tabela (object) do Excel existe](#13-verificar-se-uma-tabela-object-do-excel-existe)
 
 <!-- /TOC -->
 
@@ -29,7 +30,7 @@ No final não esqueça de colocar:
     End With
 ```
 
-## Método que verifica se Aba Existe na Planilha
+## 1.2. Método que verifica se Aba Existe na Planilha
 
 ```
 Public Function aba_existe(wb As Workbook, strNameWsheet As String)
@@ -62,4 +63,23 @@ Exemplo de uso:
         MsgBox "A Aba " & sNomeAba & " NÃO FOI ENCONTRADA! ", vbCritical
     Exit Sub
     End If
+```
+
+
+## 1.3. Verificar se uma Tabela (object) do Excel existe
+
+```
+    Dim sNomeAba as String
+    sNomeAba = "Clientes"
+
+    Dim sNomeTblExcel As String
+    Dim ListObj As ListObject
+    sNomeTblExcel = "tbl_dados_clientes"
+
+    'Varre a lista de objetos
+    For Each ListObj In wb.Sheets(sNomeAba).ListObjects
+        If ListObj.Name = sNomeTblExcel Then
+            ListObj.AutoFilter.ShowAllData 'remove os filtros
+        End If
+    Next ListObj
 ```
