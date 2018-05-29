@@ -5,6 +5,7 @@
         - [1.1.1. Salve o arquivo (01) como **script01.reg**](#111-salve-o-arquivo-01-como-script01reg)
         - [1.1.2. Salve o arquivo (02) como **script02.reg**](#112-salve-o-arquivo-02-como-script02reg)
         - [1.1.3. Execute os scripts respndendo **sim** as perguntas](#113-execute-os-scripts-respndendo-sim-as-perguntas)
+    - [Instalação do Grads no Windows 10](#instalacao-do-grads-no-windows-10)
 
 <!-- /TOC -->
 # 1. Mostrando o Prompt de Comando no Windows 10
@@ -153,3 +154,17 @@ Pronto, a partir de agora, ao clicar com o botão direito em uma pasta do Window
 
 * command prompt
 * command prompt elevate
+
+
+## Instalação do Grads no Windows 10
+
+> Baixe e instale o grads **superpack.exe** para windows.
+
+http://sourceforge.net/projects/opengrads/files/grads2/2.0.2.oga.2/Windows/
+
+Baixe o wgrib2 já compilado:
+
+ftp://cola.gmu.edu/grads/wgrib2-bin-cygwin.zip
+
+Descompacte-o em uma pasta qualquer.
+Coloque o **wgrib2.exe** no PATH DO WINDOWS.
