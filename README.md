@@ -1,10 +1,11 @@
 <!-- TOC -->
 
-- [Dicas Úteis](#dicas-úteis)
+- [Dicas Úteis](#dicas-uteis)
     - [MySQL](#mysql)
     - [GIT](#git)
     - [LINUX](#linux)
     - [VBA EXCEL](#vba-excel)
+    - [DICAS WINDOWS 10](#dicas-windows-10)
 
 <!-- /TOC -->
 
@@ -28,3 +29,7 @@ O objetivo deste projeto é armazenar dicas de comandos linux, dicas de vba, pyt
 ## VBA EXCEL
 
 [Dicas sobre VBA](VBA_EXCEL.md)
+
+## DICAS WINDOWS 10
+
+[Dicas sobre Windows 10](WINDOWS10.md)

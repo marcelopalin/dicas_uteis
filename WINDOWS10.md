@@ -1,12 +1,23 @@
 <!-- TOC -->
 
-## Open Command Here no Windows 10
+- [1. Mostrando o Prompt de Comando no Windows 10](#1-mostrando-o-prompt-de-comando-no-windows-10)
+    - [1.1. Open Command Here](#11-open-command-here)
+        - [1.1.1. Salve o arquivo (01) como **script01.reg**](#111-salve-o-arquivo-01-como-script01reg)
+        - [1.1.2. Salve o arquivo (02) como **script02.reg**](#112-salve-o-arquivo-02-como-script02reg)
+        - [1.1.3. Execute os scripts respndendo **sim** as perguntas](#113-execute-os-scripts-respndendo-sim-as-perguntas)
+
+<!-- /TOC -->
+# 1. Mostrando o Prompt de Comando no Windows 10
+
+## 1.1. Open Command Here
 
 
 [Referência](https://blogs.msdn.microsoft.com/andrew_richards/2017/03/01/enhancing-the-open-command-prompt-here-shift-right-click-context-menu-experience/)
 
 
-### Salve o arquivo (01) como **script01.reg** 
+Basta baixar ou criar os dois scripts e executar com permissão de administardor.
+
+### 1.1.1. Salve o arquivo (01) como **script01.reg** 
 
 Edite o conteúdo deste arquivo com o editor de sua preferência (**VSCode**, **NotePad++**) e coloque o seguinte conteúdo nele:
 
@@ -84,7 +95,7 @@ Windows Registry Editor Version 5.00
 "Extended"=""
 ```
 
-### Salve o arquivo (02) como **script02.reg** 
+### 1.1.2. Salve o arquivo (02) como **script02.reg** 
 
 Edite o conteúdo deste arquivo com o editor de sua preferência (**VSCode**, **NotePad++**) e coloque o seguinte conteúdo nele:
 
@@ -136,7 +147,7 @@ Windows Registry Editor Version 5.00
 ```
 
 
-### Execute os scripts respndendo **sim** as perguntas
+### 1.1.3. Execute os scripts respndendo **sim** as perguntas
 
 Pronto, a partir de agora, ao clicar com o botão direito em uma pasta do Windows Explorer aparecerão as opções:
 
