@@ -6,6 +6,7 @@
     - [LINUX](#linux)
     - [VBA EXCEL](#vba-excel)
     - [DICAS WINDOWS 10](#dicas-windows-10)
+    - [DICAS PYTHON](#dicas-python)
 
 <!-- /TOC -->
 
@@ -33,3 +34,8 @@ O objetivo deste projeto é armazenar dicas de comandos linux, dicas de vba, pyt
 ## DICAS WINDOWS 10
 
 [Dicas sobre Windows 10](WINDOWS10.md)
+
+## DICAS PYTHON
+
+[Dicas sobre PYTHON](PYTHON.md)
+
