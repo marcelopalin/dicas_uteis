@@ -10,6 +10,11 @@
         - [Como instalar o Sublime?](#como-instalar-o-sublime)
         - [1.1.5. Instalando o editor de texto **joe** para terminal](#115-instalando-o-editor-de-texto-joe-para-terminal)
         - [Instalando Codecs](#instalando-codecs)
+        - [LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)](#layout-de-teclado-para-abnt2---configuração-no-ubuntu-modo-texto)
+    - [Instalando PHP 7.2](#instalando-php-72)
+    - [Instalando COMPOSER](#instalando-composer)
+    - [Instalando MYSQL no UBUNTU](#instalando-mysql-no-ubuntu)
+    - [CRIANDO BD E USUÁRIOS](#criando-bd-e-usuários)
 - [2. Dicas de Extração/Compactação Linux](#2-dicas-de-extraçãocompactação-linux)
     - [2.1. **Como extrair um arquivo .tar.gz**?](#21-como-extrair-um-arquivo-targz)
     - [2.2. **Como extrair um arquivo .tar.bz2**?](#22-como-extrair-um-arquivo-tarbz2)
@@ -155,8 +160,90 @@ Por questões de legislação, o Ubuntu não pode incluir determinados codecs mu
 sudo apt install ubuntu-restricted-extras
 ```
 
+### LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)
+> No terminal, digite como root: 
+
+```
+joe /etc/default/keyboard  
+```
+
+> Altere para br, se o teclado for ABNT2: 
+
+```
+XKBLAYOUT="br"  
+```
+
+> Salve a alteração e reinicie!
+
+Opção 2:
+coloque essa linha no ~.BASHRC:
+
+```
+setxkbmap -model abnt2 -layout br
+```
+
+## Instalando PHP 7.2
+
+sudo apt-get install curl
+
+https://thishosting.rocks/install-php-on-ubuntu/
+
+```
+sudo apt-get update && apt-get upgrade
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+sudo apt-get install php7.2
+sudo apt-get install php-pear php7.2-curl php7.2-dev php7.2-gd php7.2-mbstring php7.2-zip php7.2-mysql php7.2-xml php7.2-sqlite3
+
+```
+
+## Instalando COMPOSER
+
+```bash
+curl -sS https://getcomposer.org/installer -o composer-setup.php
+```
+
+Acesse
+https://composer.github.io/pubkeys.html
+
+Pegue o último HASH:
+>544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061
+
+Execute:
+
+```
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+```
+
+```
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+```
+
+Pronto, o composer está instalado!
 
 
+## Instalando MYSQL no UBUNTU
+
+```
+sudo apt-get install mysql-server
+```
+
+No meio da instalação será pedido a senha do usuário "root"
+
+```
+mysql_secure_installation
+```
+
+## CRIANDO BD E USUÁRIOS
+
+```
+CREATE DATABASE nome_db CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE USER 'meu_admin'@'localhost' IDENTIFIED BY 'senha';
+GRANT ALL PRIVILEGES ON *.* TO 'meu_admin'@'localhost';
+flush privileges;
+quit;
+```
 
 
 # 2. Dicas de Extração/Compactação Linux
