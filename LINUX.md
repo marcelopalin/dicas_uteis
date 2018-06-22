@@ -3,18 +3,19 @@
 - [1. Dicas de Instalação](#1-dicas-de-instalação)
     - [1.1. Pós-instalação do Ubuntu](#11-pós-instalação-do-ubuntu)
         - [1.1.1. Atualizando o Sistema Operacional](#111-atualizando-o-sistema-operacional)
-        - [Instalando o Git](#instalando-o-git)
-        - [1.1.2. Instalando o Google Chrome](#112-instalando-o-google-chrome)
-        - [1.1.3. Instalando a Linguagem Pt-br por linha de comando](#113-instalando-a-linguagem-pt-br-por-linha-de-comando)
-        - [1.1.4. Instalando o Visual Studio Code](#114-instalando-o-visual-studio-code)
-        - [Como instalar o Sublime?](#como-instalar-o-sublime)
-        - [1.1.5. Instalando o editor de texto **joe** para terminal](#115-instalando-o-editor-de-texto-joe-para-terminal)
-        - [Instalando Codecs](#instalando-codecs)
-        - [LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)](#layout-de-teclado-para-abnt2---configuração-no-ubuntu-modo-texto)
-    - [Instalando PHP 7.2](#instalando-php-72)
-    - [Instalando COMPOSER](#instalando-composer)
-    - [Instalando MYSQL no UBUNTU](#instalando-mysql-no-ubuntu)
-    - [CRIANDO BD E USUÁRIOS](#criando-bd-e-usuários)
+        - [1.1.2. Instalando o Git](#112-instalando-o-git)
+        - [1.1.3. Instalando o Google Chrome](#113-instalando-o-google-chrome)
+        - [1.1.4. Instalando a Linguagem Pt-br por linha de comando](#114-instalando-a-linguagem-pt-br-por-linha-de-comando)
+        - [1.1.5. Instalando o Visual Studio Code](#115-instalando-o-visual-studio-code)
+        - [1.1.6. Como instalar o Sublime?](#116-como-instalar-o-sublime)
+        - [1.1.7. Instalando o editor de texto **joe** para terminal](#117-instalando-o-editor-de-texto-joe-para-terminal)
+        - [1.1.8. Instalando Codecs](#118-instalando-codecs)
+        - [1.1.9. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)](#119-layout-de-teclado-para-abnt2---configuração-no-ubuntu-modo-texto)
+    - [1.2. Instalando PHP 7.2](#12-instalando-php-72)
+    - [1.3. Instalando COMPOSER](#13-instalando-composer)
+    - [1.4. Instalando MYSQL no UBUNTU](#14-instalando-mysql-no-ubuntu)
+    - [1.5. CRIANDO BD E USUÁRIOS](#15-criando-bd-e-usuários)
+        - [Facilidades no acesso SSH](#facilidades-no-acesso-ssh)
 - [2. Dicas de Extração/Compactação Linux](#2-dicas-de-extraçãocompactação-linux)
     - [2.1. **Como extrair um arquivo .tar.gz**?](#21-como-extrair-um-arquivo-targz)
     - [2.2. **Como extrair um arquivo .tar.bz2**?](#22-como-extrair-um-arquivo-tarbz2)
@@ -33,7 +34,7 @@
 sudo apt-get update && sudo apt-get upgrade
 ```
 
-### Instalando o Git
+### 1.1.2. Instalando o Git
 
 Um programa indispensável para qualquer desenvolvedor é o Git, para utilizá-lo execute o comando abaixo:
 
@@ -46,7 +47,7 @@ Não é necessário, mas se quiser que ao digitar sua senha de Git ela permaneç
 
 
 
-### 1.1.2. Instalando o Google Chrome
+### 1.1.3. Instalando o Google Chrome
 
 Basta você baixar o arquivo **.deb** em: [google chrome](http://www.google.com.br/chrome)
 
@@ -55,14 +56,14 @@ Instale com o comando:
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
 
-### 1.1.3. Instalando a Linguagem Pt-br por linha de comando
+### 1.1.4. Instalando a Linguagem Pt-br por linha de comando
 
 ```
 sudo apt-get install language-pack-gnome-pt language-pack-pt-base
 ```
 
 
-### 1.1.4. Instalando o Visual Studio Code
+### 1.1.5. Instalando o Visual Studio Code
 
 Motivos para migrar para o Visual Studio Code:
 
@@ -106,7 +107,7 @@ Dicas de instalação de Extensões:
 
 ```
 
-### Como instalar o Sublime?
+### 1.1.6. Como instalar o Sublime?
 
 ```
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -129,7 +130,7 @@ sudo apt-get install sublime-text
 ```
 
 
-### 1.1.5. Instalando o editor de texto **joe** para terminal
+### 1.1.7. Instalando o editor de texto **joe** para terminal
 
 ```
 sudo apt-get install joe
@@ -152,7 +153,7 @@ Para sair salvando:
 CTRL + K + X
 ```
 
-### Instalando Codecs
+### 1.1.8. Instalando Codecs
 
 Por questões de legislação, o Ubuntu não pode incluir determinados codecs multimídia, como os de MP3, para poder ser distribuído em alguns países, entre outros formatos. Qualquer pessoa que já formatou o computador com Windows sabe que tem que instalar alguns codecs para que todos os tipos de arquivos rodem no sistema, no Windows é bem comum utilizar o pack "K-Lite", no Ubuntu, temos o Ubuntu Restricted Extras:
 
@@ -160,7 +161,7 @@ Por questões de legislação, o Ubuntu não pode incluir determinados codecs mu
 sudo apt install ubuntu-restricted-extras
 ```
 
-### LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)
+### 1.1.9. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)
 > No terminal, digite como root: 
 
 ```
@@ -182,7 +183,7 @@ coloque essa linha no ~.BASHRC:
 setxkbmap -model abnt2 -layout br
 ```
 
-## Instalando PHP 7.2
+## 1.2. Instalando PHP 7.2
 
 sudo apt-get install curl
 
@@ -198,7 +199,7 @@ sudo apt-get install php-pear php7.2-curl php7.2-dev php7.2-gd php7.2-mbstring p
 
 ```
 
-## Instalando COMPOSER
+## 1.3. Instalando COMPOSER
 
 ```bash
 curl -sS https://getcomposer.org/installer -o composer-setup.php
@@ -223,7 +224,7 @@ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 Pronto, o composer está instalado!
 
 
-## Instalando MYSQL no UBUNTU
+## 1.4. Instalando MYSQL no UBUNTU
 
 ```
 sudo apt-get install mysql-server
@@ -235,7 +236,7 @@ No meio da instalação será pedido a senha do usuário "root"
 mysql_secure_installation
 ```
 
-## CRIANDO BD E USUÁRIOS
+## 1.5. CRIANDO BD E USUÁRIOS
 
 ```
 CREATE DATABASE nome_db CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -244,6 +245,56 @@ GRANT ALL PRIVILEGES ON *.* TO 'meu_admin'@'localhost';
 flush privileges;
 quit;
 ```
+
+### Facilidades no acesso SSH
+
+Gere as chaves de segurança da sua máquina:
+
+**ssh-keygen -t rsa**
+
+```
+mpi@ubuntu:~$ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/mpi/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/mpi/.ssh/id_rsa.
+Your public key has been saved in /home/mpi/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:M1fTjXRDwLzFZSrDtdQ mi@ubuntu
+The key's randomart image is:
++---[RSA 2048]----+
+|     ..oo...o+Bo*|
+|    . .  .  .= X.|
+|   .        o = .|
+|  o o      . o   |
+| . +.o .S .      |
+|  +o.E. .=       |
+|..*o.o  o.       |
+|.+.=. =o.        |
+|oo.... +o        |
++----[SHA256]-----+
+mpi@ubuntu:~$ cd .ssh/
+mpi@ubuntu:~/.ssh$ 
+mpi@ubuntu:~/.ssh$ touch config
+```
+
+No config utilize o formato para facilitar:
+
+Altere as permissões das chaves para 600.
+
+```
+chmod 600 minhachaveamazon.pem
+```
+
+```
+Host meuserver
+HostName 192.168.0.1
+User ubuntu
+IdentityFile ~/.ssh/minhachaveamazon.pem
+```
+
+
 
 
 # 2. Dicas de Extração/Compactação Linux
