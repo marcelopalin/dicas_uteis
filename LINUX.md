@@ -4,6 +4,7 @@
     - [1.1. Pós-instalação do Ubuntu](#11-p%C3%B3s-instala%C3%A7%C3%A3o-do-ubuntu)
         - [1.1.1. Atualizando o Sistema Operacional](#111-atualizando-o-sistema-operacional)
         - [1.1.2. Instalando o Git](#112-instalando-o-git)
+        - [Instalando todos os Compactadores/Descompactadores](#instalando-todos-os-compactadoresdescompactadores)
         - [1.1.3. Instalando o Google Chrome](#113-instalando-o-google-chrome)
         - [1.1.4. Instalando a Linguagem Pt-br por linha de comando](#114-instalando-a-linguagem-pt-br-por-linha-de-comando)
         - [1.1.5. Instalando o Visual Studio Code](#115-instalando-o-visual-studio-code)
@@ -45,7 +46,17 @@ sudo apt-get install git
 
 Não é necessário, mas se quiser que ao digitar sua senha de Git ela permaneça sem necessidade de autenticação por um certo período de tempo configure:
 
+### Instalando todos os Compactadores/Descompactadores
 
+```
+sudo apt-get install p7zip-full p7zip-rar lzma lzma-dev rar unrar-free p7zip ark ncompress
+```
+
+Para descompactar um arquivo do tipo rar:
+
+```bash
+unrar x arquivo.rar
+```
 
 
 ### 1.1.3. Instalando o Google Chrome
