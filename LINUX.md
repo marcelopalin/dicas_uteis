@@ -1,7 +1,7 @@
 <!-- TOC -->
 
-- [1. Dicas de Instalação](#1-dicas-de-instalação)
-    - [1.1. Pós-instalação do Ubuntu](#11-pós-instalação-do-ubuntu)
+- [1. Dicas de Instalação](#1-dicas-de-instala%C3%A7%C3%A3o)
+    - [1.1. Pós-instalação do Ubuntu](#11-p%C3%B3s-instala%C3%A7%C3%A3o-do-ubuntu)
         - [1.1.1. Atualizando o Sistema Operacional](#111-atualizando-o-sistema-operacional)
         - [1.1.2. Instalando o Git](#112-instalando-o-git)
         - [1.1.3. Instalando o Google Chrome](#113-instalando-o-google-chrome)
@@ -10,13 +10,14 @@
         - [1.1.6. Como instalar o Sublime?](#116-como-instalar-o-sublime)
         - [1.1.7. Instalando o editor de texto **joe** para terminal](#117-instalando-o-editor-de-texto-joe-para-terminal)
         - [1.1.8. Instalando Codecs](#118-instalando-codecs)
-        - [1.1.9. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)](#119-layout-de-teclado-para-abnt2---configuração-no-ubuntu-modo-texto)
+        - [1.1.9. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)](#119-layout-de-teclado-para-abnt2---configura%C3%A7%C3%A3o-no-ubuntu-modo-texto)
     - [1.2. Instalando PHP 7.2](#12-instalando-php-72)
     - [1.3. Instalando COMPOSER](#13-instalando-composer)
     - [1.4. Instalando MYSQL no UBUNTU](#14-instalando-mysql-no-ubuntu)
-    - [1.5. CRIANDO BD E USUÁRIOS](#15-criando-bd-e-usuários)
-        - [Facilidades no acesso SSH](#facilidades-no-acesso-ssh)
-- [2. Dicas de Extração/Compactação Linux](#2-dicas-de-extraçãocompactação-linux)
+    - [1.5. CRIANDO BD E USUÁRIOS](#15-criando-bd-e-usu%C3%A1rios)
+        - [1.5.1. Facilidades no acesso SSH](#151-facilidades-no-acesso-ssh)
+        - [1.5.2. NodeJS](#152-nodejs)
+- [2. Dicas de Extração/Compactação Linux](#2-dicas-de-extra%C3%A7%C3%A3ocompacta%C3%A7%C3%A3o-linux)
     - [2.1. **Como extrair um arquivo .tar.gz**?](#21-como-extrair-um-arquivo-targz)
     - [2.2. **Como extrair um arquivo .tar.bz2**?](#22-como-extrair-um-arquivo-tarbz2)
     - [2.3. **Como descompactar um arquivo .bz2**?](#23-como-descompactar-um-arquivo-bz2)
@@ -246,7 +247,7 @@ flush privileges;
 quit;
 ```
 
-### Facilidades no acesso SSH
+### 1.5.1. Facilidades no acesso SSH
 
 Gere as chaves de segurança da sua máquina:
 
@@ -292,6 +293,55 @@ Host meuserver
 HostName 192.168.0.1
 User ubuntu
 IdentityFile ~/.ssh/minhachaveamazon.pem
+```
+
+
+### 1.5.2. NodeJS
+
+Instalando o NodeJS utilizando NVM (Node Version Manager)
+
+Uma alternativa para instalação do Node.js através do apt é usar uma ferramenta especialmente projetada, chamada nvm, que significa "Node.js version manager" ou "Gerenciador de Versão do Node.js".
+
+Usando o nvm você pode instalar múltiplas versões, auto-contidas do Node.js que o permitirá controlar seu ambiente mais facilmente. 
+Ele dará a você acesso sob demanda às mais novas versões do Node.js, 
+mas também o permitirá apontar versões prévias que suas aplicações podem depender.
+
+Para começar, precisaremos obter os pacotes de software do nosso repositório Ubuntu, que nos permitirão compilar pacotes de fontes. O script nvm aproveitará estas ferramentas para construir os componentes necessários:
+
+```bash
+sudo apt-get update
+sudo apt-get install build-essential libssl-dev
+```
+
+Uma vez que os pacotes requeridos estejam instalados, você pode baixar o script de instalação do nvm da página do projeto GitHub (https://github.com/creationix/nvm). 
+
+O número de versão pode ser diferente, mas em geral, você pode baixá-lo com o curl:
+
+```bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+
+```
+Abra um novo terminal para carregar o script inserido no seu **.bashrc**
+
+
+Liste as versões de Node para instalar:
+
+```bash
+nvm ls-remote
+
+```
+
+Escolhemos a última LTS - versão estável e instalamos:
+
+```bash
+nvm install 8.9.4
+
+```
+
+Use o comando:
+
+```bash
+node -v
 ```
 
 
