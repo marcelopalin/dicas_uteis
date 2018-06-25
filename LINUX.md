@@ -73,7 +73,7 @@ git config --global credential.helper 'cache --timeout=86400'
 ```
 
 ```bash
-git config --global user.email meeumail@mail.com"
+git config --global user.email "meumail@mail.com"
 ```
 
 ```bash
