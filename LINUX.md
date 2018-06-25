@@ -3,15 +3,17 @@
 - [1. Dicas de Instalação](#1-dicas-de-instala%C3%A7%C3%A3o)
     - [1.1. Pós-instalação do Ubuntu](#11-p%C3%B3s-instala%C3%A7%C3%A3o-do-ubuntu)
         - [1.1.1. Atualizando o Sistema Operacional](#111-atualizando-o-sistema-operacional)
-        - [1.1.2. Instalando o Git](#112-instalando-o-git)
-        - [Instalando todos os Compactadores/Descompactadores](#instalando-todos-os-compactadoresdescompactadores)
-        - [1.1.3. Instalando o Google Chrome](#113-instalando-o-google-chrome)
-        - [1.1.4. Instalando a Linguagem Pt-br por linha de comando](#114-instalando-a-linguagem-pt-br-por-linha-de-comando)
-        - [1.1.5. Instalando o Visual Studio Code](#115-instalando-o-visual-studio-code)
-        - [1.1.6. Como instalar o Sublime?](#116-como-instalar-o-sublime)
-        - [1.1.7. Instalando o editor de texto **joe** para terminal](#117-instalando-o-editor-de-texto-joe-para-terminal)
-        - [1.1.8. Instalando Codecs](#118-instalando-codecs)
-        - [1.1.9. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)](#119-layout-de-teclado-para-abnt2---configura%C3%A7%C3%A3o-no-ubuntu-modo-texto)
+        - [1.1.2. Instalando Aptitude](#112-instalando-aptitude)
+        - [1.1.3. Instalando o Ambiente Virtual do Python](#113-instalando-o-ambiente-virtual-do-python)
+        - [1.1.4. Instalando o Git](#114-instalando-o-git)
+        - [1.1.5. Instalando todos os Compactadores/Descompactadores](#115-instalando-todos-os-compactadoresdescompactadores)
+        - [1.1.6. Instalando o Google Chrome](#116-instalando-o-google-chrome)
+        - [1.1.7. Instalando a Linguagem Pt-br por linha de comando](#117-instalando-a-linguagem-pt-br-por-linha-de-comando)
+        - [1.1.8. Instalando o Visual Studio Code](#118-instalando-o-visual-studio-code)
+        - [1.1.9. Como instalar o Sublime?](#119-como-instalar-o-sublime)
+        - [1.1.10. Instalando o editor de texto **joe** para terminal](#1110-instalando-o-editor-de-texto-joe-para-terminal)
+        - [1.1.11. Instalando Codecs](#1111-instalando-codecs)
+        - [1.1.12. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)](#1112-layout-de-teclado-para-abnt2---configura%C3%A7%C3%A3o-no-ubuntu-modo-texto)
     - [1.2. Instalando PHP 7.2](#12-instalando-php-72)
     - [1.3. Instalando COMPOSER](#13-instalando-composer)
     - [1.4. Instalando MYSQL no UBUNTU](#14-instalando-mysql-no-ubuntu)
@@ -36,7 +38,21 @@
 sudo apt-get update && sudo apt-get upgrade
 ```
 
-### 1.1.2. Instalando o Git
+### 1.1.2. Instalando Aptitude
+
+```
+sudo apt install aptitude
+sudo aptitude update & sudo aptitude upgrade
+```
+
+### 1.1.3. Instalando o Ambiente Virtual do Python
+
+```
+sudo aptitude install virtualenv python3-virtualenv virtualenvwrapper python3-pip
+```
+
+
+### 1.1.4. Instalando o Git
 
 Um programa indispensável para qualquer desenvolvedor é o Git, para utilizá-lo execute o comando abaixo:
 
@@ -44,9 +60,27 @@ Um programa indispensável para qualquer desenvolvedor é o Git, para utilizá-l
 sudo apt-get install git
 ```
 
-Não é necessário, mas se quiser que ao digitar sua senha de Git ela permaneça sem necessidade de autenticação por um certo período de tempo configure:
+Não é necessário, mas se quiser que ao digitar sua senha de Git ela permaneça sem necessidade de autenticação por um certo período de tempo configure
+para armazenar as credenciais(86400 segs = 24h * 60min * 60seg)
 
-### Instalando todos os Compactadores/Descompactadores
+
+```bash
+git config --global credential.helper cache
+```
+
+```bash
+git config --global credential.helper 'cache --timeout=86400'
+```
+
+```bash
+git config --global user.email meeumail@mail.com"
+```
+
+```bash
+git config --global user.name "Seu Nome"
+```
+
+### 1.1.5. Instalando todos os Compactadores/Descompactadores
 
 ```
 sudo apt-get install p7zip-full p7zip-rar lzma lzma-dev rar unrar-free p7zip ark ncompress
@@ -59,7 +93,7 @@ unrar x arquivo.rar
 ```
 
 
-### 1.1.3. Instalando o Google Chrome
+### 1.1.6. Instalando o Google Chrome
 
 Basta você baixar o arquivo **.deb** em: [google chrome](http://www.google.com.br/chrome)
 
@@ -68,14 +102,14 @@ Instale com o comando:
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
 
-### 1.1.4. Instalando a Linguagem Pt-br por linha de comando
+### 1.1.7. Instalando a Linguagem Pt-br por linha de comando
 
 ```
 sudo apt-get install language-pack-gnome-pt language-pack-pt-base
 ```
 
 
-### 1.1.5. Instalando o Visual Studio Code
+### 1.1.8. Instalando o Visual Studio Code
 
 Motivos para migrar para o Visual Studio Code:
 
@@ -119,7 +153,7 @@ Dicas de instalação de Extensões:
 
 ```
 
-### 1.1.6. Como instalar o Sublime?
+### 1.1.9. Como instalar o Sublime?
 
 ```
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -142,7 +176,7 @@ sudo apt-get install sublime-text
 ```
 
 
-### 1.1.7. Instalando o editor de texto **joe** para terminal
+### 1.1.10. Instalando o editor de texto **joe** para terminal
 
 ```
 sudo apt-get install joe
@@ -165,7 +199,7 @@ Para sair salvando:
 CTRL + K + X
 ```
 
-### 1.1.8. Instalando Codecs
+### 1.1.11. Instalando Codecs
 
 Por questões de legislação, o Ubuntu não pode incluir determinados codecs multimídia, como os de MP3, para poder ser distribuído em alguns países, entre outros formatos. Qualquer pessoa que já formatou o computador com Windows sabe que tem que instalar alguns codecs para que todos os tipos de arquivos rodem no sistema, no Windows é bem comum utilizar o pack "K-Lite", no Ubuntu, temos o Ubuntu Restricted Extras:
 
@@ -173,7 +207,7 @@ Por questões de legislação, o Ubuntu não pode incluir determinados codecs mu
 sudo apt install ubuntu-restricted-extras
 ```
 
-### 1.1.9. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)
+### 1.1.12. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)
 > No terminal, digite como root: 
 
 ```
