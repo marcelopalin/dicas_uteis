@@ -1,12 +1,13 @@
 <!-- TOC -->
 
-- [Dicas Úteis](#dicas-uteis)
+- [Dicas Úteis](#dicas-%C3%BAteis)
     - [MySQL](#mysql)
     - [GIT](#git)
     - [LINUX](#linux)
     - [VBA EXCEL](#vba-excel)
     - [DICAS WINDOWS 10](#dicas-windows-10)
     - [DICAS PYTHON](#dicas-python)
+    - [DICAS SERVIDOR WEB NGINX](#dicas-servidor-web-nginx)
 
 <!-- /TOC -->
 
@@ -39,3 +40,6 @@ O objetivo deste projeto é armazenar dicas de comandos linux, dicas de vba, pyt
 
 [Dicas sobre PYTHON](PYTHON.md)
 
+## DICAS SERVIDOR WEB NGINX
+
+[Dicas sobre NGINX](NGINX.md)
