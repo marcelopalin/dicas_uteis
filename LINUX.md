@@ -25,9 +25,9 @@
     - [2.2. **Como extrair um arquivo .tar.bz2**?](#22-como-extrair-um-arquivo-tarbz2)
     - [2.3. **Como descompactar um arquivo .bz2**?](#23-como-descompactar-um-arquivo-bz2)
     - [2.4. Executa dois comandos em uma linha. Comando para Instalar pacote:](#24-executa-dois-comandos-em-uma-linha-comando-para-instalar-pacote)
-- [SCREEN LINUX](#screen-linux)
-    - [Objetivo](#objetivo)
-    - [Resumo dos Comandos Screen](#resumo-dos-comandos-screen)
+- [3. SCREEN LINUX](#3-screen-linux)
+    - [3.1. Objetivo](#31-objetivo)
+    - [3.2. Resumo dos Comandos Screen](#32-resumo-dos-comandos-screen)
 
 <!-- /TOC -->
 
@@ -422,9 +422,9 @@ bunzip2 programa.tar.bz2
 sudo apt-get update & apt-get install <nome do pacote>
 ```
 
-# SCREEN LINUX
+# 3. SCREEN LINUX
 
-## Objetivo
+## 3.1. Objetivo
 
 Rodar um processo (script) no linux através de um terminal SSH que demorará horas, dias ou nunca se encerrará. Como fechar a sessão sem que o processo seja encerado? Utilizando o Screen.
 
@@ -475,7 +475,7 @@ screen -r rodando_baixador
 Ou, ao invés de digitar o nome, utilize o número da sessão.
 
 
-## Resumo dos Comandos Screen
+## 3.2. Resumo dos Comandos Screen
 
 * screen -S <nome_da_janela> : Cria uma sessão com um nome personalizado. Ex: screen -S baixador
 * Ctrl+ a + d : Sai da Sessão (Detaches) sem matar os processos que ficarão rodando em segundo plano.
