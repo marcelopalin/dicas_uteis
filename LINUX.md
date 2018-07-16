@@ -18,8 +18,10 @@
     - [1.3. Instalando COMPOSER](#13-instalando-composer)
     - [1.4. Instalando MYSQL no UBUNTU](#14-instalando-mysql-no-ubuntu)
     - [1.5. CRIANDO BD E USUÁRIOS](#15-criando-bd-e-usu%C3%A1rios)
-        - [1.5.1. Facilidades no acesso SSH](#151-facilidades-no-acesso-ssh)
-        - [1.5.2. NodeJS](#152-nodejs)
+    - [1.6. Como saber o IP da minha máquina?](#16-como-saber-o-ip-da-minha-m%C3%A1quina)
+    - [1.7. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina](#17-permitir-que-seu-banco-de-dados-mysql-seja-acessado-de-qualquer-m%C3%A1quina)
+        - [1.7.1. Facilidades no acesso SSH](#171-facilidades-no-acesso-ssh)
+        - [1.7.2. NodeJS](#172-nodejs)
 - [2. Dicas de Extração/Compactação Linux](#2-dicas-de-extra%C3%A7%C3%A3ocompacta%C3%A7%C3%A3o-linux)
     - [2.1. **Como extrair um arquivo .tar.gz**?](#21-como-extrair-um-arquivo-targz)
     - [2.2. **Como extrair um arquivo .tar.bz2**?](#22-como-extrair-um-arquivo-tarbz2)
@@ -295,7 +297,33 @@ flush privileges;
 quit;
 ```
 
-### 1.5.1. Facilidades no acesso SSH
+## 1.6. Como saber o IP da minha máquina?
+
+```bash
+ip addr show
+```
+
+
+## 1.7. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina
+
+**OBS:** um exemplo de utilização é na sua máquina virtual linux para poder ser acessada pelo Windows. Não faça isso nos seus servidores de produção pois é inseguro.
+
+Altere o arquivo:
+
+```bash
+/etc/mysql/mysql.conf.d
+```
+
+Alterando a linha bind-address para:
+
+```bash
+# Instead of skip-networking the default is now to listen only on
+# localhost which is more compatible and is not less secure.
+bind-address            = 0.0.0.0
+```
+
+
+### 1.7.1. Facilidades no acesso SSH
 
 Gere as chaves de segurança da sua máquina:
 
@@ -344,7 +372,7 @@ IdentityFile ~/.ssh/minhachaveamazon.pem
 ```
 
 
-### 1.5.2. NodeJS
+### 1.7.2. NodeJS
 
 Instalando o NodeJS utilizando NVM (Node Version Manager)
 
