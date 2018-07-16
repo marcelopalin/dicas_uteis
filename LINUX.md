@@ -25,6 +25,9 @@
     - [2.2. **Como extrair um arquivo .tar.bz2**?](#22-como-extrair-um-arquivo-tarbz2)
     - [2.3. **Como descompactar um arquivo .bz2**?](#23-como-descompactar-um-arquivo-bz2)
     - [2.4. Executa dois comandos em uma linha. Comando para Instalar pacote:](#24-executa-dois-comandos-em-uma-linha-comando-para-instalar-pacote)
+- [SCREEN LINUX](#screen-linux)
+    - [Objetivo](#objetivo)
+    - [Resumo dos Comandos Screen](#resumo-dos-comandos-screen)
 
 <!-- /TOC -->
 
@@ -419,3 +422,63 @@ bunzip2 programa.tar.bz2
 sudo apt-get update & apt-get install <nome do pacote>
 ```
 
+# SCREEN LINUX
+
+## Objetivo
+
+Rodar um processo (script) no linux através de um terminal SSH que demorará horas, dias ou nunca se encerrará. Como fechar a sessão sem que o processo seja encerado? Utilizando o Screen.
+
+Muitos administradores tem a necessidade de rodar vários comandos de uma vez. Ao invés de sair abrindo várias janelas de SSH para executá-los você pode criar várias sessões com o Screen e ir alternando entre elas com comandos do tipo: Ctrl + a + p (sessão anterior) ou Ctrl + a + n (próxima sessão). Tudo como se você estivesse saindo de uma tela de SSH para outra, de forma simples, rápida e segura.
+
+
+Como instalar?
+
+```bash
+sudo apt-get install screen
+```
+
+Caso de exemplo:
+
+Quero abrir uma sessão como Screen para deixar baixando uma imagem de um ISO do linux, sair da sessão, e depois voltar para verificar se a ISO foi baixada:
+
+Este comando iniciará uma sessão dentro do screen com o nome "baixando_iso":
+
+```bash
+screen -S rodando_baixador
+```
+
+Neste exemplo vamos deixar baixando a ISO do linux:
+
+
+```bash
+wget http://cdimage.ubuntu.com/ubuntu-gnome/releases/16.04/release/ubuntu-gnome-16.04-desktop-amd64.iso
+```
+
+Para sair da sessão deixando-a ativa (com o comando wget rodando em background) faça:
+
+```
+Ctrl+a+ d (pressione control +a, solte, e em seguida aperte d)
+
+```
+Então, quando você quiser voltar para asa janelas abertas pelo screen, digite:
+
+```bash
+screen -ls
+```
+
+Para listar todas as janelas abertas. Para retornar a uma delas digite
+
+```bash
+screen -r rodando_baixador
+```
+
+Ou, ao invés de digitar o nome, utilize o número da sessão.
+
+
+## Resumo dos Comandos Screen
+
+* screen -S <nome_da_janela> : Cria uma sessão com um nome personalizado. Ex: screen -S baixador
+* Ctrl+ a + d : Sai da Sessão (Detaches) sem matar os processos que ficarão rodando em segundo plano.
+* screen -ls: lista as sessões abertas.
+* screen -r <nome da sessao> : Retorna a sessão que estava aberta.
+* Ctrl + a + k : Mata a sessão (claro que você deve estar nela) e todos os seus processos
