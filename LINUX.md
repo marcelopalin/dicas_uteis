@@ -5,6 +5,9 @@
         - [1.1.1. Atualizando o Sistema Operacional](#111-atualizando-o-sistema-operacional)
         - [1.1.2. Instalando Aptitude](#112-instalando-aptitude)
         - [1.1.3. Instalando o Ambiente Virtual do Python](#113-instalando-o-ambiente-virtual-do-python)
+        - [Instalando o Serviço de SSH](#instalando-o-servi%C3%A7o-de-ssh)
+            - [Para instalar o SSH](#para-instalar-o-ssh)
+            - [Verificar o Status da Porta 22 do SSH](#verificar-o-status-da-porta-22-do-ssh)
         - [1.1.4. Instalando o Git](#114-instalando-o-git)
         - [1.1.5. Instalando todos os Compactadores/Descompactadores](#115-instalando-todos-os-compactadoresdescompactadores)
         - [1.1.6. Instalando o Google Chrome](#116-instalando-o-google-chrome)
@@ -57,6 +60,53 @@ sudo aptitude install virtualenv python3-virtualenv virtualenvwrapper python3-pi
 ```
 
 
+### Instalando o Serviço de SSH
+
+Primeiro verifique se o serviço já está instalado e rodando com o comando:
+
+```bash
+user@ubuntu:~$ /etc/init.d/ssh status
+```
+
+
+Se estiver rodando você verá a seguinte resposta:
+
+```bash
+● ssh.service - OpenBSD Secure Shell server
+   Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+   Active: active (running) since Tue 2018-07-17 16:47:11 -03; 8min ago
+ Main PID: 56478 (sshd)
+   CGroup: /system.slice/ssh.service
+           └─56478 /usr/sbin/sshd -D
+
+Jul 17 16:47:11 ubuntu systemd[1]: Starting OpenBSD Secure Shell server...
+Jul 17 16:47:11 ubuntu sshd[56478]: Server listening on 0.0.0.0 port 22.
+Jul 17 16:47:11 ubuntu sshd[56478]: Server listening on :: port 22.
+Jul 17 16:47:11 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
+```
+
+#### Para instalar o SSH
+
+```bash
+sudo apt-get install openssh-server -y
+```
+
+#### Verificar o Status da Porta 22 do SSH
+
+```bash
+mpi@ubuntu:~/www/dicas_uteis$ netstat -aln | grep ":22"
+```
+
+Resposta correta (LISTEN):
+
+```bash
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
+tcp        0      0 192.168.204.147:22      192.168.204.1:54344     ESTABLISHED
+tcp6       0      0 :::22                   :::*                    LISTEN 
+```
+
+
+
 ### 1.1.4. Instalando o Git
 
 Um programa indispensável para qualquer desenvolvedor é o Git, para utilizá-lo execute o comando abaixo:
@@ -71,17 +121,11 @@ para armazenar as credenciais(86400 segs = 24h * 60min * 60seg)
 
 ```bash
 git config --global credential.helper cache
-```
 
-```bash
 git config --global credential.helper 'cache --timeout=86400'
-```
 
-```bash
 git config --global user.email "meumail@mail.com"
-```
 
-```bash
 git config --global user.name "Seu Nome"
 ```
 
