@@ -323,6 +323,12 @@ Procure por **cgi.fix_pathinfo** descomente a linha e altere para:
 cgi.fix_pathinfo=0
 ```
 
+Reinicie o serviço do PHP:
+
+```bash
+ sudo /etc/init.d/php7.2-fpm restart
+```
+
 
 ## 1.4. Instalando COMPOSER
 

@@ -422,10 +422,16 @@ server {
 Terminado de configurar, antes de testar reinicie os serviços:
 
 ```bash
-
+sudo /etc/init.d/nginx stop
 ```
 
+```bash
+sudo /etc/init.d/nginx start
+```
 
+```bash
+ sudo /etc/init.d/php7.2-fpm restart
+```
 
 # EXTRAS
 
