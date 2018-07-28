@@ -21,6 +21,7 @@
     - [LARAVEL 5.6 API RESTFUL com NGINX no UBUNTU na Amazon EC2 - AWS](#laravel-56-api-restful-com-nginx-no-ubuntu-na-amazon-ec2---aws)
     - [Problemas 01](#problemas-01)
     - [Instalando o Passport](#instalando-o-passport)
+    - [Instalando o PASSPORT](#instalando-o-passport)
 - [Arquivo de Configuraçaõ do NGINX](#arquivo-de-configura%C3%A7a%C3%B5-do-nginx)
 - [EXTRAS](#extras)
     - [Comandos NGINX](#comandos-nginx)
@@ -331,6 +332,24 @@ $ sudo nano /etc/fstab
 Coloque esta linha no final do arquivo **fstab**:
 ```ini
 /swapfile   none    swap    sw    0   0
+```
+
+## Instalando o PASSPORT
+
+```bash
+composer require laravel/passport
+```
+
+Depois execute (verifique antes a configuração do arquivo .env e defina o BD):
+
+```bash
+php artisan migrate
+```
+
+Por fim, execute:
+
+```bash
+php artisan passport:install
 ```
 
 
