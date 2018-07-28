@@ -5,26 +5,29 @@
         - [1.1.1. Atualizando o Sistema Operacional](#111-atualizando-o-sistema-operacional)
         - [1.1.2. Instalando Aptitude](#112-instalando-aptitude)
         - [1.1.3. Instalando o Ambiente Virtual do Python](#113-instalando-o-ambiente-virtual-do-python)
-        - [Instalando o Serviço de SSH](#instalando-o-servi%C3%A7o-de-ssh)
-            - [Para instalar o SSH](#para-instalar-o-ssh)
-            - [Verificar o Status da Porta 22 do SSH](#verificar-o-status-da-porta-22-do-ssh)
-        - [1.1.4. Instalando o Git](#114-instalando-o-git)
-        - [1.1.5. Instalando todos os Compactadores/Descompactadores](#115-instalando-todos-os-compactadoresdescompactadores)
-        - [1.1.6. Instalando o Google Chrome](#116-instalando-o-google-chrome)
-        - [1.1.7. Instalando a Linguagem Pt-br por linha de comando](#117-instalando-a-linguagem-pt-br-por-linha-de-comando)
-        - [1.1.8. Instalando o Visual Studio Code](#118-instalando-o-visual-studio-code)
-        - [1.1.9. Como instalar o Sublime?](#119-como-instalar-o-sublime)
-        - [1.1.10. Instalando o editor de texto **joe** para terminal](#1110-instalando-o-editor-de-texto-joe-para-terminal)
-        - [1.1.11. Instalando Codecs](#1111-instalando-codecs)
-        - [1.1.12. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)](#1112-layout-de-teclado-para-abnt2---configura%C3%A7%C3%A3o-no-ubuntu-modo-texto)
+        - [1.1.4. Instalando o Serviço de SSH](#114-instalando-o-servi%C3%A7o-de-ssh)
+            - [1.1.4.1. Para instalar o SSH](#1141-para-instalar-o-ssh)
+            - [1.1.4.2. Verificar o Status da Porta 22 do SSH](#1142-verificar-o-status-da-porta-22-do-ssh)
+        - [1.1.5. Instalando o Git](#115-instalando-o-git)
+        - [1.1.6. Instalando todos os Compactadores/Descompactadores](#116-instalando-todos-os-compactadoresdescompactadores)
+        - [1.1.7. Instalando o Google Chrome](#117-instalando-o-google-chrome)
+        - [1.1.8. Instalando a Linguagem Pt-br por linha de comando](#118-instalando-a-linguagem-pt-br-por-linha-de-comando)
+        - [1.1.9. Instalando o Visual Studio Code](#119-instalando-o-visual-studio-code)
+        - [1.1.10. Como instalar o Sublime?](#1110-como-instalar-o-sublime)
+        - [1.1.11. Instalando o editor de texto **joe** para terminal](#1111-instalando-o-editor-de-texto-joe-para-terminal)
+        - [1.1.12. Instalando Codecs](#1112-instalando-codecs)
+        - [1.1.13. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)](#1113-layout-de-teclado-para-abnt2---configura%C3%A7%C3%A3o-no-ubuntu-modo-texto)
     - [1.2. Instalando PHP 7.2](#12-instalando-php-72)
-    - [1.3. Instalando COMPOSER](#13-instalando-composer)
-    - [1.4. Instalando MYSQL no UBUNTU](#14-instalando-mysql-no-ubuntu)
-    - [1.5. CRIANDO BD E USUÁRIOS](#15-criando-bd-e-usu%C3%A1rios)
-    - [1.6. Como saber o IP da minha máquina?](#16-como-saber-o-ip-da-minha-m%C3%A1quina)
-    - [1.7. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina](#17-permitir-que-seu-banco-de-dados-mysql-seja-acessado-de-qualquer-m%C3%A1quina)
-        - [1.7.1. Facilidades no acesso SSH](#171-facilidades-no-acesso-ssh)
-        - [1.7.2. NodeJS](#172-nodejs)
+        - [Referências](#refer%C3%AAncias)
+        - [Configurando PHP 7.2 no Ubuntu](#configurando-php-72-no-ubuntu)
+    - [1.4. Instalando COMPOSER](#14-instalando-composer)
+        - [Ajustes COMPOSER](#ajustes-composer)
+    - [1.5. Instalando MYSQL no UBUNTU](#15-instalando-mysql-no-ubuntu)
+    - [1.6. CRIANDO BD E USUÁRIOS](#16-criando-bd-e-usu%C3%A1rios)
+    - [1.7. Como saber o IP da minha máquina?](#17-como-saber-o-ip-da-minha-m%C3%A1quina)
+    - [1.8. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina](#18-permitir-que-seu-banco-de-dados-mysql-seja-acessado-de-qualquer-m%C3%A1quina)
+        - [1.8.1. Facilidades no acesso SSH](#181-facilidades-no-acesso-ssh)
+        - [1.8.2. NodeJS](#182-nodejs)
 - [2. Dicas de Extração/Compactação Linux](#2-dicas-de-extra%C3%A7%C3%A3ocompacta%C3%A7%C3%A3o-linux)
     - [2.1. **Como extrair um arquivo .tar.gz**?](#21-como-extrair-um-arquivo-targz)
     - [2.2. **Como extrair um arquivo .tar.bz2**?](#22-como-extrair-um-arquivo-tarbz2)
@@ -60,7 +63,7 @@ sudo aptitude install virtualenv python3-virtualenv virtualenvwrapper python3-pi
 ```
 
 
-### Instalando o Serviço de SSH
+### 1.1.4. Instalando o Serviço de SSH
 
 Primeiro verifique se o serviço já está instalado e rodando com o comando:
 
@@ -85,13 +88,13 @@ Jul 17 16:47:11 ubuntu sshd[56478]: Server listening on :: port 22.
 Jul 17 16:47:11 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
 ```
 
-#### Para instalar o SSH
+#### 1.1.4.1. Para instalar o SSH
 
 ```bash
 sudo apt-get install openssh-server -y
 ```
 
-#### Verificar o Status da Porta 22 do SSH
+#### 1.1.4.2. Verificar o Status da Porta 22 do SSH
 
 ```bash
 mpi@ubuntu:~/www/dicas_uteis$ netstat -aln | grep ":22"
@@ -107,7 +110,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN
 
 
 
-### 1.1.4. Instalando o Git
+### 1.1.5. Instalando o Git
 
 Um programa indispensável para qualquer desenvolvedor é o Git, para utilizá-lo execute o comando abaixo:
 
@@ -129,7 +132,7 @@ git config --global user.email "meumail@mail.com"
 git config --global user.name "Seu Nome"
 ```
 
-### 1.1.5. Instalando todos os Compactadores/Descompactadores
+### 1.1.6. Instalando todos os Compactadores/Descompactadores
 
 ```
 sudo apt-get install p7zip-full p7zip-rar lzma lzma-dev rar unrar-free p7zip ark ncompress
@@ -142,7 +145,7 @@ unrar x arquivo.rar
 ```
 
 
-### 1.1.6. Instalando o Google Chrome
+### 1.1.7. Instalando o Google Chrome
 
 Basta você baixar o arquivo **.deb** em: [google chrome](http://www.google.com.br/chrome)
 
@@ -151,14 +154,14 @@ Instale com o comando:
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
 
-### 1.1.7. Instalando a Linguagem Pt-br por linha de comando
+### 1.1.8. Instalando a Linguagem Pt-br por linha de comando
 
 ```
 sudo apt-get install language-pack-gnome-pt language-pack-pt-base
 ```
 
 
-### 1.1.8. Instalando o Visual Studio Code
+### 1.1.9. Instalando o Visual Studio Code
 
 Motivos para migrar para o Visual Studio Code:
 
@@ -202,7 +205,7 @@ Dicas de instalação de Extensões:
 
 ```
 
-### 1.1.9. Como instalar o Sublime?
+### 1.1.10. Como instalar o Sublime?
 
 ```
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -225,7 +228,7 @@ sudo apt-get install sublime-text
 ```
 
 
-### 1.1.10. Instalando o editor de texto **joe** para terminal
+### 1.1.11. Instalando o editor de texto **joe** para terminal
 
 ```
 sudo apt-get install joe
@@ -248,7 +251,7 @@ Para sair salvando:
 CTRL + K + X
 ```
 
-### 1.1.11. Instalando Codecs
+### 1.1.12. Instalando Codecs
 
 Por questões de legislação, o Ubuntu não pode incluir determinados codecs multimídia, como os de MP3, para poder ser distribuído em alguns países, entre outros formatos. Qualquer pessoa que já formatou o computador com Windows sabe que tem que instalar alguns codecs para que todos os tipos de arquivos rodem no sistema, no Windows é bem comum utilizar o pack "K-Lite", no Ubuntu, temos o Ubuntu Restricted Extras:
 
@@ -256,7 +259,7 @@ Por questões de legislação, o Ubuntu não pode incluir determinados codecs mu
 sudo apt install ubuntu-restricted-extras
 ```
 
-### 1.1.12. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)
+### 1.1.13. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)
 > No terminal, digite como root: 
 
 ```
@@ -280,21 +283,48 @@ setxkbmap -model abnt2 -layout br
 
 ## 1.2. Instalando PHP 7.2
 
+```bash
 sudo apt-get install curl
-
-https://thishosting.rocks/install-php-on-ubuntu/
-
 ```
-sudo apt-get update && apt-get upgrade
-sudo apt-get install python-software-properties
+
+Para podermos adicionar um repositório instale:
+
+```bash
+apt-get install software-properties-common
+apt-get install python-software-properties
+```
+
+### Referências
+
+* https://thishosting.rocks/install-php-on-ubuntu/
+
+* https://medium.com/@asked_io/how-to-install-php-7-2-x-nginx-1-10-x-laravel-5-6-f9e30ee30eff
+
+```adicione
 sudo add-apt-repository ppa:ondrej/php
-sudo apt-get update
-sudo apt-get install php7.2
-sudo apt-get install php-pear php7.2-curl php7.2-dev php7.2-gd php7.2-mbstring php7.2-zip php7.2-mysql php7.2-xml php7.2-sqlite3
+```
+
+```
+sudo apt-get update 
+sudo apt-get install php7.2 php7.2-fpm php-pear php7.2-curl php7.2-dev php7.2-gd php7.2-mbstring php7.2-zip php7.2-mysql php7.2-xml php7.2-sqlite3
 
 ```
 
-## 1.3. Instalando COMPOSER
+### Configurando PHP 7.2 no Ubuntu
+
+Edite o arquivo **php.ini**
+```bash
+sudo nano /etc/php/7.2/fpm/php.ini
+```
+
+Procure por **cgi.fix_pathinfo** descomente a linha e altere para:
+
+```bash
+cgi.fix_pathinfo=0
+```
+
+
+## 1.4. Instalando COMPOSER
 
 ```bash
 curl -sS https://getcomposer.org/installer -o composer-setup.php
@@ -312,14 +342,37 @@ Execute:
 php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 ```
 
-```
+Finalmente para instalar faça:
+
+```bash
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 ```
 
 Pronto, o composer está instalado!
 
+Para verificar, basta digitar:
 
-## 1.4. Instalando MYSQL no UBUNTU
+```bash
+composer -v
+```
+
+### Ajustes COMPOSER
+
+https://medium.com/teknomuslim/simply-boost-laravel-performance-in-production-7e5c63e32ffd
+
+Use Artisan Command
+Laravel comes with a great tool named Artisan command and this is very usefull to boost performance using available artisan command. And here is my common setup:
+
+php artisan config:cache
+php artisan route:cache
+php artisan optimize --force
+
+Optimize autoload file using composer command:
+
+composer dumpautoload --optimize
+
+
+## 1.5. Instalando MYSQL no UBUNTU
 
 ```
 sudo apt-get install mysql-server
@@ -331,7 +384,7 @@ No meio da instalação será pedido a senha do usuário "root"
 mysql_secure_installation
 ```
 
-## 1.5. CRIANDO BD E USUÁRIOS
+## 1.6. CRIANDO BD E USUÁRIOS
 
 ```
 CREATE DATABASE nome_db CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -341,14 +394,14 @@ flush privileges;
 quit;
 ```
 
-## 1.6. Como saber o IP da minha máquina?
+## 1.7. Como saber o IP da minha máquina?
 
 ```bash
 ip addr show
 ```
 
 
-## 1.7. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina
+## 1.8. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina
 
 **OBS:** um exemplo de utilização é na sua máquina virtual linux para poder ser acessada pelo Windows. Não faça isso nos seus servidores de produção pois é inseguro.
 
@@ -367,7 +420,7 @@ bind-address            = 0.0.0.0
 ```
 
 
-### 1.7.1. Facilidades no acesso SSH
+### 1.8.1. Facilidades no acesso SSH
 
 Gere as chaves de segurança da sua máquina:
 
@@ -416,7 +469,7 @@ IdentityFile ~/.ssh/minhachaveamazon.pem
 ```
 
 
-### 1.7.2. NodeJS
+### 1.8.2. NodeJS
 
 Instalando o NodeJS utilizando NVM (Node Version Manager)
 
