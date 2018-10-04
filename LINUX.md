@@ -4,6 +4,7 @@
     - [1.1. Pós-instalação do Ubuntu](#11-p%C3%B3s-instala%C3%A7%C3%A3o-do-ubuntu)
         - [1.1.1. Atualizando o Sistema Operacional](#111-atualizando-o-sistema-operacional)
         - [1.1.2. Instalando Aptitude](#112-instalando-aptitude)
+        - [1.1.2. Como configurar o Prompt do Servidor?](#112-como-configurar-o-prompt-do-servidor)
         - [1.1.3. Instalando o Ambiente Virtual do Python](#113-instalando-o-ambiente-virtual-do-python)
         - [1.1.4. Instalando o Serviço de SSH](#114-instalando-o-servi%C3%A7o-de-ssh)
             - [1.1.4.1. Para instalar o SSH](#1141-para-instalar-o-ssh)
@@ -55,6 +56,35 @@ sudo apt-get update && sudo apt-get upgrade
 sudo apt install aptitude
 sudo aptitude update & sudo aptitude upgrade
 ```
+
+
+### 1.1.2. Como configurar o Prompt do Servidor?
+
+No arquivo .bashrc coloque as seguintes linhas:
+
+```bash
+export PS1="\u NOME_SERVIDOR \w$ "
+```
+
+Utilize o programa chamado "figlet" para gerar um Logo:
+
+```bash
+figlet PALIN > saida_do_logo.txt
+```
+
+Edite o arquivo **saida_do_logo.txt** no VSCODE e utilize a edição de colunas (ctrl+shift+Seta (para baixo ou para cima)) para acrescentar **echo "**:
+
+```bash
+echo " ____   _    _     ___ _   _ "
+echo "|  _ \ / \  | |   |_ _| \ | |"
+echo "| |_) / _ \ | |    | ||  \| |"
+echo "|  __/ ___ \| |___ | || |\  |"
+echo "|_| /_/   \_\_____|___|_| \_|"
+echo "                             "                                  "
+```
+
+Cole estas linhas no final do arquivo **.bashrc**.
+
 
 ### 1.1.3. Instalando o Ambiente Virtual do Python
 
