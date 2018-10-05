@@ -43,3 +43,8 @@ O objetivo deste projeto é armazenar dicas de comandos linux, dicas de vba, pyt
 ## DICAS SERVIDOR WEB NGINX
 
 [Dicas sobre NGINX](NGINX.md)
+
+
+## DICAS LARAVEL WEBSERVICE AWS
+
+[Dicas sobre LARAVEL](LARAVEL_AWS.md)
