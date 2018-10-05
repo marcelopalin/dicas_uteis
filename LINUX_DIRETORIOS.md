@@ -50,7 +50,7 @@ sudo du -sh
 Outro comando que mostrará em detalhes:
 
 ```bash
-sudo df -h
+sudo df -h --total
 ```
 
 
