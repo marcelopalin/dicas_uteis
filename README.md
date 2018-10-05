@@ -8,6 +8,9 @@
     - [DICAS WINDOWS 10](#dicas-windows-10)
     - [DICAS PYTHON](#dicas-python)
     - [DICAS SERVIDOR WEB NGINX](#dicas-servidor-web-nginx)
+    - [DICAS LARAVEL WEBSERVICE AWS](#dicas-laravel-webservice-aws)
+    - [DICAS LINUX DIRETÓRIOS](#dicas-linux-diret%C3%B3rios)
+    - [DICAS INSTALAR CERTIFICADO SSL FREE](#dicas-instalar-certificado-ssl-free)
 
 <!-- /TOC -->
 
@@ -48,3 +51,12 @@ O objetivo deste projeto é armazenar dicas de comandos linux, dicas de vba, pyt
 ## DICAS LARAVEL WEBSERVICE AWS
 
 [Dicas sobre LARAVEL](LARAVEL_AWS.md)
+
+
+## DICAS LINUX DIRETÓRIOS
+
+[Dicas sobre LINUX](LINUX_DIRETORIOS.md)
+
+## DICAS INSTALAR CERTIFICADO SSL FREE
+
+[Dicas sobre SSL](SSL_FREE_LETSENCRYPT.md)
