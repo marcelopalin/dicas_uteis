@@ -245,7 +245,7 @@ Coloque esta linha no final do arquivo **/etc/fstab**:
 Primeiro você precisa desabilitá-lo. Neste caso estou considerando que o arquivo swap esteja na pasta **/** e se chame **swapfile**:
 
 ```bash
-swapoff -v /swapfile
+sudo swapoff -v /swapfile
 ```
 
 Remova a entrada do arquivo **/etc/fstab**:
@@ -255,7 +255,7 @@ Remova a entrada do arquivo **/etc/fstab**:
 ```
 
 ```bash
-rm /swapfile
+sudo rm /swapfile
 ```
 
 
