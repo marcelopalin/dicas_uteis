@@ -36,7 +36,7 @@ ALTER TABLE [NOME_DA_TABELA] ALTER COLUMN id COUNTER(1,1)
 ## 1.2. Criando um NOVO Banco de Dados
 
 ```bash
-CREATE DATABASE nome_database CHARACTER SET utf8 COLLATE utf_general_ci;
+CREATE DATABASE nome_database CHARACTER SET utf8 COLLATE utf8_general_ci;
 ```
 
 ## 1.3. DUMP
