@@ -253,7 +253,13 @@ pgsql.max_links => Unlimited => Unlimited
 pgsql.max_persistent => Unlimited => Unlimited
 ```
 
-Pronto! Agora você pode testar criando um projeto Laravel, configurando o arquivo **.env** para:
+Pronto! Agora você pode testar criando um projeto Laravel:
+
+```
+composer create-project --prefer-dist laravel/laravel blog
+```
+
+Configurando o arquivo **.env** para:
 
 ```
 DB_CONNECTION=pgsql
@@ -266,3 +272,48 @@ DB_PASSWORD=senhabd
 
 Atenção: não se esqueça que a porta do POSTGRESQL é a 5432!
 
+Crie o BD no windows utilizando o Prompt do PostgreSQL (localize teclando a tecla do Windows e buscando por SQL -> aparecerá SQL Shell (psql)).
+
+Ele pedirá para você confirmar algumas informações, se for utilizar a default que está entre [], basta ir teclando ENTER:
+
+![fig03](images/postgresql/fig03.png)
+
+
+
+Criando o BD no postgres (uma vez que esteja logado no ambiente):
+
+```
+CREATE DATABASE meubancodados;
+```
+
+```
+postgres=# CREATE DATABASE meubancodados;
+CREATE DATABASE
+postgres=#
+```
+
+Para verificar:
+
+```
+postgres=# \l
+                                            Lista dos bancos de dados
+     Nome      |   Dono   | CodificaþÒo |        Collate         |         Ctype          | PrivilÚgios de acesso
+---------------+----------+-------------+------------------------+------------------------+-----------------------
+ meubancodados | postgres | UTF8        | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |
+ postgres      | postgres | UTF8        | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |
+ template0     | postgres | UTF8        | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 | =c/postgres          +
+               |          |             |                        |                        | postgres=CTc/postgres
+ template1     | postgres | UTF8        | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 | =c/postgres          +
+               |          |             |                        |                        | postgres=CTc/postgres
+ teste         | postgres | UTF8        | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |
+(5 registros)
+
+
+postgres=#
+```
+
+Criando o usuário de acesso:
+
+```
+
+```
