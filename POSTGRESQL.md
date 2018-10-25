@@ -144,13 +144,13 @@ No windows a instalação é feita através de um arquivo binário que pode ser 
 https://www.postgresql.org/download/windows/
 
 
-![fig01](images/postgresql/fig01.png)
+![fig01](images/postgresql/fig01.PNG)
 
 Depois de clicar em Download Installers você será redirecionado para:
 
 https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 
-![fig02](images/postgresql/fig02.png)
+![fig02](images/postgresql/fig02.PNG)
 
 
 Neste momento (25/10/2019) foi lançado o PostgreSQL 11, porém, ainda utilizaremos a versão 9.6.
@@ -276,7 +276,7 @@ Crie o BD no windows utilizando o Prompt do PostgreSQL (localize teclando a tecl
 
 Ele pedirá para você confirmar algumas informações, se for utilizar a default que está entre [], basta ir teclando ENTER:
 
-![fig03](images/postgresql/fig03.png)
+![fig03](images/postgresql/fig03.PNG)
 
 
 
