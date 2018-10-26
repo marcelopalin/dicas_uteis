@@ -50,10 +50,6 @@
 lsb_release -a
 ```
 
-```
-
-```
-
 
 ### 1.0.2. Atualizando o Sistema Operacional
 
