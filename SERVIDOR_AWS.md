@@ -164,10 +164,155 @@ sudo dpkg -i mysql-apt-config*
 sudo apt-get install mysql-server
 ```
 
-
-
 Atualmente é necessário rodar este comando com sudo:
 
 ```bash
 sudo mysql_secure_installation
+```
+
+# NODE JS
+
+Instalando o NodeJS utilizando NVM (Node Version Manager)
+
+Uma alternativa para instalação do Node.js através do apt é usar uma ferramenta especialmente projetada, chamada nvm, que significa "Node.js version manager" ou "Gerenciador de Versão do Node.js".
+
+Usando o nvm você pode instalar múltiplas versões, auto-contidas do Node.js que o permitirá controlar seu ambiente mais facilmente. 
+Ele dará a você acesso sob demanda às mais novas versões do Node.js, 
+mas também o permitirá apontar versões prévias que suas aplicações podem depender.
+
+Para começar, precisaremos obter os pacotes de software do nosso repositório Ubuntu, que nos permitirão compilar pacotes de fontes. O script nvm aproveitará estas ferramentas para construir os componentes necessários:
+
+```bash
+sudo apt-get update
+sudo apt-get install build-essential libssl-dev
+```
+
+Uma vez que os pacotes requeridos estejam instalados, você pode baixar o script de instalação do nvm da página do projeto GitHub (https://github.com/creationix/nvm). 
+
+O número de versão pode ser diferente, mas em geral, você pode baixá-lo com o curl:
+
+```bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+
+```
+Abra um novo terminal para carregar o script inserido no seu **.bashrc**
+
+
+Liste as versões de Node para instalar:
+
+```bash
+nvm ls-remote
+```
+
+Escolhemos a última LTS - versão estável e instalamos:
+
+```bash
+nvm install 8.12.4
+```
+
+Use o comando:
+
+```bash
+node -v
+```
+
+
+## Instalando
+
+### Parando o Apache2
+
+**Antes de instalar o NGINX verifique se existe o APACHE e remova-o:**
+
+Execute o comando para verificar se o Apache está sendo executado:
+
+```bash
+service apache2 status
+```
+
+Pare o serviço do Apache:
+
+```bash
+sudo systemctl stop apache2.service
+```
+
+Previna o Apache de inicializar no Boot:
+
+```bash
+sudo systemctl disable apache2.service
+```
+
+Caso queira remover o Apache2 execute (COMANDO NÃO TESTADO):
+
+```bash
+sudo apt-get remove apache2 apache2-utils apache2.2-bin apache2.2-common libapache2-mod-php
+```
+
+
+## Instalando NGNIX
+
+```
+sudo apt-get install nginx -y
+```
+
+
+## Como verificar a instalação?
+Ao final do processo de instalação, o Ubuntu 16.04 inicia o Nginx. O servidor web já deve estar em funcionamento.
+
+Podemos checar com o sistema de init systemd para ter certeza de que o serviço está executando ao digitar:
+
+```bash
+sudo systemctl status nginx
+```
+ou 
+```
+sudo /etc/init.d/nginx status
+```
+
+**Testando:**
+
+Se tentar acessar a URL e ainda aparecer a página do Apache2, é porque o NGINX não 
+substituiu o arquivo **/var/www/html/index.html**, ele simplesmente adicionou outro 
+na pasta **html**:
+
+```bash
+ubuntu@ip-172-31-29-17:/var/www/html$ ls
+index.html  index.nginx-debian.html
+```
+
+Para ver as boas vindas do NGINX neste caso você deve executar o comando:
+
+```bash
+sudo mv index.nginx-debian.html index.html
+```
+
+Reinicie o servidor:
+
+```bash
+sudo /etc/init.d/nginx restart
+```
+
+Pronto! Você verá a tela de boas-vindas do NGINX no seu Browser!
+
+**Atenção** caso altere alguma configuração execute o comando para verificar se está tudo ok:
+
+```bash
+sudo nginx -t
+```
+
+
+## LARAVEL
+
+## Alterando Permissões dos Diretórios de Projeto
+
+Não se esqueça de alterar as permissões e alterar o nome do usuário e grupo
+da pasta **/var/www/html**
+
+```
+sudo chown -R ubuntu:www-data /var/www/html
+sudo chmod -R 775 /var/www/html/"PASTA_SEU_PROJETO_LARAVEL"/storage
+```
+
+Ex:
+```
+sudo chmod -R 775 /var/www/html/webservice/storage
 ```
