@@ -97,7 +97,7 @@ sudo apt-get install python-certbot-nginx
 
 Agora edite o arquivo **default** do **NGNIX** e coloque o nome do seu domínio:
 
-```json
+```bash
 ##
 # You should look at the following URL's in order to grasp a solid understanding
 # of Nginx configuration files in order to fully unleash the power of Nginx.
