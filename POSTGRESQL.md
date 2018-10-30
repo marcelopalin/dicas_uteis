@@ -1,4 +1,4 @@
-# Instalando o PostgreSQL no Linux
+# 1. Instalando o PostgreSQL no Linux
 
 Referências:
 
@@ -21,25 +21,81 @@ Alterne para a conta postgres no seu servidor digitando:
 sudo -i -u postgres
 ```
 
-## Criando Usuário
+## 1.1. Criando Usuário
 
+Primeiro, logue-se:
 
 ```bash
-sudo -u postgres createuser <username>
+sudo -i -u postgres
+postgres=# CREATE USER <username>;
 ```
 
-## Conceitos de permissão do PostgreSQL
+Liste os usuários criados:
+
+```bash
+=# SELECT usename FROM pg_user;
+```
+
+Para listarmos as Roles digite:
+
+```bash
+\du
+```
+
+Exemplo:
+
+```bash
+postgres=# CREATE USER ampere;
+CREATE ROLE
+postgres=# SELECT usename FROM pg_user;
+ usename
+----------
+ postgres
+ ampere
+(2 rows)
+
+postgres=# \du
+                                   List of roles
+ Role name |                         Attributes                         | Member of
+-----------+------------------------------------------------------------+-----------
+ ampere    |                                                            | {}
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+```
+
+## 1.2. Alterando o usuário para Superuser
+
+```bash
+ALTER USER ampere WITH SUPERUSER;
+```
+
+
+## 1.3. Criando uma Senha para o Usuário
+
+```bash
+sudo -u postgres psql
+psql=\# alter user <username> with encrypted password '<password>';
+```
+
+## 1.4. Dando Permissões ao Usuário
+
+```bash
+psql=\# grant all privileges on database <dbname> to <username> ;
+```
+
+
+
+## 1.5. Conceitos de permissão do PostgreSQL
 O PostgreSQL (ou simplesmente "postgres") gerencia permissões através do conceito de "papéis" "ROLES".
 
 As funções são diferentes das permissões tradicionais no estilo Unix, pois não há distinção entre usuários e grupos. As funções podem ser manipuladas para se assemelhar a essas convenções, mas também são mais flexíveis.
 
 Por exemplo, os papéis podem ser membros de outros papéis, permitindo que eles assumam as características de permissão de papéis previamente definidos. As funções também podem possuir objetos e controlar o acesso a esses objetos para outras funções.
 
-## Como visualizar funções no PostgreSQL
+## 1.6. Como visualizar funções no PostgreSQL
 Podemos visualizar as funções atuais definidas no PostgreSQL, fazendo login na interface de prompt com o seguinte comando:
 
 ```bash
-sudo su - postgres psql
+sudo -u postgres psql
 ```
 
 Para obter uma lista de funções, digite isto:
@@ -48,14 +104,20 @@ Para obter uma lista de funções, digite isto:
 \du
 ```
 
+## 1.7. Fazendo Backup com PostgreSQL
 
-
-
-## Fazendo Backup com PostgreSQL
+Versão testada:
 
 ```bash
-pg_dump -U postgres -W -F t nome_do_bd > nome_do_bd.tar
+ pg_dump --username postgres --host localhost <nomedb> | gzip -c > backup.sql.gz
 ```
+
+Versão testada, porém, pede a senha do usuário postgres:
+
+```bash
+pg_dump -h localhost -U postgres -W -F t nome_do_bd > nome_do_bd.tar
+```
+
 
 Examinando o comando:
 
@@ -71,21 +133,8 @@ Examinando o comando:
 	*  p: arquivo texto de SQL 
 
 
-## Criando uma Senha para o Usuário
 
-```bash
-sudo -u postgres psql
-psql=\# alter user <username> with encrypted password '<password>';
-```
-
-## Dando Permissões ao Usuário
-
-```bash
-psql=\# grant all privileges on database <dbname> to <username> ;
-```
-
-
-## Criando BD
+## 1.8. Criando BD
 
 ```bash
 sudo -u postgres createdb modelos
@@ -94,18 +143,18 @@ sudo -u postgres createdb modelos
 ou, depois de logar:
 
 ```bash
-sudo su - postgres psql
+sudo -u postgres psql
 
 # CREATE DATABASE modelos;
 ```
 
-## DROP DATABASE 
+## 1.9. DROP DATABASE 
 
 ```
 SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = 'modelos';
 ```
 
-## Restaurando um Banco de Dados
+## 1.10. Restaurando um Banco de Dados
 
 ```bash
 pg_restore -d <nomebd>.tar
@@ -113,7 +162,7 @@ pg_restore -d <nomebd>.tar
 pg_restore -h localhost -U postgre -W -F t -d modelos Modelos.tar
 ```
 
-## Instalando PgAdmin3 no Ubuntu 16
+## 1.11. Instalando PgAdmin3 no Ubuntu 16
 
 ```
 sudo apt-get install pgadmin3
@@ -135,7 +184,7 @@ And then type \password postgres, and you'll be prompted for your password:
 postgres=# \password postgres
 ```
 
-## Instalando PostgreSQL no Windows
+## 1.12. Instalando PostgreSQL no Windows
 
 O objetivo é instalarmos o PostgreSQL para depois trabalharmos com o Laravel na parte de desenvolvimento do **backend** utilizando o servidor embutido **artisan**. 
 
@@ -157,7 +206,7 @@ Neste momento (25/10/2019) foi lançado o PostgreSQL 11, porém, ainda utilizare
 
 
 
-## Configurando o WampServer no Windows para PostgreSQL
+## 1.13. Configurando o WampServer no Windows para PostgreSQL
 
 Abra o terminal do DOS no windows e digite:
 

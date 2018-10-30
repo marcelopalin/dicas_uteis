@@ -1,62 +1,68 @@
 <!-- TOC -->
 
-- [Dicas Úteis](#dicas-%C3%BAteis)
-    - [MySQL](#mysql)
-    - [GIT](#git)
-    - [LINUX](#linux)
-    - [VBA EXCEL](#vba-excel)
-    - [DICAS WINDOWS 10](#dicas-windows-10)
-    - [DICAS PYTHON](#dicas-python)
-    - [DICAS SERVIDOR WEB NGINX](#dicas-servidor-web-nginx)
-    - [DICAS LARAVEL WEBSERVICE AWS](#dicas-laravel-webservice-aws)
-    - [DICAS LINUX DIRETÓRIOS](#dicas-linux-diret%C3%B3rios)
-    - [DICAS INSTALAR CERTIFICADO SSL FREE](#dicas-instalar-certificado-ssl-free)
+- [1. Dicas Úteis](#1-dicas-%C3%BAteis)
+    - [1.1. MySQL](#11-mysql)
+    - [1.2. PostgreSQL](#12-postgresql)
+    - [1.3. GIT](#13-git)
+    - [1.4. LINUX](#14-linux)
+    - [1.5. VBA EXCEL](#15-vba-excel)
+    - [1.6. DICAS WINDOWS 10](#16-dicas-windows-10)
+    - [1.7. DICAS PYTHON](#17-dicas-python)
+    - [1.8. DICAS SERVIDOR WEB NGINX](#18-dicas-servidor-web-nginx)
+    - [1.9. DICAS LARAVEL WEBSERVICE AWS](#19-dicas-laravel-webservice-aws)
+    - [1.10. DICAS LINUX DIRETÓRIOS](#110-dicas-linux-diret%C3%B3rios)
+    - [1.11. DICAS INSTALAR CERTIFICADO SSL FREE](#111-dicas-instalar-certificado-ssl-free)
 
 <!-- /TOC -->
 
-# Dicas Úteis
+# 1. Dicas Úteis
 
 O objetivo deste projeto é armazenar dicas de comandos linux, dicas de vba, python e outras mais que sejam úteis.
 
 
-## MySQL
+## 1.1. MySQL
 
 [Dicas sobre MySQL](MYSQL.md)
 
-## GIT
+
+## 1.2. PostgreSQL
+
+[Dicas sobre PostgreSQL](POSTGRESQL.md)
+
+## 1.3. GIT
 
 [Dicas sobre GIT](GIT.md)
 
-## LINUX
+## 1.4. LINUX
 
 [Dicas sobre LINUX](LINUX.md)
 
-## VBA EXCEL
+## 1.5. VBA EXCEL
 
 [Dicas sobre VBA](VBA_EXCEL.md)
 
-## DICAS WINDOWS 10
+## 1.6. DICAS WINDOWS 10
 
 [Dicas sobre Windows 10](WINDOWS10.md)
 
-## DICAS PYTHON
+## 1.7. DICAS PYTHON
 
 [Dicas sobre PYTHON](PYTHON.md)
 
-## DICAS SERVIDOR WEB NGINX
+## 1.8. DICAS SERVIDOR WEB NGINX
 
 [Dicas sobre NGINX](NGINX.md)
 
 
-## DICAS LARAVEL WEBSERVICE AWS
+## 1.9. DICAS LARAVEL WEBSERVICE AWS
 
 [Dicas sobre LARAVEL](LARAVEL_AWS.md)
 
 
-## DICAS LINUX DIRETÓRIOS
+## 1.10. DICAS LINUX DIRETÓRIOS
 
 [Dicas sobre LINUX](LINUX_DIRETORIOS.md)
 
-## DICAS INSTALAR CERTIFICADO SSL FREE
+## 1.11. DICAS INSTALAR CERTIFICADO SSL FREE
 
 [Dicas sobre SSL](SSL_FREE_LETSENCRYPT.md)
