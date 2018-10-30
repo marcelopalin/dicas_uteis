@@ -56,7 +56,15 @@ sudo apt-get install php7.3
 ```
 
 ```
-sudo apt-get install php-pear php7.3-curl php7.3-dev php7.3-gd php7.3-mbstring php7.3-zip php7.3-mysql php7.3-xml
+sudo apt-get install php-pear php7.3-curl php7.3-dev php7.3-gd php7.3-mbstring php7.3-zip php7.3-xml
+```
+
+Como o Nginx não contém processamento PHP nativo como alguns outros servidores da Web, você precisará instalar php-fpm, que significa "gerenciador de processos fastCGI". Vamos dizer ao Nginx para passar solicitações do PHP para este software para processamento.
+
+Instale este módulo junto com um pacote auxiliar adicional que permitirá que o PHP se comunique com o back-end de seu banco de dados. A instalação irá puxar os arquivos essenciais do PHP. Faça isso digitando:
+
+```
+sudo apt-get install php7.3-fpm php7.3-mysql php7.3-pgsql
 ```
 
 Versão:
