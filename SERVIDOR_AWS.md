@@ -51,7 +51,13 @@ sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:ondrej/php
 ```
 
+Os pacotes zip e unzip são necessários para o **composer** instalar os pacotes do Laravel.
+
+```bash
+sudo apt-get install zip unzip
 ```
+
+```bash
 sudo apt-get install php7.3
 ```
 
