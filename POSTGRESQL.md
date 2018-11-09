@@ -26,7 +26,7 @@ sudo -i -u postgres
 Primeiro, logue-se:
 
 ```bash
-sudo -i -u postgres
+sudo -i -u postgres psql
 postgres=# CREATE USER <username>;
 ```
 
