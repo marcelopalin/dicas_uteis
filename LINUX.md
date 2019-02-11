@@ -539,7 +539,7 @@ Uma vez que os pacotes requeridos estejam instalados, você pode baixar o script
 O número de versão pode ser diferente, mas em geral, você pode baixá-lo com o curl:
 
 ```bash
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
 ```
 Abra um novo terminal para carregar o script inserido no seu **.bashrc**
