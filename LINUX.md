@@ -542,7 +542,7 @@ O número de versão pode ser diferente, mas em geral, você pode baixá-lo com 
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
 ```
-Abra um novo terminal para carregar o script inserido no seu **.bashrc**
+**Abra um NOVO terminal** para carregar o script inserido no seu **.bashrc**
 
 
 Liste as versões de Node para instalar:
@@ -555,7 +555,7 @@ nvm ls-remote
 Escolhemos a última LTS - versão estável e instalamos:
 
 ```bash
-nvm install 8.9.4
+nvm install 8.15.0
 
 ```
 
