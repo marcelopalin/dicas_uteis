@@ -386,7 +386,41 @@ Optimize autoload file using composer command:
 composer dumpautoload --optimize
 
 
-## 1.24. Instalando MYSQL no UBUNTU
+## Instalando Mysql 8.0 no Ubuntu, Debian
+
+Fonte: https://www.tecmint.com/install-mysql-8-in-ubuntu/
+
+Verifique em
+
+https://dev.mysql.com/downloads/repo/apt/
+
+Qual é o último arquivo de configuração e baixe-o com o comando:
+
+```
+wget -c https://dev.mysql.com/get/mysql-apt-config_0.8.12-1_all.deb 
+```
+
+Instale o pacote com o comando:
+
+```
+sudo dpkg -i mysql-apt-config_0.8.12-1_all.deb
+```
+
+Depois faça:
+
+```
+sudo apt-get update
+sudo apt-get install mysql-server
+```
+
+No final execute:
+
+```
+sudo mysql_secure_installation
+```
+
+
+## 1.24. Instalando MYSQL no UBUNTU (Versão antiga)
 
 ```
 sudo apt-get install mysql-server
