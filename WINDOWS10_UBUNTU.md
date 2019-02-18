@@ -20,17 +20,28 @@ Feito isso, você está apto a isntalar o REDIS
 
 # Instalar e testar o Redis
 Inicie a distro instalada na sua Windows Store e instale o redis-server. O exemplo a seguir funciona com o Ubuntu (você precisará aguardar a inicialização e criar um login na primeira utilização):
+
+```bash
 > sudo apt-get update
 > sudo apt-get upgrade
 > sudo apt-get install redis-server
 > redis-cli -v
+```
+
 Reinicie o servidor Redis para se certificar de que está em execução:
+
+```bash
 > sudo service redis-server restart
+```
+
 Execute um comando Redis simples para verificar se seu servidor Redis está em execução e disponível:
+
+
+```bash
 $ redis-cli 
 127.0.0.1:6379> set user:1 "Jane"
 127.0.0.1:6379> get user:1
 "Jane"
-
+```
 Para parar seu servidor Redis:
 > sudo service redis-server stop
