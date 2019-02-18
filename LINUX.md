@@ -36,6 +36,7 @@ Senão instale utilizando o comando:
 sudo apt install rsync
 ```
 
+Fonte: https://calomel.org/rsync_tips.html
 
 Vantagem:
 
@@ -130,6 +131,28 @@ A linha a seguir executará o comando **find** na máquina remota no diretório 
 ```bash
 rsync -avR user@remote_host_or_ip:'`find /data/video -name "*.[avi]"`' /download/
 ```
+
+
+### Defina o tamanho máximo dos arquivos a serem transferidos
+
+Você pode especificar o tamanho máximo do arquivo a ser transferido ou sincronizado. 
+
+Você pode fazer isso com a opção “ –max-size ”. Aqui neste exemplo, o tamanho máximo do arquivo é 200k, 
+portanto, esse comando transferirá apenas os arquivos iguais ou menores que 200k.
+
+```bash
+rsync -avzhe ssh --max-size='200k' /home/user/dir_destino user@remote_host_or_ip:/home/user/dir_destino
+```
+
+### Rsync - Limite o Tamanho da Banda e o Timeout
+
+--timeout = 30 signifca que o rsync não será interrompido se o sistema remoto estiver inacessível por 30 segundos.
+
+
+```bash
+rsync -avzhe ssh --bwlimit=100 --max-size='200k' --timeout = 30 /home/user/dir_destino user@remote_host_or_ip:/home/user/dir_destino
+```
+
 
 
 ### 1.4.7. Rsync e PV
