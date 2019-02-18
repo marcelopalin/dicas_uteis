@@ -109,7 +109,19 @@ Caso queira copiar o diretório local e você já está dentro dele use:
 rsync -avzhe ssh --progress . user_remote@192.168.0.100:/home/user/dir_destino
 ```
 
-### 1.4.5. Rsync SSH em outra Porta
+### 1.4.5. Excluir automaticamente os arquivos de origem após uma transferência bem-sucedida
+
+Agora, suponha que você tenha um servidor web principal e um servidor de backup de dados, você criou um backup diário e o sincronizou com seu servidor de backup, agora você não quer manter essa cópia local de backup em seu servidor web.
+
+Então, você vai aguardar a transferência para concluir e, em seguida, excluir os arquivos de backup local manualmente? Claro que não. Essa exclusão automática pode ser feita usando a opção ' **–remove-source-files**
+
+```bash
+rsync --remove-source-files -zvh backup.tar /tmp/backups/
+```
+
+
+
+### 1.4.6. Rsync SSH em outra Porta
 
 Se o SSH no host remoto estiver escutando em uma porta diferente do padrão 22, você poderá especificar a porta usando:
 
@@ -122,7 +134,7 @@ P = --progress
 Quando você está transferindo grandes quantidades de dados, é recomendável executar o comando rsync dentro de uma sessão de tela ou usar a -Popção.
 
 
-### 1.4.6. Execute o comando shell remoto para arquivos rsync
+### 1.4.7. Execute o comando shell remoto para arquivos rsync
 
 É importante observar que o **rsync** também pode executar comandos na máquina remota para ajudá-lo a gerar uma lista de arquivos copiados. O comando shell é expandido pelo seu shell remoto antes do rsync ser chamado.
 
@@ -133,7 +145,7 @@ rsync -avR user@remote_host_or_ip:'`find /data/video -name "*.[avi]"`' /download
 ```
 
 
-### Defina o tamanho máximo dos arquivos a serem transferidos
+### 1.4.8. Defina o tamanho máximo dos arquivos a serem transferidos
 
 Você pode especificar o tamanho máximo do arquivo a ser transferido ou sincronizado. 
 
@@ -144,18 +156,26 @@ portanto, esse comando transferirá apenas os arquivos iguais ou menores que 200
 rsync -avzhe ssh --max-size='200k' /home/user/dir_destino user@remote_host_or_ip:/home/user/dir_destino
 ```
 
-### Rsync - Limite o Tamanho da Banda e o Timeout
+### 1.4.9. Rsync - Limite o Tamanho da Banda e o Timeout
 
 --timeout = 30 signifca que o rsync não será interrompido se o sistema remoto estiver inacessível por 30 segundos.
 
 
 ```bash
-rsync -avzhe ssh --bwlimit=100 --max-size='200k' --timeout = 30 /home/user/dir_destino user@remote_host_or_ip:/home/user/dir_destino
+rsync -avzhe ssh --bwlimit=100 --max-size='200k' --timeout = 30 /home/user/dir_origem user@remote_host_or_ip:/home/user/dir_destino
+```
+
+### 1.4.10. Rsync Backup Diário
+
+O exemplo a seguir fará um backup incremental do diretório /home/user/dir_origem e colocará uma cópia de qualquer arquivo que seja alterado em um diretório datado em /BACKUP/. 
+Isso pode ser usado para manter uma árvore de backup diária de todos os arquivos alterados **e não ter que substituir os arquivos do dia anterior**. Observe que esse método precisa copiar o arquivo inteiro se ele for alterado conforme os novos arquivos forem feitos no diretório nomeado no dia atual.
+
+```bash
+rsync --backup --backup-dir=`date +%Y.%m.%d` -a /home/user/dir_origem /BACKUP/
 ```
 
 
-
-### 1.4.7. Rsync e PV
+### 1.4.11. Rsync e PV
 
 Use o comando **pv** para monitorar o progresso do comando rsync
 O comando **pv** permite que você veja o progresso dos dados por meio de um pipeline . Ele fornece as seguintes informações:
