@@ -2,7 +2,44 @@
 
 # 1. MYSQL
 
-## 1.1. Como saber se o MySQL está instalado na sua máquina?
+
+## Como definir a senha do MySQL no Windows quando instalar o Wampserver 3.0?
+
+MÉTODO MANUAL
+
+1) Vá no painel do MySQL (Wampserver) e abra o MySQL Console - pedirá senha, basta teclar (Enter)
+pois não tem senha depois da instalação:
+
+- Para definir a senha utilize:
+
+```bash
+SET PASSWORD FOR root@localhost=PASSWORD('senha_root');
+```
+
+2) Edite o arquivo
+C:\wamp\apps\phpmyadmin4.6.4\config.inc.php
+
+
+Defina na Seção:
+/* Server: localhost [1] */
+$i++;
+$cfg['Servers'][$i]['verbose'] = 'Local Databases';
+$cfg['Servers'][$i]['host'] = '127.0.0.1';
+$cfg['Servers'][$i]['extension'] = 'mysqli';
+$cfg['Servers'][$i]['auth_type'] = 'cookie';
+
+**ALTERE AS SEGUINTES LINHAS:**
+
+$cfg['Servers'][$i]['user'] = 'root';
+$cfg['Servers'][$i]['password'] = 'senha_root';
+
+3) Reinicie os servidores;
+
+4) Teste acessando a página:
+5) http://localhost/phpmyadmin/
+
+
+## 1.1. Como saber se o MySQL está instalado na sua máquina LINUX?
 
 Execute o comando:
 
