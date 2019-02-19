@@ -613,7 +613,7 @@ sudo dpkg -i mysql-apt-config_0.8.12-1_all.deb
 
 Depois faça:
 
-```
+```bash
 sudo apt-get update
 sudo apt-get install mysql-server
 ```
