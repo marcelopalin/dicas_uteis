@@ -129,7 +129,7 @@ mysqldump -uroot -p --default-character-set=utf8 teste_db > back_teste_db.sql
 ## 1.6. CRIANDO USUÁRIO COM PERMISSÕES 
 
 ```bash
-CREATE DATABASE nome_database CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE nome_database CHARACTER SET utf8 COLLATE utf8_general_ci;
 CREATE USER 'meu_user'@'localhost' IDENTIFIED BY 'minha_senha';
 GRANT ALL PRIVILEGES ON *.* TO 'meu_user'@'localhost';
 CREATE USER 'meu_user'@'%' IDENTIFIED BY 'minha_senha';
