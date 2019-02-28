@@ -38,6 +38,20 @@ Inclui a copia de todos os diretórios que COMEÇAM com 2019-02 e exclui (da có
 rsync -rzvvhP --size-only --filter="+ /2019-02*/" --exclude='/*' nextcloud:/home/user/origem/ /home/meuuser/destino
 ```
 
+Caso a máquina remota não esteja configurado o acesso por Key e precise passar o PASSWORD!
+Instale:
+
+```bash
+sudo apt-get install sshpass
+```
+Depois utilize o comando:
+
+```bash
+sshpass -p PASSWORD_DE_ACESSO rsync -avzhe ssh --progress maq_remota:/home/user/origem/ /home/meuuser/destino_local/
+```
+
+## Instalando RSYNC
+
 Senão instale utilizando o comando:
 
 ```bash
