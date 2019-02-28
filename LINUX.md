@@ -30,6 +30,14 @@ Verifique se ele está instalado:
 rsync --version
 ```
 
+## COMANDOS UTEIS
+
+Inclui a copia de todos os diretórios que COMEÇAM com 2019-02 e exclui (da cópia) o restante '*'
+
+```bash
+rsync -rzvvhP --size-only --filter="+ /2019-02*/" --exclude='/*' nextcloud:/home/user/origem/ /home/meuuser/destino
+```
+
 Senão instale utilizando o comando:
 
 ```bash
