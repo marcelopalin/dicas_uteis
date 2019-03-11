@@ -20,215 +20,8 @@ sdb      8:16   0   1,8T  0 disk
 └─sdb1   8:17   0   1,8T  0 part /media/user/2TB_BACKUPS
 ```
 
-## 1.2. Usando Rsync ao invés de Copy
 
-Uma dica muito interessante é utilizar a aplicação **rsync** para copiar um diretório para outro no seu linux Ubuntu.
-
-Verifique se ele está instalado:
-
-```bash
-rsync --version
-```
-
-## COMANDOS UTEIS
-
-Inclui a copia de todos os diretórios que COMEÇAM com 2019-02 e exclui (da cópia) o restante '*'
-
-```bash
-rsync -rzvvhP --size-only --filter="+ /2019-02*/" --exclude='/*' nextcloud:/home/user/origem/ /home/meuuser/destino
-```
-
-Caso a máquina remota não esteja configurado o acesso por Key e precise passar o PASSWORD!
-Instale:
-
-```bash
-sudo apt-get install sshpass
-```
-Depois utilize o comando:
-
-```bash
-sshpass -p PASSWORD_DE_ACESSO rsync -avzhe ssh --progress maq_remota:/home/user/origem/ /home/meuuser/destino_local/
-```
-
-## Instalando RSYNC
-
-Senão instale utilizando o comando:
-
-```bash
-sudo apt install rsync
-```
-
-Fonte: https://calomel.org/rsync_tips.html
-
-Vantagem:
-
-O **rsync** só copiará os dados que estão diferentes nos dois sistemas (ou nas duas pastas)!
-
-Se não houver dados na máquina de destino, o rsync copiará os dados. Mas, se houver uma cópia dos dados e apenas 1% do arquivo foi alterado, **não será necessário copiar o arquivo inteiro novamente**. 
-
-Exemplo: se você tiver um arquivo **ISO de 1 GB** e apenas 1% do arquivo for alterado, o **rsync copiará apenas o 1% que foi alterado**, economizando tempo e largura de banda. Isso é incrivelmente eficiente em economia de tempo e essencial se você pagar pela taxa de dados da Internet.
-
-
-## 1.3. Outras vantagens e recursos do comando Rsync
-
-- Ele copia e sincroniza arquivos de maneira eficiente para ou de um sistema remoto.
-- Suporta a cópia de links, dispositivos, proprietários, grupos e permissões.
-- É mais rápido que o scp ( Secure Copy ) porque o rsync usa o protocolo de atualização remota que permite transferir **apenas as diferenças** entre dois conjuntos de arquivos. Na primeira vez, copia todo o conteúdo de um arquivo ou diretório da origem para o destino, mas, da próxima vez, **copia apenas os blocos e bytes alterados** para o destino.
-- O Rsync consome menos largura de banda , pois usa o método de compactação e descompactação ao enviar e receber dados nas duas extremidades.
-
-
-## 1.4. Sintaxe básica do comando rsync
-
-```bash
-rsync opcoes ORIGEM DESTINO
-```
-
-
-### 1.4.1. Algumas opções comuns usadas com comandos rsync
-
--v : verbose (nada mais é que o modo detalhado)
--r : copia os dados recursivamente (mas não preserva os timestamps e a permissão durante a transferência de dados)
--a, --archive modo de arquivo, equivalente a -rlptgoD. A opção comumente usada que sincronizará diretórios recursivamente, transferirá dispositivos especiais e de bloco, preservará links simbólicos, tempos de modificação, grupo, propriedade e permissões.
--z : comprime os dados do arquivo
--h : números de saída legíveis por humanos em um formato legível por humanos
--z, --compress. Essa opção forçará o rsync a **compactar os dados à medida que forem enviados** para a máquina de destino. Use esta opção **somente se a conexão com a máquina remota estiver lenta**.
--P, equivalente a --partial --progress. Esta opção irá dizer ao rsync para mostrar uma **barra de progresso** durante a transferência e para manter os arquivos parcialmente transferidos. É útil ao transferir arquivos grandes em conexões de rede lentas ou instáveis.
---delete Ao usar esta opção, **o rsync excluirá arquivos estranhos do local de destino**. É útil para espelhamento.
--q, --quiet. Use esta opção se você quiser suprimir mensagens que não sejam de erro.
--e. Esta opção permite que você escolha um shell remoto diferente. Por padrão, o Rsync está configurado para usar o ssh.
-
-
-### 1.4.2. Rsync para Backup arquivos do nosso Site (mesma máquina)
-
-```bash
-rsync -ahP /var/www/domain.com/public_html/ /var/www/domain.com/public_html_backup/
-```
-
-
-### 1.4.3. Rsync: Diretório -> Diretório (mesma máquina)
-
-O comando abaixo copiará os arquivos do PENDRIVE para uma pasta chamada 'destino'
-(-a) preservando as propriedades dos arquivos (grupo, user, data...)
-(-v) para mostrar os detalhes da cópia
-
-```bash
-rsync -ahvP /media/usb-drive/ /home/user/destino
-```
-
-### 1.4.4. Copiando - Sincronizando - Local -> Remoto (por SSH)
-
-Atenção:
-
-Ao usar o rsync para transferência remota, ele deve ser instalado na máquina de origem e de destino. As novas versões do rsync são configuradas para usar o SSH como shell remoto padrão.
-
-```bash
-rsync -avzhe ssh --progress /home/user/dir_origem user_remote@192.168.0.100:/home/user/dir_destino
-```
-
-Caso queira copiar o diretório local e você já está dentro dele use:
-
-```bash
-rsync -avzhe ssh --progress . user_remote@192.168.0.100:/home/user/dir_destino
-```
-
-### 1.4.5. Excluir automaticamente os arquivos de origem após uma transferência bem-sucedida
-
-Agora, suponha que você tenha um servidor web principal e um servidor de backup de dados, você criou um backup diário e o sincronizou com seu servidor de backup, agora você não quer manter essa cópia local de backup em seu servidor web.
-
-Então, você vai aguardar a transferência para concluir e, em seguida, excluir os arquivos de backup local manualmente? Claro que não. Essa exclusão automática pode ser feita usando a opção ' **–remove-source-files**
-
-```bash
-rsync --remove-source-files -zvh backup.tar /tmp/backups/
-```
-
-
-
-### 1.4.6. Rsync SSH em outra Porta
-
-Se o SSH no host remoto estiver escutando em uma porta diferente do padrão 22, você poderá especificar a porta usando:
-
-```bash
-rsync -avzhPe "ssh -p 2322" /opt/media/ remote_user@remote_host_or_ip:/opt/media/
-```
-
-P = --progress
-
-Quando você está transferindo grandes quantidades de dados, é recomendável executar o comando rsync dentro de uma sessão de tela ou usar a -Popção.
-
-
-### 1.4.7. Execute o comando shell remoto para arquivos rsync
-
-É importante observar que o **rsync** também pode executar comandos na máquina remota para ajudá-lo a gerar uma lista de arquivos copiados. O comando shell é expandido pelo seu shell remoto antes do rsync ser chamado.
-
-A linha a seguir executará o comando **find** na máquina remota no diretório de vídeo (/data/video) e rsync todos os arquivos com a extensão "avi" que encontrar em nossa máquina no diretório /download.
-
-```bash
-rsync -avR user@remote_host_or_ip:'`find /data/video -name "*.[avi]"`' /download/
-```
-
-
-### 1.4.8. Defina o tamanho máximo dos arquivos a serem transferidos
-
-Você pode especificar o tamanho máximo do arquivo a ser transferido ou sincronizado. 
-
-Você pode fazer isso com a opção “ –max-size ”. Aqui neste exemplo, o tamanho máximo do arquivo é 200k, 
-portanto, esse comando transferirá apenas os arquivos iguais ou menores que 200k.
-
-```bash
-rsync -avzhe ssh --max-size='200k' /home/user/dir_destino user@remote_host_or_ip:/home/user/dir_destino
-```
-
-### 1.4.9. Rsync - Limite o Tamanho da Banda e o Timeout
-
---timeout = 30 signifca que o rsync não será interrompido se o sistema remoto estiver inacessível por 30 segundos.
-
-
-```bash
-rsync -avzhe ssh --bwlimit=100 --max-size='200k' --timeout = 30 /home/user/dir_origem user@remote_host_or_ip:/home/user/dir_destino
-```
-
-### 1.4.10. Rsync Backup Diário
-
-O exemplo a seguir fará um backup incremental do diretório /home/user/dir_origem e colocará uma cópia de qualquer arquivo que seja alterado em um diretório datado em /BACKUP/. 
-Isso pode ser usado para manter uma árvore de backup diária de todos os arquivos alterados **e não ter que substituir os arquivos do dia anterior**. Observe que esse método precisa copiar o arquivo inteiro se ele for alterado conforme os novos arquivos forem feitos no diretório nomeado no dia atual.
-
-```bash
-rsync --backup --backup-dir=`date +%Y.%m.%d` -a /home/user/dir_origem /BACKUP/
-```
-
-
-### 1.4.11. Rsync e PV
-
-Use o comando **pv** para monitorar o progresso do comando rsync
-O comando **pv** permite que você veja o progresso dos dados por meio de um pipeline . Ele fornece as seguintes informações:
-
-- Tempo decorrido
-- Percentagem concluída (com barra de progresso)
-- Taxa de transferência atual
-- Total de dados transferidos
-- ETA
-
-
-A sintaxe é:
-
-```bash
-rsync opções source dest | pv -lpes Number-Of-Files
-```
-
-Portanto, se você tiver **42 arquivos** em /tmp/dir_origem e quiser copiá-los para /home/user/dir_destino , digite:
-
-```bash
-rsync -vrltD --stats  --human  -readable  /tmp/dir_origem /home/user/dir_destino | pv -lep  -s  42
-```
-
-OU
-
-```bash
-rsync -vrltD --stats  --human  -readable  /tmp/dir_origem /home/user/dir_destino | pv -lep  -s  42  > /dev/null
-```
-
-
-## 1.5. Limpando o Histórico de Comandos do Linux
+## 1.2. Limpando o Histórico de Comandos do Linux
 
 ```bash
 cat /dev/null > ~/.bash_history && history -c 
@@ -240,27 +33,27 @@ ou
 cat /dev/null > ~/.bash_history && history -c && exit
 ```
 
-## 1.6. Saber a quanto tempo o servidor Linux está ligado
+## 1.3. Saber a quanto tempo o servidor Linux está ligado
 
 ```
 uptime
 ```
 
 
-## 1.7. Verificando qual distribuição
+## 1.4. Verificando qual distribuição
 
 ```bash
 lsb_release -a
 ```
 
 
-## 1.8. Atualizando o Sistema Operacional
+## 1.5. Atualizando o Sistema Operacional
 
 ```
 sudo apt-get update && sudo apt-get upgrade
 ```
 
-## 1.9. Instalando Aptitude
+## 1.6. Instalando Aptitude
 
 ```
 sudo apt install aptitude
@@ -268,7 +61,7 @@ sudo aptitude update & sudo aptitude upgrade
 ```
 
 
-## 1.10. Como configurar o Prompt do Servidor?
+## 1.7. Como configurar o Prompt do Servidor?
 
 No arquivo .bashrc coloque as seguintes linhas:
 
@@ -296,13 +89,13 @@ echo "                             "                                  "
 Cole estas linhas no final do arquivo **.bashrc**.
 
 
-## 1.11. Instalando o Ambiente Virtual do Python
+## 1.8. Instalando o Ambiente Virtual do Python
 
 ```
 sudo aptitude install virtualenv python3-virtualenv virtualenvwrapper python3-pip
 ```
 
-## 1.12. Instalando o Serviço de SSH
+## 1.9. Instalando o Serviço de SSH
 
 Primeiro verifique se o serviço já está instalado e rodando com o comando:
 
@@ -326,13 +119,13 @@ Jul 17 16:47:11 ubuntu sshd[56478]: Server listening on :: port 22.
 Jul 17 16:47:11 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
 ```
 
-## 1.13. Para instalar o SSH
+## 1.10. Para instalar o SSH
 
 ```bash
 sudo apt-get install openssh-server -y
 ```
 
-## 1.14. Verificar o Status da Porta 22 do SSH
+## 1.11. Verificar o Status da Porta 22 do SSH
 
 ```bash
 mpi@ubuntu:~/www/dicas_uteis$ netstat -aln | grep ":22"
@@ -347,7 +140,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN
 ```
 
 
-## 1.15. Instalando o Git
+## 1.12. Instalando o Git
 
 Um programa indispensável para qualquer desenvolvedor é o Git, para utilizá-lo execute o comando abaixo:
 
@@ -369,7 +162,7 @@ git config --global user.email "meumail@mail.com"
 git config --global user.name "Seu Nome"
 ```
 
-## 1.16. Instalando todos os Compactadores/Descompactadores
+## 1.13. Instalando todos os Compactadores/Descompactadores
 
 ```
 sudo apt-get install p7zip-full p7zip-rar rar unrar-free p7zip
@@ -382,7 +175,7 @@ unrar x arquivo.rar
 ```
 
 
-## 1.17. Instalando o Google Chrome
+## 1.14. Instalando o Google Chrome
 
 Basta você baixar o arquivo **.deb** em: [google chrome](http://www.google.com.br/chrome)
 
@@ -391,14 +184,14 @@ Instale com o comando:
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
 
-## 1.18. Instalando a Linguagem Pt-br por linha de comando
+## 1.15. Instalando a Linguagem Pt-br por linha de comando
 
 ```
 sudo apt-get install language-pack-gnome-pt language-pack-pt-base
 ```
 
 
-## 1.19. Instalando o Visual Studio Code
+## 1.16. Instalando o Visual Studio Code
 
 Motivos para migrar para o Visual Studio Code:
 
@@ -442,7 +235,7 @@ Dicas de instalação de Extensões:
 
 ```
 
-## 1.20. Como instalar o Sublime?
+## 1.17. Como instalar o Sublime?
 
 ```bash
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -464,7 +257,7 @@ Finalmente instale o Sublime:
 sudo apt-get install sublime-text
 ```
 
-## 1.21. Instalando o editor de texto **joe** para terminal
+## 1.18. Instalando o editor de texto **joe** para terminal
 
 ```
 sudo apt-get install joe
@@ -487,7 +280,7 @@ Para sair salvando:
 CTRL + K + X
 ```
 
-## 1.22. Instalando Codecs
+## 1.19. Instalando Codecs
 
 Por questões de legislação, o Ubuntu não pode incluir determinados codecs multimídia, como os de MP3, para poder ser distribuído em alguns países, entre outros formatos. Qualquer pessoa que já formatou o computador com Windows sabe que tem que instalar alguns codecs para que todos os tipos de arquivos rodem no sistema, no Windows é bem comum utilizar o pack "K-Lite", no Ubuntu, temos o Ubuntu Restricted Extras:
 
@@ -495,7 +288,7 @@ Por questões de legislação, o Ubuntu não pode incluir determinados codecs mu
 sudo apt install ubuntu-restricted-extras
 ```
 
-## 1.23. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)
+## 1.20. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)
 > No terminal, digite como root: 
 
 ```
@@ -517,7 +310,7 @@ coloque essa linha no ~.BASHRC:
 setxkbmap -model abnt2 -layout br
 ```
 
-## 1.24. Instalando PHP 7.3
+## 1.21. Instalando PHP 7.3
 
 ```bash
 sudo apt-get install curl
@@ -545,7 +338,7 @@ sudo apt-get update
 sudo apt install php7.3 php7.3-cli php7.3-fpm php-pear php7.3-dev php7.3-json php7.3-pdo php7.3-mysql php7.3-zip php7.3-gd php7.3-mbstring php7.3-curl php7.3-xml php7.3-bcmath php7.3-sqlite3
 ```
 
-## 1.25. Configurando PHP 7.3 no Ubuntu
+## 1.22. Configurando PHP 7.3 no Ubuntu
 
 Edite o arquivo **php.ini**
 ```bash
@@ -565,7 +358,7 @@ Reinicie o serviço do PHP:
 ```
 
 
-## 1.26. Instalando COMPOSER
+## 1.23. Instalando COMPOSER
 
 ```bash
 curl -sS https://getcomposer.org/installer -o composer-setup.php
@@ -597,7 +390,7 @@ Para verificar, basta digitar:
 composer -v
 ```
 
-## 1.27. Ajustes COMPOSER
+## 1.24. Ajustes COMPOSER
 
 https://medium.com/teknomuslim/simply-boost-laravel-performance-in-production-7e5c63e32ffd
 
@@ -613,7 +406,7 @@ Optimize autoload file using composer command:
 composer dumpautoload --optimize
 
 
-## 1.28. Instalando Mysql 8.0 no Ubuntu, Debian
+## 1.25. Instalando Mysql 8.0 no Ubuntu, Debian
 
 Fonte: https://www.tecmint.com/install-mysql-8-in-ubuntu/
 
@@ -647,7 +440,7 @@ sudo mysql_secure_installation
 ```
 
 
-## 1.29. Instalando MYSQL no UBUNTU (Versão antiga)
+## 1.26. Instalando MYSQL no UBUNTU (Versão antiga)
 
 ```
 sudo apt-get install mysql-server
@@ -659,7 +452,7 @@ No meio da instalação será pedido a senha do usuário "root"
 mysql_secure_installation
 ```
 
-## 1.30. CRIANDO BD E USUÁRIOS
+## 1.27. CRIANDO BD E USUÁRIOS
 
 ```
 CREATE DATABASE nome_db CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -669,14 +462,14 @@ flush privileges;
 quit;
 ```
 
-## 1.31. Como saber o IP da minha máquina?
+## 1.28. Como saber o IP da minha máquina?
 
 ```bash
 ip addr show
 ```
 
 
-## 1.32. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina
+## 1.29. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina
 
 **OBS:** um exemplo de utilização é na sua máquina virtual linux para poder ser acessada pelo Windows. Não faça isso nos seus servidores de produção pois é inseguro.
 
@@ -695,7 +488,7 @@ bind-address            = 0.0.0.0
 ```
 
 
-### 1.32.1. Facilidades no acesso SSH
+### 1.29.1. Facilidades no acesso SSH
 
 Gere as chaves de segurança da sua máquina:
 
@@ -744,7 +537,7 @@ IdentityFile ~/.ssh/minhachaveamazon.pem
 ```
 
 
-## 1.33. NodeJS
+## 1.30. NodeJS
 
 Instalando o NodeJS utilizando NVM (Node Version Manager)
 
