@@ -161,32 +161,35 @@ Quando você deseja excluir vários arquivos e diretórios, sempre é possível 
 rsync -avz --exclude file1.txt --exclui dir3/ file4.txt origem/ destino/
 ```
 
-Esperar. E se eu tivesse muitos arquivos que eu quisesse excluir do rsync?
+## E se eu tivesse muitos arquivos que eu quisesse excluir do rsync? R: rsysnc --exclude-from
 
 Eu não posso continuar adicionando-os na linha de comando usando vários –exclude, que é difícil de ler, e difícil de reutilizar o comando rsync para mais tarde.
+Então, a melhor maneira é usar a opção **rsync –exclude-from** como mostrado abaixo, onde você pode listar todos os arquivos (e diretórios) que você deseja excluir em um arquivo.
+Primeiro, crie um arquivo de texto com uma lista de todos os arquivos e diretórios que você **não deseja fazer backup**. Esta é a lista de arquivos e diretórios que você deseja excluir do rsync.
 
-Então, a melhor maneira é usar a opção rsync –exclude-from como mostrado abaixo, onde você pode listar todos os arquivos (e diretórios) que você deseja excluir em um arquivo.
+Exemplo, no conteúdo do arquivo **exclude-list.txt** coloque os arquivos que você NÃO deseja copiar:
 
-Primeiro, crie um arquivo de texto com uma lista de todos os arquivos e diretórios que você não deseja fazer backup. Esta é a lista de arquivos e diretórios que você deseja excluir do rsync.
-
-$ vim exclude-list.txt
+```bash
 file1.txt
-dir3 / file4.txt
-Em seguida, execute o rsync usando a opção –exclude-from com o exclude-list.txt como mostrado abaixo.
+dir3/file4.txt
+```
 
-$ rm -rf destino
+Em seguida, execute o **rsync** usando a opção **--exclude-from** com o arquivo **exclude-list.txt** como mostrado abaixo:
 
-$ rsync -avz --exclude-from 'exclude-list.txt' source / destination /
+```
+rsync -avz --exclude-from 'exclude-list.txt' source/ destination/
+```
+
 lista de arquivos de construção ... concluída
 diretório criado para destino
 ./
 arquivo2.txt
-dir1 /
-dir1 / dir2 /
-dir1 / dir2 / file3.txt
-dir3 /
-Verifique o diretório de destino para certificar-se de que os arquivos e diretórios listados no arquivo exclude-list.txt não sejam submetidos a backup.
+dir1/
+dir1/dir2/
+dir1/dir2/file3.txt
+dir3/
 
+Verifique o diretório de destino para certificar-se de que os arquivos e diretórios listados no arquivo **exclude-list.txt não sejam submetidos** a backup.
 
 
 **Exemplo 5:** Caso a máquina remota não esteja configurado o acesso por Key (sem senha) e precise passar o PASSWORD,
