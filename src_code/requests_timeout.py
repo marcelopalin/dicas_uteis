@@ -10,13 +10,18 @@ o auxílio do site https://httpbin.org/
 
 def main():
     try:
-        delay = 9 # 1 a 10 seg
-
+        
         # Quantos segundos esperar a resposta
         
         # Radical - Força do ERRO de Timeout
         # timeout = 0.001 
 
+        # Se você coloca um delay de 9 segs
+        # e um Timeout = 5 terá uma erro de READTIMEOUT
+
+        # Para não ter problema nos testes coloque
+        # delay < timeout    
+        delay = 9 # 1 a 10 seg
         # Timeout de 5 segundos
         timeout = 5
 
