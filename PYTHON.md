@@ -137,3 +137,115 @@ Método que converte a lista de dicionários em um dicionário com a Key desejad
         """
         return dict((d[key], dict(d, index=index)) for (index, d) in enumerate(seq))
 ```
+
+
+### Como saber qual é o sistema operacional que o script está rodando?
+
+Utilize:
+
+```python
+def get_platform():
+    """
+    Objetivo: padronizar a descoberta dos sistema operacional
+    em apenas 3 respostas: windows, linux e macosx.
+    Muito utilizado para trabalhar com diretórios.
+
+    Imports: sys
+    """
+    platforms = {
+        'linux1': 'linux',
+        'linux2': 'linux',
+        'darwin': 'macosx',
+        'win32': 'windows'
+    }
+    if sys.platform not in platforms:
+        return sys.platform
+    return platforms[sys.platform]
+```
+
+Modo de utilizar: 
+
+```python
+import sys
+
+print(get_platform())
+
+if get_platform = 'linux':
+    print("Você está no linux!")
+
+```
+
+
+### Como criar um arquivo vazio utilizando o PATHLIB - Python 3.6+?
+
+Simplesmente faça:
+
+```python
+from pathlib import Path
+
+Path('arquivo_vazio.txt').touch()
+
+```
+
+### Como baixar um arquivo com requests?
+
+Para uma maior sofisticação do seu código vamos definir o timeout de 5 segundos
+para aguardar a conexão com o servidor. 
+
+Vamos verificar o tamanho do arquivo a ser baixado e depois de baixado vamos
+fazer a verificação se bate com o tamanho.
+
+```python
+        
+        url = 'https://www.peterbe.com/unzip-in-parallel/symbols-2017-11-27T14_15_30.zip'
+        r = requests.head(url, timeout=(5, 14))
+
+        # Security: link is avalible?
+        if not r.status_code == 200:
+            print("=" * 80)
+            print(" Script Interrupted!")
+            print(" Url do arquivo do ETA40 do ONS {} não está disponível!".format(url))
+            print("=" * 80)
+            logger.info(" Script Interrupted! ")
+            logger.info(" Url do arquivo do ETA40 do ONS {} não está disponível!".format(url))
+            sys.exit(0)        
+ 
+        print(json.dumps(r.json(), indent=4, sort_keys=True))
+
+    except requests.exceptions.ConnectTimeout as err:
+        print('ERRO de TIME OUT!!')
+    except requests.exceptions.ReadTimeout as err:
+        print('ERRO READTIMEOUT de TIME OUT!!')
+    except requests.exceptions.HTTPError as err:
+        print ("Http Error:",err)
+    except requests.exceptions.ConnectionError as err:
+        print ("Error Connecting:",err)
+    except requests.exceptions.Timeout as err:
+        print ("Timeout Error:",err)
+    except requests.exceptions.RequestException as err:
+        print ("OOps: Something Else",err)    
+
+```
+
+
+### Imprimindo o tamanho do arquivo a ser baixado?
+
+Para uma maior sofisticação do seu código vamos definir o timeout de 5 segundos
+para aguardar a conexão com o servidor. 
+
+Vamos verificar o tamanho do arquivo a ser baixado e depois de baixado vamos
+fazer a verificação se bate com o tamanho.
+
+```python
+    r = requests.get('http://repositorio.ipea.gov.br/bitstream/11058/3532/9/cc13_serieshistoricas.xls', timeout=5)
+    
+    # Imprimindo a resposta
+    # print(json.dumps(r.json(), indent=4, sort_keys=True))
+
+    # Print File Size
+    size_of_file_bytes =  r.headers['Content-length']
+    print('Tamanho do arquivo no site: {} bytes '.format(size_of_file_bytes))
+
+```
+
+

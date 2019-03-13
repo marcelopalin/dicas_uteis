@@ -123,10 +123,123 @@ What about Python 2?
 Even though pathlib is built into Python 3, there is a Python 2.7 backport for anyone who can’t switch yet.
 
 
-# 2. ARTIGO II
+# 2. APLICAÇÕES
+
+## 2.1. Como construir a Árvore de Diretórios e Arquivos com PATHLIB
+
+Importações necessárias:
+
+```python
+from pathlib import Path
+```
+
+Modo de uso:
+
+```bash
+    diretorio = Path('monitor')
+    print(tree(diretorio))
+```
+
+Este método construirá a árvore de diretório igual a do comando **tree** do linux:
 
 
-## 2.1. os.path é desajeitado!
+
+
+
+```python
+def tree(directoryPathlib):
+    """
+        Parâmetro:
+
+        params directoryPathlib: (pathlib.Path())
+        
+        O próximo exemplo define uma função, tree() que imprimirá uma               árvore visual representando a hierarquia de arquivos, com raiz em           um determinado diretório. Aqui, queremos listar subdiretórios               também, então usamos o .rglob() método.
+
+        OBSERVE que precisamos saber a que distância do diretório raiz um           arquivo está localizado. 
+
+        Para fazer isso, primeiro usamos .relative_to() para representar um         caminho relativo ao diretório raiz. Em seguida, contamos o número           de diretórios (usando a .parts propriedade) na representação. 
+        Quando executado, essa função cria uma árvore visual como a                 seguinte:
+
+        + / home / mpi / realpython 
+            + diretório_1 
+                + arquivo_a.md 
+            + diretório_2 
+                + arquivo_a.md 
+                + arquivo_b.pdf 
+                + arquivo_c.py 
+            + arquivo_1.txt 
+            + arquivo_2.txt        
+
+    """
+    print(f'+ {directoryPathlib}')
+    for path in sorted(directoryPathlib.rglob('*')):
+        depth = len(path.relative_to(directoryPathlib).parts)
+        spacer = '    ' * depth
+        print(f'{spacer}+ {path.name}')
+
+```
+
+
+## 2.2. RESUMO
+
+https://stackabuse.com/introduction-to-the-python-pathlib-module/
+
+Usando o Pathlib, os.getcwd () se torna Path.cwd () e o operador '/' é usado para unir caminhos e usado no lugar de os.path.join. Usando o módulo Pathlib, as coisas podem ser feitas de maneira mais simples usando operadores e chamadas de método.
+
+A seguir estão os métodos comumente usados ​​e seu uso:
+
+* Path.cwd(): Objeto de caminho de retorno representando o diretório de * trabalho atual
+* Path.home(): Objeto de caminho de retorno representando o diretório inicial
+* Path.stat(): informações de retorno sobre o caminho
+* Path.chmod(): alterar o modo de arquivo e permissões
+* Path.glob(pattern): Glob o padrão dado no diretório que é representado pelo * caminho, produzindo arquivos correspondentes de qualquer tipo
+* Path.mkdir(): para criar um novo diretório no caminho fornecido
+* Path.open(): Para abrir o arquivo criado pelo caminho
+* Path.rename(): Renomear um arquivo ou diretório para o destino determinado
+* Path.rmdir(): Remover o diretório vazio
+* Path.unlink(): Remover o arquivo ou link simbólico
+
+Gerando Caminhos de Plataforma Cruzada
+
+Caminhos usam diferentes convenções em diferentes sistemas operacionais. O Windows usa uma barra invertida entre nomes de pastas, enquanto todos os outros sistemas operacionais populares usam barra entre os nomes das pastas. Se você quiser que seu código python funcione, independentemente do SO subjacente, você precisará lidar com as diferentes convenções específicas da plataforma subjacente. O módulo Pathlib facilita o trabalho com caminhos de arquivos. No Pathlib, você pode simplesmente passar um caminho ou um nome de arquivo para o Path()objeto usando a barra, independentemente do sistema operacional. O Pathlib cuida do resto.
+
+```python
+pathlib.Path.home() / 'python' / 'samples' / 'test_me.py'  
+```
+
+O Path() objeto converterá / para o tipo de barra, para o sistema operacional subjacente. O pathlib.Path pode representar o caminho do Windows ou Posix. Assim, o Pathlib resolve muitos bugs interfuncionais, ao manipular caminhos facilmente.
+
+## 2.3. Obtendo informações sobre o caminho
+
+Ao lidar com caminhos, estamos interessados ​​em encontrar o diretório pai de um arquivo / pasta ou nos links simbólicos a seguir. A classe de caminho tem vários métodos convenientes para fazer isso, já que diferentes partes de um caminho estão disponíveis como propriedades que incluem o seguinte:
+
+drive: uma string que representa o nome da unidade. Por exemplo, PureWindowsPath('c:/Program Files/CSV').driveretorna "C:"
+parts: retorna uma tupla que fornece acesso aos componentes do caminho
+name: o componente de caminho sem nenhum diretório
+parent: seqüência fornecendo acesso aos ancestrais lógicos do caminho
+stem: componente do caminho final sem seu sufixo
+suffix: a extensão do arquivo do componente final
+anchor: a parte de um caminho antes do diretório. /é usado para criar caminhos filhos e imita o comportamento de os.path.join.
+joinpath: combina o caminho com os argumentos fornecidos
+match(pattern): retorna verdadeiro / falso, com base na correspondência do caminho com o padrão de estilo glob fornecido
+No caminho "/home/projects/stackabuse/python/sample.md":
+
+* **path**: - retorna PosixPath ('/home/projects/stackabuse/python/sample.md')
+* **path.parts**: - retorna ('/', 'home', 'projects', 'stackabuse', 'python')
+* **path.name**: - retorna 'sample.md'
+* **path.stem**: - retorna 'amostra'
+* **path.suffix**: - retorna '.md'
+* **path.parent**: - retorna PosixPath ('/home/projects/stackabuse/python')
+* **path.parent.parent**: - retorna PosixPath ('/home/projects/stackabuse')
+* **path.match('*.md')**: retorna verdadeiro
+* **PurePosixPath('/python').joinpath('edited_version')**: returns ('home/ * projetos/stackabuse/python/edited_version
+
+
+
+# 3. ARTIGO II
+
+
+## 3.1. os.path é desajeitado!
 
 O os.path módulo sempre foi o que buscamos para trabalhar com caminhos em Python. Tem praticamente tudo que você precisa, mas às vezes pode ser muito desajeitado.
 
@@ -161,7 +274,7 @@ Eu acho tudo isso um pouco estranho. Estamos passando strings para funções que
 
 As funções string-in-string-out os.path são realmente desajeitadas quando aninhadas porque o código tem que ser lido de dentro para fora. Não seria legal se pudéssemos fazer essas chamadas de função aninhadas e transformá-las em chamadas de método encadeadas?
 
-## 2.2. COMO FICA COM PATHLIB?
+## 3.2. COMO FICA COM PATHLIB?
 
 ```python
 from pathlib import Path
@@ -212,7 +325,7 @@ Observe que o pathlib código coloca o caminho primeiro devido ao encadeamento d
 
 Como o Zen of Python diz, “namespaces são uma grande ideia, vamos fazer mais daquelas”. O **os** módulo é um namespace muito grande com um monte de coisas nele. A classe **pathlib.Path** é um namespace muito menor e mais específico que o módulo **os**. Além disso, os métodos neste Path namespace retornam Path objetos, o que permite o encadeamento de métodos em vez de chamadas de função stringiful aninhadas.
 
-## 2.3. Não se esqueça do módulo glob!
+## 3.3. Não se esqueça do módulo glob!
 
 Os módulos ose os.path não são os únicos utilitários relacionados a arquivos/sistemas de arquivos na biblioteca padrão do Python. O **glob** módulo é outro módulo útil relacionado ao caminho.
 
@@ -263,7 +376,7 @@ file_contents = [
 ]
 ```
 
-## 2.4. E se você precisar gravar em um arquivo?
+## 3.4. E se você precisar gravar em um arquivo?
 
 Você poderia usar o opengerenciador de contexto novamente:
 
@@ -301,7 +414,7 @@ with open(path, mode='wt') as config:
 
 Objetos de caminho tornam seu código mais explícito
 
-## 2.5. O que as seguintes 3 variáveis ​​apontam? O que seus valores representam?
+## 3.5. O que as seguintes 3 variáveis ​​apontam? O que seus valores representam?
 
 person = '{"name": "Trey Hunner", "location": "San Diego"}'
 pycon_2019 = "2019-05-01"
@@ -332,7 +445,7 @@ Eu não sou um forte defensor da programação orientada a objetos. As classes a
 
 Graças ao **PEP 519**, os objetos de caminho de arquivo estão se tornando o padrão para trabalhar com caminhos. A partir do Python 3.6, o embutido a função **open** e as várias funções no **os**, **shutil** e os.path módulos de todo o trabalho adequadamente com pathlib.Path objectos. Você pode começar a usar o pathlib hoje sem alterar a maior parte do seu código que funciona com caminhos!
 
-## 2.6. O que está faltando no pathlib?
+## 3.6. O que está faltando no pathlib?
 
 Embora pathlib seja ótimo, **não é abrangente**. Definitivamente, faltam alguns recursos que descobri que gostaria que o pathlib módulo fosse incluído.
 
@@ -340,7 +453,7 @@ A primeira lacuna que notei é a falta de shutil equivalentes nos pathlib.Path m
 
 Embora você possa passar Path objetos (e objetos semelhantes a caminhos) para as shutil funções de nível superior para copiar / excluir / mover arquivos e diretórios, não há equivalente a essas funções em Path objetos.
 
-## 2.7. Então, para copiar um arquivo, você ainda precisa fazer algo assim:
+## 3.7. Então, para copiar um arquivo, você ainda precisa fazer algo assim:
 
 ```python
 from pathlib import Path
@@ -355,31 +468,35 @@ Também não há pathlib equivalente de os.chdir.
 
 Isso significa que você precisará importar chdir se precisar alterar o diretório de trabalho atual:
 
+```python
 from pathlib import Path
-from os import chdir
+import os
 
 parent = Path('..')
-chdir(parent)
+os.chdir(parent)
+```
+
+
 A os.walk função também não tem pathlib equivalente. Embora você possa fazer suas próprias walk funções semelhantes, usando pathlib bastante facilmente.
 Minha esperança é que os pathlib.Path objetos possam eventualmente incluir métodos para algumas dessas operações ausentes. Mas, mesmo com esses recursos ausentes, ainda acho muito mais fácil usar “pathlib e amigos” do que “os.path e amigos” .
 
-Você deve sempre usar o pathlib?
+## 3.8. Você deve sempre usar o pathlib?
+
 Desde o Python 3.6, os objetos pathlib.Path funcionam em quase todos os lugares em que você já está usando strings de caminho . Então não vejo razão para não usar pathlibse você estiver no Python 3.6 (ou superior).
 
-Se você está em uma versão anterior do Python 3, você sempre pode envolver seu Pathobjeto em uma strchamada para obter uma string quando precisar de uma saída de escape para o string land. É estranho mas funciona:
+Se você está em uma versão anterior do Python 3, você sempre pode envolver seu Path objeto em uma str chamada para obter uma string quando precisar de uma saída de escape para o string land. É estranho mas funciona:
 
 ```python
 from os import chdir
 from pathlib import Path
 
 chdir(Path('/home/trey'))  # Works on Python 3.6+
-chdir(str(Path('/home/trey')))  # Works on earlier versions also
+chdir(str(Path('/home/trey')))  # Works on earlier python versions also
 ```
 
-Independentemente de qual versão do Python 3 você está, eu recomendo dar pathlibuma chance.
+Independentemente de qual versão do Python 3 você está, eu recomendo dar pathlib uma chance.
 
-E se você ainda está preso no Python 2(o relógio está correndo!), O módulo pathlib2 de terceiros no PyPI é um backport para que você possa usá-lo pathlib em qualquer versão do Python.
+E se você ainda está preso no Python 2 (o relógio está correndo!), O módulo pathlib2 de terceiros no PyPI é um backport para que você possa usá-lo pathlib em qualquer versão do Python.
 
 Eu acho que usar pathlib muitas vezes torna meu código mais legível. A maior parte do meu código que funciona com arquivos agora é padronizado pathlib e eu recomendo que você faça o mesmo. Se você puder usar pathlib, você deve .
 
-Se você quiser continuar lendo sobre o pathlib, confira meu artigo de acompanhamento chamado No, o pathlib é ótimo .
