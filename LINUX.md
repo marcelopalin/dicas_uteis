@@ -3,6 +3,20 @@
 # 1. Dicas de Instalação
 
 
+## Como deletar todos as figuras PNGs do diretório atual e subdiretórios no Linux?
+
+Basta digitar o comando para verificar se os arquivos são encontrados:
+
+```bash
+find . -name "*.png" -type f
+```
+
+Depois utilize o comando **delete** para removê-los
+
+```bash
+find . -name "*.png" -type f -delete
+```
+
 ## 1.1. Listando a Estrutura do Computador
 
 ```
