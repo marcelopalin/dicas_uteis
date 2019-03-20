@@ -1,9 +1,9 @@
 
 
-# 1. Dicas de Instalação
+# 1. DICAS GERAIS LINUX
 
 
-## Como deletar todos as figuras PNGs do diretório atual e subdiretórios no Linux?
+## 1.1. Como deletar todos as figuras PNGs do diretório atual e subdiretórios no Linux?
 
 Basta digitar o comando para verificar se os arquivos são encontrados:
 
@@ -17,7 +17,7 @@ Depois utilize o comando **delete** para removê-los
 find . -name "*.png" -type f -delete
 ```
 
-## 1.1. Listando a Estrutura do Computador
+## 1.2. Listando a Estrutura do Computador
 
 ```
 $ lsblk
@@ -35,7 +35,7 @@ sdb      8:16   0   1,8T  0 disk
 ```
 
 
-## 1.2. Limpando o Histórico de Comandos do Linux
+## 1.3. Limpando o Histórico de Comandos do Linux
 
 ```bash
 cat /dev/null > ~/.bash_history && history -c 
@@ -47,27 +47,33 @@ ou
 cat /dev/null > ~/.bash_history && history -c && exit
 ```
 
-## 1.3. Saber a quanto tempo o servidor Linux está ligado
+## 1.4. Saber a quanto tempo o servidor Linux está ligado
 
-```
+```bash
 uptime
 ```
 
+## Como remover completamente a instalação do MYSQL do Linux
 
-## 1.4. Verificando qual distribuição
+```bash
+sudo apt-get remove --purge mysql*
+```
+
+
+## 1.5. Verificando qual distribuição Linux
 
 ```bash
 lsb_release -a
 ```
 
 
-## 1.5. Atualizando o Sistema Operacional
+## 1.6. Atualizando o Sistema Operacional
 
-```
+```bash
 sudo apt-get update && sudo apt-get upgrade
 ```
 
-## 1.6. Instalando Aptitude
+## 1.7. Instalando Aptitude
 
 ```
 sudo apt install aptitude
@@ -75,7 +81,7 @@ sudo aptitude update & sudo aptitude upgrade
 ```
 
 
-## 1.7. Como configurar o Prompt do Servidor?
+## 1.8. Como configurar o Prompt do Servidor?
 
 No arquivo .bashrc coloque as seguintes linhas:
 
@@ -103,13 +109,13 @@ echo "                             "                                  "
 Cole estas linhas no final do arquivo **.bashrc**.
 
 
-## 1.8. Instalando o Ambiente Virtual do Python
+## 1.9. Instalando o Ambiente Virtual do Python
 
 ```
 sudo aptitude install virtualenv python3-virtualenv virtualenvwrapper python3-pip
 ```
 
-## 1.9. Instalando o Serviço de SSH
+## 1.10. Instalando o Serviço de SSH
 
 Primeiro verifique se o serviço já está instalado e rodando com o comando:
 
@@ -133,13 +139,13 @@ Jul 17 16:47:11 ubuntu sshd[56478]: Server listening on :: port 22.
 Jul 17 16:47:11 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
 ```
 
-## 1.10. Para instalar o SSH
+## 1.11. Para instalar o SSH
 
 ```bash
 sudo apt-get install openssh-server -y
 ```
 
-## 1.11. Verificar o Status da Porta 22 do SSH
+## 1.12. Verificar o Status da Porta 22 do SSH
 
 ```bash
 mpi@ubuntu:~/www/dicas_uteis$ netstat -aln | grep ":22"
@@ -154,16 +160,16 @@ tcp6       0      0 :::22                   :::*                    LISTEN
 ```
 
 
-## 1.12. Instalando o Git
+## 1.13. Instalando e configurando o Git no Linux
 
 Um programa indispensável para qualquer desenvolvedor é o Git, para utilizá-lo execute o comando abaixo:
 
-```
+```bash
 sudo apt-get install git
 ```
 
-Não é necessário, mas se quiser que ao digitar sua senha de Git ela permaneça sem necessidade de autenticação por um certo período de tempo configure
-para armazenar as credenciais(86400 segs = 24h * 60min * 60seg)
+Não é necessário, mas se quiser que ao digitar sua senha de Git ela permaneça sem necessidade de autenticação 
+por um certo período de tempo configure para armazenar as credenciais(86400 segs = 24h * 60min * 60seg)
 
 
 ```bash
@@ -176,7 +182,7 @@ git config --global user.email "meumail@mail.com"
 git config --global user.name "Seu Nome"
 ```
 
-## 1.13. Instalando todos os Compactadores/Descompactadores
+## 1.14. Instalando todos os Compactadores/Descompactadores
 
 ```
 sudo apt-get install p7zip-full p7zip-rar rar unrar-free p7zip
@@ -189,7 +195,7 @@ unrar x arquivo.rar
 ```
 
 
-## 1.14. Instalando o Google Chrome
+## 1.15. Instalando o Google Chrome
 
 Basta você baixar o arquivo **.deb** em: [google chrome](http://www.google.com.br/chrome)
 
@@ -198,14 +204,14 @@ Instale com o comando:
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
 
-## 1.15. Instalando a Linguagem Pt-br por linha de comando
+## 1.16. Instalando a Linguagem Pt-br por linha de comando
 
 ```
 sudo apt-get install language-pack-gnome-pt language-pack-pt-base
 ```
 
 
-## 1.16. Instalando o Visual Studio Code
+## 1.17. Instalando o Visual Studio Code
 
 Motivos para migrar para o Visual Studio Code:
 
@@ -246,10 +252,12 @@ Dicas de instalação de Extensões:
 * SVG Viewer - para poder visualizar SVG diretamente do editor.
 * vscode-spotify - integra com o Spotify e tem a opção de ver a letra da música! Você pode ver a letra da música cara, isso é demais!
 * Wakatime - porque eu sou fissurado com métricas.
+* GitLens - controle de versões excelente
+* SQLTOOLS - permite visualizar o conteúdo de qualquer banco de dados.
 
 ```
 
-## 1.17. Como instalar o Sublime?
+## 1.18. Como instalar o Sublime?
 
 ```bash
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -271,7 +279,7 @@ Finalmente instale o Sublime:
 sudo apt-get install sublime-text
 ```
 
-## 1.18. Instalando o editor de texto **joe** para terminal
+## 1.19. Instalando o editor de texto **joe** para terminal
 
 ```
 sudo apt-get install joe
@@ -294,7 +302,7 @@ Para sair salvando:
 CTRL + K + X
 ```
 
-## 1.19. Instalando Codecs
+## 1.20. Instalando Codecs
 
 Por questões de legislação, o Ubuntu não pode incluir determinados codecs multimídia, como os de MP3, para poder ser distribuído em alguns países, entre outros formatos. Qualquer pessoa que já formatou o computador com Windows sabe que tem que instalar alguns codecs para que todos os tipos de arquivos rodem no sistema, no Windows é bem comum utilizar o pack "K-Lite", no Ubuntu, temos o Ubuntu Restricted Extras:
 
@@ -302,7 +310,7 @@ Por questões de legislação, o Ubuntu não pode incluir determinados codecs mu
 sudo apt install ubuntu-restricted-extras
 ```
 
-## 1.20. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)
+## 1.21. LAYOUT DE TECLADO PARA ABNT2 - CONFIGURAÇÃO NO UBUNTU (MODO TEXTO)
 > No terminal, digite como root: 
 
 ```
@@ -324,7 +332,7 @@ coloque essa linha no ~.BASHRC:
 setxkbmap -model abnt2 -layout br
 ```
 
-## 1.21. Instalando PHP 7.3
+## 1.22. Instalando PHP 7.3
 
 ```bash
 sudo apt-get install curl
@@ -352,7 +360,7 @@ sudo apt-get update
 sudo apt install php7.3 php7.3-cli php7.3-fpm php-pear php7.3-dev php7.3-json php7.3-pdo php7.3-mysql php7.3-zip php7.3-gd php7.3-mbstring php7.3-curl php7.3-xml php7.3-bcmath php7.3-sqlite3
 ```
 
-## 1.22. Configurando PHP 7.3 no Ubuntu
+## 1.23. Configurando PHP 7.3 no Ubuntu
 
 Edite o arquivo **php.ini**
 ```bash
@@ -372,7 +380,7 @@ Reinicie o serviço do PHP:
 ```
 
 
-## 1.23. Instalando COMPOSER
+## 1.24. Instalando COMPOSER
 
 ```bash
 curl -sS https://getcomposer.org/installer -o composer-setup.php
@@ -404,7 +412,7 @@ Para verificar, basta digitar:
 composer -v
 ```
 
-## 1.24. Ajustes COMPOSER
+## 1.25. Ajustes COMPOSER
 
 https://medium.com/teknomuslim/simply-boost-laravel-performance-in-production-7e5c63e32ffd
 
@@ -420,7 +428,7 @@ Optimize autoload file using composer command:
 composer dumpautoload --optimize
 
 
-## 1.25. Instalando Mysql 8.0 no Ubuntu, Debian
+## 1.26. Instalando Mysql 8.0 no Ubuntu, Debian
 
 Fonte: https://www.tecmint.com/install-mysql-8-in-ubuntu/
 
@@ -454,7 +462,7 @@ sudo mysql_secure_installation
 ```
 
 
-## 1.26. Instalando MYSQL no UBUNTU (Versão antiga)
+## 1.27. Instalando MYSQL no UBUNTU (Versão antiga)
 
 ```
 sudo apt-get install mysql-server
@@ -466,7 +474,7 @@ No meio da instalação será pedido a senha do usuário "root"
 mysql_secure_installation
 ```
 
-## 1.27. CRIANDO BD E USUÁRIOS
+## 1.28. CRIANDO BD E USUÁRIOS
 
 ```
 CREATE DATABASE nome_db CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -476,14 +484,14 @@ flush privileges;
 quit;
 ```
 
-## 1.28. Como saber o IP da minha máquina?
+## 1.29. Como saber o IP da minha máquina?
 
 ```bash
 ip addr show
 ```
 
 
-## 1.29. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina
+## 1.30. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina
 
 **OBS:** um exemplo de utilização é na sua máquina virtual linux para poder ser acessada pelo Windows. Não faça isso nos seus servidores de produção pois é inseguro.
 
@@ -502,7 +510,7 @@ bind-address            = 0.0.0.0
 ```
 
 
-### 1.29.1. Facilidades no acesso SSH
+### 1.30.1. Facilidades no acesso SSH
 
 Gere as chaves de segurança da sua máquina:
 
@@ -551,7 +559,7 @@ IdentityFile ~/.ssh/minhachaveamazon.pem
 ```
 
 
-## 1.30. NodeJS
+## 1.31. NodeJS
 
 Instalando o NodeJS utilizando NVM (Node Version Manager)
 
