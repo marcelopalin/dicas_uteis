@@ -112,7 +112,7 @@ Cole estas linhas no final do arquivo **.bashrc**.
 ## 1.9. Instalando o Ambiente Virtual do Python
 
 ```
-sudo aptitude install virtualenv python3-virtualenv virtualenvwrapper python3-pip
+sudo apt install virtualenv python3-virtualenv virtualenvwrapper python3-pip
 ```
 
 ## 1.10. Instalando o Serviço de SSH
@@ -142,7 +142,7 @@ Jul 17 16:47:11 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
 ## 1.11. Para instalar o SSH
 
 ```bash
-sudo apt-get install openssh-server -y
+sudo apt install openssh-server -y
 ```
 
 ## 1.12. Verificar o Status da Porta 22 do SSH
@@ -165,7 +165,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN
 Um programa indispensável para qualquer desenvolvedor é o Git, para utilizá-lo execute o comando abaixo:
 
 ```bash
-sudo apt-get install git
+sudo apt install git
 ```
 
 Não é necessário, mas se quiser que ao digitar sua senha de Git ela permaneça sem necessidade de autenticação 
@@ -185,7 +185,7 @@ git config --global user.name "Seu Nome"
 ## 1.14. Instalando todos os Compactadores/Descompactadores
 
 ```
-sudo apt-get install p7zip-full p7zip-rar rar unrar-free p7zip
+sudo apt-get install p7zip-full p7zip-rar rar unrar-free p7zip zip
 ```
 
 Para descompactar um arquivo do tipo rar:
