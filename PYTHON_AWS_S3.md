@@ -13,8 +13,10 @@ https://aws.amazon.com/pt/blogs/security/a-new-and-standardized-way-to-manage-cr
 
 ## 1.1. Instalação
 
+Em geral instalamos no ambiente virtual de um projeto de python3, porém, é possível instalar no SO Geral.
+
 ```bash
-pip install boto3
+pip3 install boto3
 ```
 
 Você tem o SDK. Mas você não poderá usá-lo agora, porque não sabe a qual conta da AWS ele deve se conectar.
