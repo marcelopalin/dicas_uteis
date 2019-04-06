@@ -1,4 +1,30 @@
-Depois que instalou as extensões em uma máquina para copoiar para outra acesse:
+# VISUAL STUDIO CODE
+
+## Como alterar o terminal integrado?
+
+No windows você pode optar pelo Command Prompt, POWER SHELL ou pelo BASH.
+
+Para alterar digite a combinação: **CTRL + SHIFT + P** e depois digite: **Terminal: Select Default Shell**
+
+
+E escolha seu terminal de preferência.  Feche a abra novamente o terminal.
+
+<img src="images/gifs/vscode_terminal_integrado_01.gif" alt="Fig01" width="800"/>
+
+
+## Como fazer um Gif Animado e Incorporá-lo?
+
+Para fazer utilizei o ScreenToGif:
+
+https://www.screentogif.com/?l=pt_br
+
+
+```html
+<img src="images/gifs/vscode_terminal_integrado_01.gif" alt="Fig01" width="800"/>
+```
+
+# Dica de Como Armazenar as Extensões Instaladas no GitHub
+Depois que instalou as extensões em uma máquina para copiar para outra acesse:
 
 ```bash
 Windows %USERPROFILE%\.vscode\extensions
