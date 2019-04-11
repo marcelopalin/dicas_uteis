@@ -1,5 +1,31 @@
 # 1. Python 3.6+
 
+## Criando Ambiente Virtual no Linux/Windows
+
+Crie um ambiente virtual em Python 3
+Crie um ambiente virtual no Python 3 com o nome do ambiente **env**:
+
+virtualenv -p python3 env
+
+## Valide que o ambiente está instalado com o python3:
+
+ls env/lib
+
+## Ativar Ambiente
+Ative o ambiente virtual recém-criado (o nome do ambiente de trabalho aparecerá entre parênteses):
+
+source env/bin/activate
+
+(env) testuser@localhost:~/python-environments$
+
+Agora que o ambiente está ativo, você pode instalar executáveis ​​e pacotes somente neste ambiente virtual.
+
+## Desativar Ambiente
+Para desativar um ambiente virtual ativo:
+
+deactivate
+
+
 ## 1.1. Trabalhando com Zip
 
 Importação padrão:
