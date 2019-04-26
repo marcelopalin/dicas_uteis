@@ -17,6 +17,14 @@ Depois utilize o comando **delete** para removê-los
 find . -name "*.png" -type f -delete
 ```
 
+
+## Expressão Regular - para Deletar Diretórios
+
+O padrão específico é:
+
+201903[01][0-9][0-9A-Za-z\.]{5}
+
+
 ## 1.2. Listando a Estrutura do Computador
 
 ```
