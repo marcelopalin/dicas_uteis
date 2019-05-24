@@ -647,7 +647,7 @@ nvm ls-remote
 Escolhemos a última LTS - versão estável e instalamos:
 
 ```bash
-nvm install 8.15.0
+nvm install 10.15.3
 
 ```
 
