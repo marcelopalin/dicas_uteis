@@ -1,0 +1,1 @@
+/home/mpi/www/treinamento_sagace/extensions.list
