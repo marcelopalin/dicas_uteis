@@ -22,6 +22,30 @@ Se não estiver instalado o XDebug instale:
 sudo apt install php-xdebug
 ```
 
+Digite:
+
+```
+$ php --ini
+Configuration File (php.ini) Path: /etc/php/7.3/cli
+Loaded Configuration File:         /etc/php/7.3/cli/php.ini
+Scan for additional .ini files in: /etc/php/7.3/cli/conf.d
+Additional .ini files parsed:      /etc/php/7.3/cli/conf.d/10-mysqlnd.ini,
+/etc/php/7.3/cli/conf.d/10-opcache.ini,
+/etc/php/7.3/cli/conf.d/10-pdo.ini,
+/etc/php/7.3/cli/conf.d/15-xml.ini,
+
+...
+/etc/php/7.3/cli/conf.d/20-xdebug.ini,
+
+...
+/etc/php/7.3/cli/conf.d/20-xmlreader.ini,
+/etc/php/7.3/cli/conf.d/20-xmlwriter.ini,
+/etc/php/7.3/cli/conf.d/20-xsl.ini,
+/etc/php/7.3/cli/conf.d/20-zip.ini
+
+```
+
+Edite o arquivo /etc/php/7.3/cli/conf.d/20-xdebug.ini:
 
 ```ini
 #zend_extension=xdebug.so
