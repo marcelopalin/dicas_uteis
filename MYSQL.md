@@ -112,8 +112,14 @@ ALTER TABLE [NOME_DA_TABELA] ALTER COLUMN id COUNTER(1,1)
 ## 1.4. Criando um NOVO Banco de Dados
 
 ```bash
-CREATE DATABASE nome_database CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE nome_database CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ```
+
+
+A instrução a seguir pode ser usada para verificar o conjunto de caracteres padrão e o agrupamento para um determinado banco de dados:
+
+USE nome_database;
+SELECT @@character_set_database, @@collation_database;
 
 ## 1.5. DUMP
 
