@@ -7,3 +7,22 @@ Suporta cópia de links, propriedades de arquivos como usuário, grupos e permis
 Rsync consome menos banda , uma vez que usa o método de compressão e descompressão durante o envio e recebimento de dados em ambas as extremidades.
 
 
+```bash
+   rsync -avzhe ssh --progress --exclude-from 'lista_exclusao.txt' /home/ubuntu/meteorologia/outputs/CFSv2/membros/2019062600.01 exclusivo:/home/ampere/imagens-previsao/cfsv2/membros/2019/06/26/
+   rsync -avzhe ssh --progress --exclude-from 'lista_exclusao.txt' /home/ubuntu/meteorologia/outputs/CFSv2/membros/2019062606.01 exclusivo:/home/ampere/imagens-previsao/cfsv2/membros/2019/06/26/
+   rsync -avzhe ssh --progress --exclude-from 'lista_exclusao.txt' /home/ubuntu/meteorologia/outputs/CFSv2/membros/2019062612.01 exclusivo:/home/ampere/imagens-previsao/cfsv2/membros/2019/06/26/
+   rsync -avzhe ssh --progress --exclude-from 'lista_exclusao.txt' /home/ubuntu/meteorologia/outputs/CFSv2/membros/2019062618.01 exclusivo:/home/ampere/imagens-previsao/cfsv2/membros/2019/06/26/
+```
+
+
+Onde a lista de exclusão contém as pastas e arquivos que estão na ORIGEM e que não serão SINCRONIZADOS.
+Conteúdo do arquivo **lista_exclusao.txt**:
+
+```bash
+monthly
+src
+weekly
+*.grb2
+*.nc
+```
+
