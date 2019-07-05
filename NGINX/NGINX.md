@@ -1,36 +1,5 @@
 
-<!-- TOC -->
-
-- [1. NGINX](#1-nginx)
-    - [O que é o Nginx?](#o-que-%C3%A9-o-nginx)
-    - [Como funciona?](#como-funciona)
-    - [Quais são as suas principais características?](#quais-s%C3%A3o-as-suas-principais-caracter%C3%ADsticas)
-        - [Configuração simplificada](#configura%C3%A7%C3%A3o-simplificada)
-        - [Velocidade](#velocidade)
-        - [Streaming](#streaming)
-        - [Configuração de hosts virtuais](#configura%C3%A7%C3%A3o-de-hosts-virtuais)
-        - [Quais são as vantagens do Nginx?](#quais-s%C3%A3o-as-vantagens-do-nginx)
-    - [Quais as diferenças entre Nginx e Apache?](#quais-as-diferen%C3%A7as-entre-nginx-e-apache)
-    - [O mecanismo de módulo também tem as suas distinções:](#o-mecanismo-de-m%C3%B3dulo-tamb%C3%A9m-tem-as-suas-distin%C3%A7%C3%B5es)
-    - [1.1. Instalando](#11-instalando)
-        - [1.1.1. Parando o Apache2](#111-parando-o-apache2)
-    - [1.2. Instale o Nginx](#12-instale-o-nginx)
-    - [1.3. Como verificar a instalação?](#13-como-verificar-a-instala%C3%A7%C3%A3o)
-    - [Configurando NGINX para rodar o PHP 7.2](#configurando-nginx-para-rodar-o-php-72)
-    - [Alterando Permissões dos Diretórios de Projeto](#alterando-permiss%C3%B5es-dos-diret%C3%B3rios-de-projeto)
-    - [LARAVEL 5.6 API RESTFUL com NGINX no UBUNTU na Amazon EC2 - AWS](#laravel-56-api-restful-com-nginx-no-ubuntu-na-amazon-ec2---aws)
-    - [Problemas 01](#problemas-01)
-    - [Instalando o Passport](#instalando-o-passport)
-    - [Instalando o PASSPORT](#instalando-o-passport)
-- [Arquivo de Configuraçaõ do NGINX](#arquivo-de-configura%C3%A7a%C3%B5-do-nginx)
-- [EXTRAS](#extras)
-    - [Comandos NGINX](#comandos-nginx)
-    - [1.5. Familiarize-se com os Arquivos e Diretórios Importantes do Nginx](#15-familiarize-se-com-os-arquivos-e-diret%C3%B3rios-importantes-do-nginx)
-    - [1.6. Logs do Servidor](#16-logs-do-servidor)
-    - [1.7. Conclusão](#17-conclus%C3%A3o)
-
-<!-- /TOC -->
-# 1. NGINX
+# 1. NGINX - INSTALAÇÃO E CONFIGURAÇÃO NO UBUNTU 18.0 NA AWS
 
 ## O que é o Nginx?
 O modo de ler o nome é “engine-x” e, conforme já mencionamos, ele nada mais é do que um servidor web (HTTP e IMAP/POP3/Proxy). Tudo o que o bom e tradicional Apache faz, ele também fará, porém, muito mais rápido!
@@ -118,7 +87,7 @@ Exemplo de **default** do NGNIX com CORS
 
 https://gist.github.com/dimitardanailov/5c0b4d76f3fe8981f908
 
-## 1.1. Instalando
+## 1.1. PREPARAÇÃO PARA A INSTALAÇÃO 
 
 ### 1.1.1. Parando o Apache2
 
@@ -149,12 +118,11 @@ sudo apt-get remove apache2 apache2-utils apache2.2-bin apache2.2-common libapac
 ```
 
 
-## 1.2. Instale o Nginx
+## 1.2. INÍCIO DA INSTALAÇÃO DO NGINX
 
-```
+```bash
 sudo apt-get install nginx -y
 ```
-
 
 ## 1.3. Como verificar a instalação?
 Ao final do processo de instalação, o Ubuntu 16.04 inicia o Nginx. O servidor web já deve estar em funcionamento.
@@ -194,165 +162,6 @@ Pronto! Você verá a tela de boas-vindas do NGINX no seu Browser!
 sudo nginx -t
 ```
 
-
-## Configurando NGINX para rodar o PHP 7.2
-
-```bash
-sudo nano /etc/php/7.2/fpm/php.ini
-```
-
-Procure pela palavra **cgi.fix_pathinfo** descomente a linha (remova o ;)
-e altere-a:
-
-```ini
-cgi.fix_pathinfo=0
-```
-
-Depois, no arquivo **/etc/php/7.2/fpm/pool.d/www.conf**:
-
-Verifique quem é o **usuário e grupo** que terá permissão nas pastas dos projetos.
-Por padrão são: 
-```
-user = www-data
-group = www-data
-```
-
-Edite o arquivo
-
-```
-sudo nano /etc/php/7.2/fpm/pool.d/www.conf
-```
-
-Altere o usuário para **ubuntu**, no final verifique se a configuração de **www.conf** está assim:
-
-```ini
-; Unix user/group of processes
-; Note: The user is mandatory. If the group is not set, the default user's group
-;       will be used.
-user = ubuntu
-group = www-data
-
-; The address on which to accept FastCGI requests.
-; Valid syntaxes are:
-;   'ip.add.re.ss:port'    - to listen on a TCP socket to a specific IPv4 address on
-;                            a specific port;
-;   '[ip:6:addr:ess]:port' - to listen on a TCP socket to a specific IPv6 address on
-;                            a specific port;
-;   'port'                 - to listen on a TCP socket to all addresses
-;                            (IPv6 and IPv4-mapped) on a specific port;
-;   '/path/to/unix/socket' - to listen on a unix socket.
-; Note: This value is mandatory.
-listen = /run/php/php7.2-fpm.sock
-```
-
-## Alterando Permissões dos Diretórios de Projeto
-
-Não se esqueça de alterar as permissões e alterar o nome do usuário e grupo
-da pasta **/var/www/html**
-
-```
-sudo chown -R ubuntu:www-data /var/www/html
-sudo chmod -R 775 /var/www/html/"PASTA_SEU_PROJETO_LARAVEL"/storage
-```
-
-Ex:
-```
-sudo chmod -R 775 /var/www/html/webservice/storage
-```
-
-
-
-## LARAVEL 5.6 API RESTFUL com NGINX no UBUNTU na Amazon EC2 - AWS
-
-Para configurarmos um projeto LARAVEL com NGINX vamos supor que você já tenha instalado o **composer**. Caso ainda não tenha, verifique as dicas **LINUX** deste repositório.
-
-Passo 1: vamos criar um projeto **LARAVEL** com o **composer** na pasta **/var/www/html/**:
-
-ou baixe o projeto do Git dentro da pasta **html**
-```bash
-git clone https://gitlab.com/marcelo.palin/webservice.git
-```
-
-**Atenção**: altere as permissões da pasta para:
-Senão o composer não consegue criar a pasta **vendor**
-```bash
- sudo chown -R ubuntu:www-data /var/www/html/webservice/
-```
-
-Também faça:
-
-```bash 
-sudo chmod -R 775 /var/www/html/webservice/storage
-```
-
-
-## Problemas 01
-
-Corrigindo problemas com o **composer update**
-
-Ao executarmos o comando **composer update** apareceram problemas de permissão.
-Que puderam ser solucionadas da seguinte maneira:
-
-```bash
-		sudo chown -R ubuntu /home/ubuntu/.composer/cache/repo/https---packagist.org
-		sudo mkdir /home/ubuntu/.composer/cache/files/
-		sudo chown -R ubuntu /home/ubuntu/.composer/cache/files/
-```
-
-Após isso execute o comando:
-
-Instalando os pacotes:
-```bash
-composer update
-```
-
-Otimizando na produção
-```
-composer install --optimize-autoloader --no-dev
-```
-
-## Instalando o Passport
-
-Para instalá-lo na instância da Amazon EC2 t2-micro, tive que criar uma memória
-swap, pois aparecia um problema dizendo que havia falta de memória, portanto criei um arquivo de memória de 4Gb, você pode optar por criar um arquivo menor, seguem os comandos:
-
-
-```bash
-sudo fallocate -l 4G /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-```
-
-Posteriormente, configure a memória Swap para ser Montada na inicialização do sistema:
-```bash
-$ sudo nano /etc/fstab
-```
-
-Coloque esta linha no final do arquivo **fstab**:
-```ini
-/swapfile   none    swap    sw    0   0
-```
-
-## Instalando o PASSPORT
-
-```bash
-composer require laravel/passport
-```
-
-Depois execute (verifique antes a configuração do arquivo .env e defina o BD):
-
-```bash
-php artisan migrate
-```
-
-Por fim, execute:
-
-```bash
-php artisan passport:install
-```
-
-
 # Arquivo de Configuraçaõ do NGINX
 
 Referências:
@@ -362,127 +171,41 @@ https://gist.github.com/psgganesh/8d1790dd0c16ab5a4cde
 
 No diretório **/etc/ngnix/sites-available** configure o arquivo **default** da seguinte mandeira:
 
-```ini
-
-server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-
-	# SSL configuration
-	#
-	# listen 443 ssl default_server;
-	# listen [::]:443 ssl default_server;
-	#
-	# Note: You should disable gzip for SSL traffic.
-	# See: https://bugs.debian.org/773332
-	#
-	# Read up on ssl_ciphers to ensure a secure configuration.
-	# See: https://bugs.debian.org/765782
-	#
-	# Self signed certs generated by the ssl-cert package
-	# Don't use them in a production server!
-	#
-	# include snippets/snakeoil.conf;
-
-	root /var/www/html/webservice/public;
-
-	# Add index.php to the list if you are using PHP
-	index index.php index.html index.htm index.nginx-debian.html;
-
-	server_name NOME_DO_DOMINIO (ex: meuapp.meudominio.com);
-
-	location / {
-		index index.html index.htm index.php;
-    		try_files $uri $uri/ /index.php?$args;
-	}
-
-	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-	#
-	location ~ \.php$ {
-		include snippets/fastcgi-php.conf;
-	
-		# With php7.0-cgi alone:
-	#	fastcgi_pass 127.0.0.1:9000;
-		# With php7.0-fpm:
-		fastcgi_pass unix:/run/php/php7.2-fpm.sock;
-
- 	# CORS settings
-    	# http://enable-cors.org/server_nginx.html
-    	# http://10.10.0.64 - Coloque os IPs permitidos somente! It's my front end application
-    	add_header 'Access-Control-Allow-Origin' '*'; # Forma Insegura
-    	add_header 'Access-Control-Allow-Credentials' 'true';
-    	add_header 'Access-Control-Allow-Methods' 'GET, POST, DELETE, PUT';
-    	add_header 'Access-Control-Allow-Headers' 'Version,Accept,Accept-Encoding,Accept-Language,Connection,Coockie,Authorization,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
-  }
-
-}
-
-
-# Virtual Host configuration for example.com
-#
-# You can move that to a different file under sites-available/ and symlink that
-# to sites-enabled/ to enable it.
-#
-#server {
-#	listen 80;
-#	listen [::]:80;
-#
-#	server_name example.com;
-#
-#	root /var/www/example.com;
-#	index index.html;
-#
-#	location / {
-#		try_files $uri $uri/ =404;
-#	}
-#}
-```
-
-Terminado de configurar, antes de testar reinicie os serviços:
-
-```bash
-sudo /etc/init.d/nginx stop
-```
-
-```bash
-sudo /etc/init.d/nginx start
-```
-
-```bash
- sudo /etc/init.d/php7.2-fpm restart
-```
 
 # EXTRAS
 
 ## Comandos NGINX
 Agora que você tem seu servidor web funcionando, podemos partir para os comandos básicos de gerenciamento.
 
-Para parar seu servidor web, você pode digitar:
+
+## Para parar seu servidor web, você pode digitar:
 
 ```bash
 sudo systemctl stop nginx
 ```
 
-Para iniciar o servidor web quando ele estiver parado, digite:
+## Para iniciar o servidor web quando ele estiver parado, digite:
 
-```
+```bash
 sudo systemctl start nginx
 ```
 
-Para parar e depois iniciar o serviço novamente, digite:
+## Para parar e depois iniciar o serviço novamente, digite:
 
 ```
 sudo systemctl restart nginx
 ```
 
-Se você estiver simplesmente realizando alterações de configuração, o Nginx muitas vezes recarrega sem perder as conexões. Para fazer isso, esse comando pode ser utilizado:
+## Recarregando
 
+Se você estiver simplesmente realizando alterações de configuração, o Nginx muitas vezes recarrega sem perder as conexões. Para fazer isso, esse comando pode ser utilizado:
 ```
 sudo systemctl reload nginx
 ```
 
-Por padrão, o Nginx é configurado para iniciar automaticamente quando o servidor é inicializado. Se isso não é o que você quer, você pode desabilitar esse comportamento digitando:
+## Desabilitando
 
+Por padrão, o Nginx é configurado para iniciar automaticamente quando o servidor é inicializado. Se isso não é o que você quer, você pode desabilitar esse comportamento digitando:
 ```
 sudo systemctl disable nginx
 ```
