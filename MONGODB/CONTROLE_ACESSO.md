@@ -1,4 +1,4 @@
-# CONTROLANDO O ACESSO AO BD
+# 1. CONTROLANDO O ACESSO AO BD
 
 https://docs.mongodb.com/manual/tutorial/enable-authentication/
 
@@ -28,7 +28,7 @@ Um valor de 1 para o ok campo na resposta indica que o servidor está funcionand
 
 
 
-# Criando o Usuário administrador 
+# 2. Criando o Usuário administrador 
 
 Com o controle de acesso ativado, assegure-se de ter um usuário com a função (Role) **userAdmin** ou **userAdminAnyDatabase** no banco de dados chamado **admin**. Esse usuário poderá administrar usuários e funções, como: criar usuários, conceder ou revogar funções de usuários e criar ou modificar funções alfandegárias.
 
@@ -85,7 +85,7 @@ Agora você pode mostrar todos os usuários criados até agora com o comando:
 Neste ponto, nosso usuário poderá inserir credenciais, **mas elas não precisarão fazer isso até que habilitemos a autenticação** e reinicie o daemon do MongoDB.
 
 
-# Ativando a Autenticação
+# 3. Ativando a Autenticação
 A autenticação está ativada no **mongod.conf**. Depois de ativá-lo e reiniciá-lo mongod, os usuários ainda poderão se conectar ao Mongo sem fazer a autenticação, mas precisarão fornecer um nome de usuário e uma senha para poderem interagir.
 
 Vamos abrir o arquivo de configuração:
@@ -112,7 +112,7 @@ sudo service mongod restart
 ```
 
 
-# Conecte-se ao MongoDB
+# 4. Conecte-se ao MongoDB
 
 Reinicie o MongoDB (comando mencionado acima) e conecte-se ao usuário criado com este comando:
 
@@ -134,7 +134,8 @@ local   0.000GB
 mydb    0.000GB
 > exit
 bye
-mpi@mpi-300E5K-300E5Q:~/projs_python/dicas_uteis$ mongo
+
+$ mongo
 MongoDB shell version v4.2.0
 connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
 Implicit session: session { "id" : UUID("d3895cc3-f644-40a2-9efd-4ab66ca41a1d") }
@@ -164,9 +165,9 @@ shellHelper@src/mongo/shell/utils.js:790:15
 ```
 
 
-# NÃO RECOMENDADO
+# 5. NÃO RECOMENDADO
 
-## Configurando o Acesso Remoto (Opcional)
+## 5.1. Configurando o Acesso Remoto (Opcional)
 Antes de começarmos a trabalhar com uma instalação que permita conexões remotas, o ideal é que o MongoDB 
 fique atrás de um firewall externo, protegido por uma rede privada virtual (VPN) ou restrito por meio de um 
 host bastion. No entanto, à medida que trabalhamos nesse sentido, podemos adotar a etapa menos complicada de ativar 
@@ -230,7 +231,7 @@ Nota: Se você for iniciante no UFW, poderá aprender mais no guia UFW Essential
 
 Com essa regra de firewall, estamos prontos para configurar o MongoDB para ouvir em sua interface pública.
 
-# Configurando um IP de ligação pública
+# 6. Configurando um IP de ligação pública
 
 Para permitir conexões remotas, adicionaremos o endereço IP publicamente roteável do nosso host ao mongod.confarquivo.
 
@@ -262,7 +263,7 @@ sudo service mongod status
 A saída deve conter Active: active (running)e podemos prosseguir para o nosso teste final. 
 O Mongo agora está ouvindo em sua porta padrão.
 
-# Testando a conexão remota
+# 7. Testando a conexão remota
 
 Vamos testar se o Mongo está escutando em sua interface pública, adicionando o --hostsinalizador com o endereço IP do mongodb.confarquivo.
 
@@ -276,13 +277,13 @@ connecting to: mongodb://107.170.233.82:27017/
 MongoDB server version: 3.4.2
 Alcançar o prompt confirma que o daemon está escutando em seu IP público. Nesse ponto, qualquer transação entre uma conexão remota e o host MongoDB não é criptografada, portanto, a próxima etapa, antes de testar o firewall, deve ser proteger essas transações. Para obter ajuda, consulte a documentação de Segurança do MongoDB em Criptografia de Transporte .
 
-# Conclusão
+# 8. Conclusão
 
 Neste tutorial, adicionamos o repositório do MongoDB à nossa lista de pacotes para instalar a última versão disponível do MongoDB, adicionamos um usuário administrativo e habilitamos a autenticação.
 
 Também mostramos como configurar o MongoDB para aceitar conexões remotas, mas impedir a publicidade da instalação do MongoDB configurando o firewall do servidor para permitir conexões apenas de hosts que precisam de acesso.
 
-# Próximos passos:
+# 9. Próximos passos:
 
 Para criptografar dados em trânsito, consulte a documentação de Segurança do MongoDB em Criptografia de Transporte.
 Saiba mais sobre como usar e administrar o MongoDB nesses artigos da comunidade DigitalOcean .
