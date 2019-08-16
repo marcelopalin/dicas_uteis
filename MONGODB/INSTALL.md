@@ -1,11 +1,44 @@
 # MONGODB
 
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+
 Objetivo: instalar o MongoDB no Ubuntu 18 ou 19.
+
+Primeiro verifique as versões já instaladas:
+
+```
+sudo apt list --installed | grep mongodb-org
+```
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+mongodb-org-mongos/bionic,now 4.2.0 amd64 [installed,automatic]
+mongodb-org-server/bionic,now 4.2.0 amd64 [installed,automatic]
+mongodb-org-shell/bionic,now 4.2.0 amd64 [installed,automatic]
+mongodb-org-tools/bionic,now 4.2.0 amd64 [installed,automatic]
+mongodb-org/bionic,now 4.2.0 amd64 [installed]
+
+Remova a versão anterior:
+
+```bash
+sudo apt remove mongodb-org
+```
+
+```bash
+sudo apt purge mongodb-org
+```
+
+Remover banco de dados de dados / diretórios e arquivos de log.
+
+```
+sudo rm -r /var/log/mongodb
+sudo rm -r /var/lib/mongodb
+```
 
 Adicione o repositório:
 
 ```bash
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
 ```
 
 
@@ -13,7 +46,7 @@ Vamos adicionar o MONGODB APT repositório url em **/etc/apt/sources.list.d/mong
 
 
 ```bash
-echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb.list
+echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
 ```
 
 Instale o MongoDB
@@ -27,15 +60,30 @@ Depois da instalação faça:
 
 ```bash
 sudo systemctl enable mongod
-sudo systemctl start mongod 
+ou
+sudo service mongod start
+sudo service mongod status
+
+
+● mongod.service - MongoDB Database Server
+   Loaded: loaded (/lib/systemd/system/mongod.service; enabled; vendor preset: enabled)
+   Active: active (running) since Fri 2019-08-16 11:22:22 -03; 41s ago
+     Docs: https://docs.mongodb.org/manual
+ Main PID: 22460 (mongod)
+   Memory: 172.7M
+   CGroup: /system.slice/mongod.service
+           └─22460 /usr/bin/mongod --config /etc/mongod.conf
+
+ago 16 11:22:22 mpi-300E5K-300E5Q systemd[1]: Started MongoDB Database Server.
+
 ```
 
 Verifique a versão do BD:
 
 ```bash
-mongod --version
-db version v4.0.12
-git version: 5776e3cbf9e7afe86e6b29e22520ffb6766e95d4
+mongo --version
+MongoDB shell version v4.2.0
+git version: a4b751dcf51dd249c5865812b390cfd1c0129c30
 OpenSSL version: OpenSSL 1.1.1c  28 May 2019
 allocator: tcmalloc
 modules: none
@@ -50,6 +98,8 @@ Além disso, conecte o MongoDB usando a linha de comando e execute alguns comand
 
 
 # LISTAR OS BANCO DE DADOS
+
+Execute:
 
 ```
 $ mongo
@@ -85,27 +135,94 @@ mydb    0.000GB
 > 
 ```
 
-# CRIAR UM BANCO DE DADOS
+# Gerenciando o Serviço MongoDB
+O MongoDB é instalado como um serviço systemd, o que significa que você pode gerenciá-lo usando systemd 
+comandos padrão junto com todos os outros serviços de sistema no Ubuntu.
 
-Agora, se queremos criar banco de dados com o nome exampledb. Basta executar o comando a seguir e salvar um único registro no banco de dados. Depois de salvar seu primeiro exemplo, você verá que o novo banco de dados foi criado.
-
+Para verificar o status do serviço, digite:
 
 ```bash
-$ mongo 
-
-> use mydb;
-
-> db.test.save ({tecadmin: 100})
-
-db.test.find ()
-
-  {"_id": ObjectId ("52b0dc8285f8a8071cbb5daf"), "tecadmin": 100}
+sudo service mongod status
 ```
 
-# DROP DATABASE
+Você pode parar o servidor a qualquer momento digitando:
 
-O MongoDB fornece o comando **dropDatabase()** para descartar o banco de dados atualmente usado com seus arquivos de dados associados. Antes de excluir, verifique qual banco de dados está selecionado usando o comando **db**.
+```bash
+sudo service mongod stop
+```
+
+Para iniciar o servidor quando estiver parado, digite:
+
+```bash
+sudo service mongod start
+```
+
+Você também pode reiniciar o servidor com um único comando:
 
 ```
-> db
+sudo service mongod restart
+```
+
+Por padrão, o MongoDB é configurado para iniciar automaticamente com o servidor. Se você deseja desativar a inicialização automática, digite:
+
+```bash
+sudo systemctl disable mongodb
+```
+
+É tão fácil ativá-lo novamente. Para fazer isso, use:
+
+```
+sudo systemctl enable mongodb
+```
+
+Configurações do firewall NÃO SÃO NECESSÁRIAS EM GERAL, apenas se você irá fazer
+acesso DIRETO ao BD pela internet - isso não é COMUM.
+
+
+# INFORMAÇÕES DE CONFIGURAÇÃO
+
+Vamos abrir o arquivo de configuração:
+
+```bash
+sudo joe /etc/mongod.conf
+```
+
+```
+# mongod.conf
+
+# for documentation of all options, see:
+#   http://docs.mongodb.org/manual/reference/configuration-options/
+
+# Where and how to store data.
+storage:
+  dbPath: /var/lib/mongodb
+  journal:
+    enabled: true
+#  engine:
+#  mmapv1:
+#  wiredTiger:
+
+# where to write logging data.
+systemLog:
+  destination: file
+  logAppend: true
+  path: /var/log/mongodb/mongod.log
+
+# network interfaces
+net:
+  port: 27017
+  bindIp: 127.0.0.1
+
+
+# how the process runs
+processManagement:
+  timeZoneInfo: /usr/share/zoneinfo
+
+#security:
+
+#operationProfiling:
+
+#replication:
+
+#sharding:
 ```
