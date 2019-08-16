@@ -162,3 +162,128 @@ shellHelper.show@src/mongo/shell/utils.js:883:9
 shellHelper@src/mongo/shell/utils.js:790:15
 @(shellhelp2):1:1
 ```
+
+
+# NÃO RECOMENDADO
+
+## Configurando o Acesso Remoto (Opcional)
+Antes de começarmos a trabalhar com uma instalação que permita conexões remotas, o ideal é que o MongoDB 
+fique atrás de um firewall externo, protegido por uma rede privada virtual (VPN) ou restrito por meio de um 
+host bastion. No entanto, à medida que trabalhamos nesse sentido, podemos adotar a etapa menos complicada de ativar 
+um firewall no servidor de banco de dados e restringir o acesso ao host ou aos hosts específicos que precisam dele.
+
+- Ativando o UFW
+No pré-requisito da Configuração Inicial do Servidor com o Ubuntu 16.04 , habilitamos o UFW e permitimos somente conexões SSH. 
+Antes de abrirmos uma porta para nossa máquina cliente, vamos verificar o status do UFW:
+
+```
+sudo ufw status
+```
+
+Nota: Se a saída indicar que o firewall está inactive, ative-o com:
+
+```
+sudo ufw enable
+```
+
+Uma vez habilitado, reexecutando o comando status, sudo ufw statusmostrará as regras. Se necessário, certifique-se de permitir o SSH.
+
+```
+sudo ufw allow OpenSSH
+```
+
+A menos que tenhamos feito alterações nos pré-requisitos, a saída deve mostrar que apenas o OpenSSH é permitido:
+
+```
+Output
+Status: active
+
+To                         Action      From
+--                         ------      ----
+OpenSSH                    ALLOW       Anywhere
+OpenSSH (v6)               ALLOW       Anywhere (v6)
+```
+
+Em seguida, permitiremos o acesso à porta padrão do MongoDB, 27017, mas restringiremos esse acesso 
+a um host específico. Se você alterou a porta padrão, certifique-se de atualizá-la no comando abaixo.
+
+```
+sudo ufw allow from client_ip_address to any port 27017
+```
+
+Execute novamente este comando usando o endereço IP para cada cliente adicional que precisa de acesso. Para verificar ufw statusnovamente a regra, executaremos novamente:
+
+```
+sudo ufw status
+```
+
+```
+Output
+To                         Action      From
+--                         ------      ----
+OpenSSH                    ALLOW       Anywhere
+27017                       ALLOW      client_ip_address
+OpenSSH (v6)               ALLOW       Anywhere (v6)
+```
+
+Nota: Se você for iniciante no UFW, poderá aprender mais no guia UFW Essentials: Regras e Comandos Comuns do Firewall .
+
+Com essa regra de firewall, estamos prontos para configurar o MongoDB para ouvir em sua interface pública.
+
+# Configurando um IP de ligação pública
+
+Para permitir conexões remotas, adicionaremos o endereço IP publicamente roteável do nosso host ao mongod.confarquivo.
+
+```
+sudo nano /etc/mongod.conf
+```
+
+Na netestrofe, adicione o MongoHostIP da bindIplinha:
+
+Excerto do /etc/mongod.conf
+ . . .
+net:
+  port: 27017
+  bindIp: 127.0.0.1,IP_of_MongoHost
+ . . .
+
+Vamos salvar e sair do arquivo e, em seguida, reiniciar o daemon:
+
+```bash
+sudo service mongod restart
+```
+
+Como fizemos anteriormente, confirmaremos que o reinício foi bem-sucedido:
+
+```
+sudo service mongod status
+```
+
+A saída deve conter Active: active (running)e podemos prosseguir para o nosso teste final. 
+O Mongo agora está ouvindo em sua porta padrão.
+
+# Testando a conexão remota
+
+Vamos testar se o Mongo está escutando em sua interface pública, adicionando o --hostsinalizador com o endereço IP do mongodb.confarquivo.
+
+```
+mongo -u AdminSammy -p --authenticationDatabase admin --host IP_address_of_MongoHost
+```
+
+MongoDB shell version v3.4.2
+Enter password:
+connecting to: mongodb://107.170.233.82:27017/
+MongoDB server version: 3.4.2
+Alcançar o prompt confirma que o daemon está escutando em seu IP público. Nesse ponto, qualquer transação entre uma conexão remota e o host MongoDB não é criptografada, portanto, a próxima etapa, antes de testar o firewall, deve ser proteger essas transações. Para obter ajuda, consulte a documentação de Segurança do MongoDB em Criptografia de Transporte .
+
+# Conclusão
+
+Neste tutorial, adicionamos o repositório do MongoDB à nossa lista de pacotes para instalar a última versão disponível do MongoDB, adicionamos um usuário administrativo e habilitamos a autenticação.
+
+Também mostramos como configurar o MongoDB para aceitar conexões remotas, mas impedir a publicidade da instalação do MongoDB configurando o firewall do servidor para permitir conexões apenas de hosts que precisam de acesso.
+
+# Próximos passos:
+
+Para criptografar dados em trânsito, consulte a documentação de Segurança do MongoDB em Criptografia de Transporte.
+Saiba mais sobre como usar e administrar o MongoDB nesses artigos da comunidade DigitalOcean .
+
