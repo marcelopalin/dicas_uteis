@@ -106,7 +106,7 @@ o comando **start**:
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon",
-    "blabla": "nodemon",
+    "blabla": "nodemon"
   },
   "keywords": [],
   "author": "",
