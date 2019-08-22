@@ -1,8 +1,9 @@
 # INSTALL POSTGRESQL
 
-Fonte: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04
+Dicas Gerais:
+https://www.lucascaton.com.br/2010/05/23/resumo-de-comandos-uteis-do-postgresql/
 
-Os sistemas de gerenciamento de bancos de dados relacionais são um componente-chave de muitos sites e aplicativos da Web. Eles fornecem uma maneira estruturada de armazenar, organizar e acessar informações.
+
 O PostgreSQL, ou Postgres, é um sistema de gerenciamento de banco de dados RELACIONAL que fornece uma implementação da linguagem de consulta SQL. 
 É uma escolha popular para muitos projetos pequenos e grandes e tem a vantagem de ser compatível com os padrões e ter muitos recursos avançados, 
 como transações confiáveis ​​e simultaneidade **SEM BLOQUEIOS DE LEITURA**.
@@ -20,58 +21,66 @@ sudo apt update
 sudo apt install postgresql postgresql-contrib
 ```
 
-Tela final da instalação:
 
-```bash
-Success. You can now start the database server using:
+# Criar uma senha
 
-    /usr/lib/postgresql/10/bin/pg_ctl -D /var/lib/postgresql/10/main -l logfile start
+```
+sudo su postgres -c psql postgres
+```
 
-Ver Cluster Port Status Owner    Data directory              Log file
-10  main    5432 down   postgres /var/lib/postgresql/10/main /var/log/postgresql/postgresql-10-main.log
-update-alternatives: using /usr/share/postgresql/10/man/man1/postmaster.1.gz to provide /usr/share/man/man1/postmaster.1.gz (postmaster.1.gz) in auto mode
-Setting up postgresql (10+190) ...
-Setting up postgresql-contrib (10+190) ...
-Processing triggers for systemd (237-3ubuntu10.23) ...
-Processing triggers for ureadahead (0.100.0-21) ...
-Processing triggers for libc-bin (2.27-3ubuntu1) ...
+Quando o console do PostgreSQL abrir, rode:
+
+```
+ALTER USER postgres WITH PASSWORD 'sua_senha';
+```
+
+# Criar um banco de dados pelo terminal
+
+```
+createdb -U username -E utf8 dbname -h localhost
 
 ```
 
+# Criar um banco de dados no console do PostgreSQL (psql)
 
-Agora que o software está instalado, podemos ver como ele funciona e como ele pode ser diferente de sistemas de gerenciamento de banco de dados semelhantes que você possa ter usado.
-
-
-## Etapa 2 - Usando funções e bancos de dados do PostgreSQL
-
-Por padrão, o Postgres usa um conceito chamado "funções" para lidar com autenticação e autorização. 
-Estes são, de certa forma, semelhantes às contas regulares no estilo Unix, mas o Postgres não faz distinção entre usuários e grupos e prefere o termo mais flexível "role".
-
-Após a instalação, o Postgres é configurado para usar a autenticação ident, o que significa que ele associa as funções do Postgres a uma conta do sistema Unix / Linux correspondente. Se houver uma função no Postgres, um nome de usuário do Unix / Linux com o mesmo nome poderá entrar como essa função.
-
-O procedimento de instalação criou uma **conta de usuário chamada postgres** que está associada à função padrão do Postgres. Para usar o Postgres, você pode fazer login nessa conta.
-
-Existem algumas maneiras de utilizar essa conta para acessar o Postgres.
-
-
-## Mudar para a conta do postgres
-
-Alterne para a conta postgres no seu servidor digitando:
-
-```bash
-sudo -i -u postgres
+```
+create database dbname with owner=postgres encoding='utf8';
 ```
 
+#Renomear um banco de dados
 
-Agora você pode acessar um prompt do Postgres imediatamente digitando:
-
-```bash
-psql
+```
+alter database "old_name" rename to "new_name";
 ```
 
-Isso fará você entrar no prompt do PostgreSQL e, a partir daqui, você estará livre para interagir com o sistema de gerenciamento de banco de dados imediatamente.
+#Apagar um banco de dados
 
-Saia do prompt do PostgreSQL digitando:
+```
+drop database dbname;
+```
+#Dump (backup) de um banco de dados
 
-\q
-Isso levará você de volta ao postgresprompt de comando do Linux.
+```
+pg_dump dbname -h localhost -U postgres > backup.sql
+```
+
+# Restauração de um banco de dados (a partir de um arquivo SQL)
+
+```
+psql dbname -h localhost -U postgres < backup.sql
+```
+
+#Dump (backup) dos usuários de um banco de dados
+
+```
+pg_dumpall -g -U postgres -h localhost > users.sql
+```
+
+# Comandos especiais em queries SQL
+
+Data:
+
+```
+select (current_date + integer '7') as nome_campo;
+```
+
