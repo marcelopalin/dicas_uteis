@@ -650,7 +650,9 @@ Para adicionar o Byobu ao seu perfil de logon, execute o seguinte comando. Isso 
 
 Para Habilitar é só fazer: 
 
+```
 byobu-enable
+```
 
 Se você mudar de idéia mais tarde e quiser desativar o Byobu no login, execute byobu-disable.
 
@@ -660,13 +662,95 @@ Depois que o Byobu estiver configurado para iniciar o login, se você desejar, p
 
 Para desabilitar:
 
+```
 byobu-disable
+```
 
 ## Etapa 3 - Configuração do multiplexador de back-end
 
 Por padrão, o Byobu usará tmux como multiplexador de back-end. No entanto, se você preferir usar screen, poderá alterar facilmente o back-end ativado.
 
+```bash
 byobu-select-backend
+```
+
+Isso fornecerá uma solicitação para escolher o multiplexador de back-end. Digite o número da sua preferência e pressione ENTER.
+
+```bash
+Output
+Select the byobu backend:
+  1. tmux
+  2. screen
+
+Choose 1-2 [1]:
+
+```
+
+Este tutorial pressupõe que você tenha o tmuxback - end ativado, no entanto, as combinações de teclas padrão também devem ser as mesmas screen.
+
+Etapa 4 - Ativando o prompt colorido
+O Byobu também inclui um prompt colorido que inclui o código de retorno do último comando executado. É ativado por padrão em alguns ambientes. Você pode ativá-lo manualmente (ou verificar se ele já está ativado) executando:
+
+```
+byobu-enable-prompt
+```
+
+```
+KEYBINDINGS
+       byobu keybindings can be user defined in /usr/share/byobu/keybindings/ (or within .screenrc if byobu-export was used). The  common  key  bindings
+       are:
+
+       F2 - Create a new window
+
+       F3 - Move to previous window
+
+       F4 - Move to next window
+
+       F5 - Reload profile
+
+       F6 - Detach from this session
+
+       F7 - Enter copy/scrollback mode
+
+       F8 - Re-title a window
+
+       F9 - Configuration Menu
+
+       F12 -  Lock this terminal
+
+       shift-F2 - Split the screen horizontally
+
+       ctrl-F2 - Split the screen vertically
+
+       shift-F3 - Shift the focus to the previous split region
+
+       shift-F4 - Shift the focus to the next split region
+
+       shift-F5 - Join all splits
+
+       ctrl-F6 - Remove this split
+
+       ctrl-F5 - Reconnect GPG and SSH sockets
+
+       shift-F6 - Detach, but do not logout
+
+       alt-pgup - Enter scrollback mode
+
+       alt-pgdn - Enter scrollback mode
+
+       Ctrl-a $ - show detailed status
+
+       Ctrl-a R - Reload profile
+
+       Ctrl-a ! - Toggle key bindings on and off
+
+       Ctrl-a k - Kill the current window
+
+       Ctrl-a ~ - Save the current window's scrollback buffer
+       Ctrl+shift + f3 - Move to left tab
+       Ctrl+shift + f4 - Move to right tab
+```
+
 
 ## Algumas informações que podem ser apresentadas:
 Status da bateria
