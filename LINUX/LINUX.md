@@ -640,6 +640,52 @@ bunzip2 programa.tar.bz2
 sudo apt-get update & apt-get install <nome do pacote>
 ```
 
+# BYOBU
+
+Para quem usa a linha de comandos (terminal) durante muito tempo como eu, é hora de dar uma lufada de ar fresco e um novo look. Para isso apresento-vos o Byobu, uma aplicação que permite incluir algumas informações do nosso sistema na linha de comandos e incluir algumas cores.
+
+O Byobu é desativado por padrão após a instalação. Há duas maneiras principais de ativar o Byobu: você pode iniciá-lo manualmente com o byobucomando toda vez que quiser usá-lo ou pode configurá-lo para iniciar automaticamente quando fizer login na sua conta.
+
+Para adicionar o Byobu ao seu perfil de logon, execute o seguinte comando. Isso significa que toda vez que você fizer login na sua conta, ela será iniciada.
+
+Para Habilitar é só fazer: 
+
+byobu-enable
+
+Se você mudar de idéia mais tarde e quiser desativar o Byobu no login, execute byobu-disable.
+
+Como as sessões do Byobu são mantidas em várias sessões de logon, se você não fechar especificamente uma sessão do Byobu, ela será carregada novamente na próxima vez que você efetuar login. Isso significa que você pode deixar os scripts em execução e os arquivos abertos entre as conexões sem problemas. Você também pode ter vários logons ativos conectados à mesma sessão.
+
+Depois que o Byobu estiver configurado para iniciar o login, se você desejar, poderá personalizar qual multiplexador ele usa.
+
+Para desabilitar:
+
+byobu-disable
+
+## Etapa 3 - Configuração do multiplexador de back-end
+
+Por padrão, o Byobu usará tmux como multiplexador de back-end. No entanto, se você preferir usar screen, poderá alterar facilmente o back-end ativado.
+
+byobu-select-backend
+
+## Algumas informações que podem ser apresentadas:
+Status da bateria
+Informações sobre o CPU
+Data/hora
+Espaço em disco
+Velocidade das ventoinhas
+Nome da máquina
+Endereço IP
+Carga do CPU
+Número de e-mails
+Memória disponível/em uso
+Temperatura
+Número de utilizadores logados
+Informações da rede sem fios
+Actualizações disponíveis
+etc.
+
+
 # 16. SCREEN LINUX
 
 ## 16.1. Objetivo
