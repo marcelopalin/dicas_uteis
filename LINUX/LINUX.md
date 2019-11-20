@@ -2,6 +2,26 @@
 
 # 1. DICAS GERAIS LINUX
 
+
+# CAPTURA DE TELA NO LINUX
+
+Instalar o Flameshot com o comando 
+
+# Associar a Tecla PrintScr ao Flameshot
+
+
+Remova a associação atual:
+
+```
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot ''
+```
+
+Depois em Configurações -> Dispositivos -> Teclado -> role até embaixo e clique em +
+
+Nome: flameshot
+Comando: /usr/bin/flameshot gui
+Tecla: PrintScr
+
 # DATAGRIP NO UBUNTU LINUX 16.04, 18+
 
 ```bash
