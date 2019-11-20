@@ -3,11 +3,11 @@
 # 1. DICAS GERAIS LINUX
 
 
-# CAPTURA DE TELA NO LINUX
+# 2. CAPTURA DE TELA NO LINUX
 
 Instalar o Flameshot com o comando 
 
-# Associar a Tecla PrintScr ao Flameshot
+# 3. Associar a Tecla PrintScr ao Flameshot
 
 
 Remova a associação atual:
@@ -22,7 +22,155 @@ Nome: flameshot
 Comando: /usr/bin/flameshot gui
 Tecla: PrintScr
 
-# DATAGRIP NO UBUNTU LINUX 16.04, 18+
+# 4. INSTALAÇÃO DO DRIVER NVIDIA NO UBUNTU 18.04
+
+https://www.linuxbabe.com/ubuntu/install-nvidia-driver-ubuntu-18-04
+
+
+Um pequeno glossário de drivers Nvidia no Ubuntu
+
+Antes de te ensinar a fazer a instalação, a nossa preocupação é que você entenda o que está fazendo, e não que você apenas copie e cole todos os passos sem absorver conhecimento, por isso vamos esclarecer alguns termos que talvez você encontre pelo caminho ao tentar instalar um driver de vídeo Nvidia no Ubuntu:
+
+Binary Driver: Refere-se ao tipo do driver (binário);
+
+Proprietário: Refere-se ao tipo de código do driver, neste caso ele é fechado;
+
+Open Source: Mesmo que o de cima, porém, neste caso o driver tem código aberto;
+
+Legacy Binary Driver: São drivers que tecnicamente não são mais suportados pelos lançamentos oficiais da Nvidia, são utilizados em placas mais antigas, normalmente não recebem atualizações para desempenho, apenas bugfixes;
+
+Nouveau (Xorg/Wayland): Este é o driver open source feito pelo projeto Nouveau, é um driver de vídeo básico que atualmente consegue apenas fazer com que a sua placa de vídeo funcione até que você possa instalar um driver mais adequado, possuindo um desempenho moderado. Ele vem normalmente junto com o Kernel do sistema, versões mais recentes do Kernel podem trazer versões mais recentes do driver Nouveau, ele vem melhorando bastante nas última versões com a ajuda da Nvidia e o árduo trabalho da comunidade, porém, ainda não é a melhor opção para quem quiser jogar;
+
+Testado: Alguns drivers do Ubuntu possuem o atributo "testado", isso significa que este driver foi analisado pela Canonical, empresa que desenvolve o Ubuntu, e é o driver recomendado para a maioria dos dispositivos se a sua intenção for estabilidade do sistema e não necessariamente recursos e desempenho, ele lhe entregará um driver que não irá desestabilizar o Ubuntu, entretanto, provavelmente também não entregará todo o desempenho possível da placa. O Interessante deste driver é que ele pode, em tese, ser usado com qualquer placa da Nvidia que o sistema funcionará sem maiores problemas. Caso a sua intenção não seja jogar, o driver "testado" se mostra uma boa opção.
+
+Updates: Alguns drivers tem ao final de sua nomenclatura a palavra "updates", isso significa que este driver poderá receber atualizações dentro de sua linha de lançamento, por exemplo, o driver 340.93 poderá atualizar para o 340.94 se atualizações saírem para ele, porém, ele nunca mudará sua série, por exemplo, de 340.93 para 341. Alguns drivers não possuem o atributo "updates", desta forma, este driver não receberá atualizações.
+
+
+## 4.1. Instalando o Driver Nvidia
+
+
+Primeiro, abra uma janela do terminal e verifique qual driver está sendo usado para a placa Nvidia com o seguinte comando.
+
+```
+sudo lshw -c display
+```
+
+Você também pode usar em videovez de displaycomo o nome da classe.
+
+```
+sudo lshw -c video
+```
+
+
+```
+sudo lshw -c display
+*-display                 
+       descrição: VGA compatible controller
+       produto: GF108M [GeForce GT 620M/630M/635M/640M LE]
+       fabricante: NVIDIA Corporation
+       ID físico: 0
+       informações do barramento: pci@0000:01:00.0
+       versão: a1
+       largura: 64 bits
+       clock: 33MHz
+       capacidades: pm msi pciexpress vga_controller bus_master cap_list rom
+       configuração: driver=nvidia latency=0
+       recursos: irq:31 memória:f6000000-f6ffffff memória:e0000000-efffffff memória:f0000000-f1ffffff porta de E/S:e000(tamanho=128) memória:f7000000-f707ffff
+  *-display
+       descrição: VGA compatible controller
+       produto: 3rd Gen Core processor Graphics Controller
+       fabricante: Intel Corporation
+       ID físico: 2
+       informações do barramento: pci@0000:00:02.0
+       versão: 09
+       largura: 64 bits
+       clock: 33MHz
+       capacidades: msi pm vga_controller bus_master cap_list rom
+       configuração: driver=i915 latency=0
+       recursos: irq:29 memória:f7400000-f77fffff memória:d0000000-dfffffff porta de E/S:f000(tamanho=64) memória:c0000-dffff
+```
+
+Em seguida, execute o comando a seguir para listar o driver disponível para sua placa Nvidia no repositório padrão do Ubuntu.
+
+```
+sudo ubuntu-drivers devices
+```
+
+```
+mpi@ubuntu:~$ sudo ubuntu-drivers devices
+== /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0 ==
+modalias : pci:v000010DEd00000DE9sv0000144Dsd0000C0D1bc03sc00i00
+vendor   : NVIDIA Corporation
+model    : GF108M [GeForce GT 620M/630M/635M/640M LE]
+driver   : nvidia-304 - third-party free
+driver   : nvidia-340 - distro non-free
+driver   : nvidia-driver-390 - third-party free recommended
+driver   : xserver-xorg-video-nouveau - distro free builtin
+
+```
+
+Como você pode ver, existem 4 drivers disponíveis para o meu GeForce GTX 108M. Dois são drivers proprietários (não livres), recomendados pelo Ubuntu. O outro é o driver Nouveau de código aberto padrão. Pode haver outros drivers para sua placa Nvidia. Para instalar o driver recomendado, execute o seguinte comando.
+
+```
+sudo ubuntu-drivers autoinstall
+```
+
+Instalando o Recomendado:
+
+```
+sudo apt install nvidia-driver-390
+```
+
+## Alterando a Placa Principal
+
+Podemos verificar que a placa selecionada é:
+
+```
+mpi@ubuntu:~$ prime-select query
+nvidia
+```
+
+Porém, temos duas placas:
+
+```
+sudo lshw -c display
+  *-display                 
+       descrição: VGA compatible controller
+       produto: GF108M [GeForce GT 620M/630M/635M/640M LE]
+       fabricante: NVIDIA Corporation
+       ID físico: 0
+       informações do barramento: pci@0000:01:00.0
+       versão: a1
+       largura: 64 bits
+       clock: 33MHz
+       capacidades: pm msi pciexpress vga_controller bus_master cap_list rom
+       configuração: driver=nvidia latency=0
+       recursos: irq:31 memória:f6000000-f6ffffff memória:e0000000-efffffff memória:f0000000-f1ffffff porta de E/S:e000(tamanho=128) memória:f7000000-f707ffff
+  *-display
+       descrição: VGA compatible controller
+       produto: 3rd Gen Core processor Graphics Controller
+       fabricante: Intel Corporation
+       ID físico: 2
+       informações do barramento: pci@0000:00:02.0
+       versão: 09
+       largura: 64 bits
+       clock: 33MHz
+       capacidades: msi pm vga_controller bus_master cap_list rom
+       configuração: driver=i915 latency=0
+       recursos: irq:29 memória:f7400000-f77fffff memória:d0000000-dfffffff porta de E/S:f000(tamanho=64) memória:c0000-dffff
+
+```
+
+Para usarmos a Intel, basta executarmos o comando:
+
+```
+sudo prime-select intel
+Info: selecting the intel profile
+```
+
+Pronto!
+
+# 5. DATAGRIP NO UBUNTU LINUX 16.04, 18+
 
 ```bash
 sudo snap install datagrip --classic
@@ -31,7 +179,7 @@ sudo snap install datagrip --classic
 Pronto! Basta buscar pelo DATAGRIP!
 
 
-# 2. INSTALAÇÃO DO MONGODB NO UBUNTU 18
+# 6. INSTALAÇÃO DO MONGODB NO UBUNTU 18
 
 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 
@@ -40,7 +188,7 @@ Objetivo: instalar o MongoDB no Ubuntu 18 ou 19.
 
 
 
-# 3. Instalando o editor de texto **joe** para terminal
+# 7. Instalando o editor de texto **joe** para terminal
 
 ```
 sudo apt-get install joe
@@ -65,13 +213,13 @@ CTRL + K + X
 ```
 
 
-# 4. Instalando o Ambiente Virtual do Python
+# 8. Instalando o Ambiente Virtual do Python
 
 ```
 sudo apt install virtualenv python3-virtualenv virtualenvwrapper python3-pip
 ```
 
-# 5. INSTALANDO PHP 7.3
+# 9. INSTALANDO PHP 7.3
 
 ```bash
 sudo apt-get install curl
@@ -99,7 +247,7 @@ sudo apt-get update
 sudo apt install php7.3 php7.3-cli php7.3-fpm php-pear php7.3-dev php7.3-json php7.3-pdo php7.3-mysql php7.3-zip php7.3-gd php7.3-mbstring php7.3-curl php7.3-xml php7.3-bcmath php7.3-sqlite3
 ```
 
-## 5.1. Configurando PHP 7.3 no Ubuntu
+## 9.1. Configurando PHP 7.3 no Ubuntu
 
 Edite o arquivo **php.ini**
 ```bash
@@ -119,7 +267,7 @@ Reinicie o serviço do PHP:
 ```
 
 
-## 5.2. Instalando COMPOSER
+## 9.2. Instalando COMPOSER
 
 ```bash
 curl -sS https://getcomposer.org/installer -o composer-setup.php
@@ -151,7 +299,7 @@ Para verificar, basta digitar:
 composer -v
 ```
 
-## 5.3. Ajustes COMPOSER
+## 9.3. Ajustes COMPOSER
 
 https://medium.com/teknomuslim/simply-boost-laravel-performance-in-production-7e5c63e32ffd
 
@@ -166,7 +314,7 @@ Optimize autoload file using composer command:
 
 composer dumpautoload --optimize
 
-# 6. INSTALL NODE JS
+# 10. INSTALL NODE JS
 
 Instalando o NodeJS utilizando NVM (Node Version Manager)
 
@@ -219,7 +367,7 @@ Use o comando:
 node -v
 ```
 
-# 7. Instalando Mysql 8.0 no Ubuntu, Debian
+# 11. Instalando Mysql 8.0 no Ubuntu, Debian
 
 Fonte: https://www.tecmint.com/install-mysql-8-in-ubuntu/
 
@@ -252,7 +400,7 @@ No final execute:
 sudo mysql_secure_installation
 ```
 
-# 8. Como deletar todos as figuras PNGs do diretório atual e subdiretórios no Linux?
+# 12. Como deletar todos as figuras PNGs do diretório atual e subdiretórios no Linux?
 
 Basta digitar o comando para verificar se os arquivos são encontrados:
 
@@ -267,7 +415,7 @@ find . -name "*.png" -type f -delete
 ```
 
 
-# 9. Listando a Estrutura do Computador
+# 13. Listando a Estrutura do Computador
 
 ```
 $ lsblk
@@ -285,40 +433,40 @@ sdb      8:16   0   1,8T  0 disk
 ```
 
 
-## 9.1. Limpando o Histórico de Comandos do Linux
+## 13.1. Limpando o Histórico de Comandos do Linux
 
 ```bash
 cat /dev/null > ~/.bash_history && history -c 
 ```
 
 
-## 9.2. Saber a quanto tempo o servidor Linux está ligado
+## 13.2. Saber a quanto tempo o servidor Linux está ligado
 
 ```bash
 uptime
 ```
 
-## 9.3. Como remover completamente a instalação do MYSQL do Linux
+## 13.3. Como remover completamente a instalação do MYSQL do Linux
 
 ```bash
 sudo apt-get remove --purge mysql*
 ```
 
 
-## 9.4. Verificando qual distribuição Linux
+## 13.4. Verificando qual distribuição Linux
 
 ```bash
 lsb_release -a
 ```
 
 
-## 9.5. Atualizando o Sistema Operacional
+## 13.5. Atualizando o Sistema Operacional
 
 ```bash
 sudo apt-get update && sudo apt-get upgrade
 ```
 
-## 9.6. Instalando Aptitude
+## 13.6. Instalando Aptitude
 
 ```
 sudo apt install aptitude
@@ -326,7 +474,7 @@ sudo aptitude update & sudo aptitude upgrade
 ```
 
 
-## 9.7. Como configurar o Prompt do Servidor?
+## 13.7. Como configurar o Prompt do Servidor?
 
 No arquivo .bashrc coloque as seguintes linhas:
 
@@ -355,7 +503,7 @@ Cole estas linhas no final do arquivo **.bashrc**.
 
 
 
-## 9.8. Instalando o Serviço de SSH
+## 13.8. Instalando o Serviço de SSH
 
 Primeiro verifique se o serviço já está instalado e rodando com o comando:
 
@@ -379,13 +527,13 @@ Jul 17 16:47:11 ubuntu sshd[56478]: Server listening on :: port 22.
 Jul 17 16:47:11 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
 ```
 
-## 9.9. Para instalar o SSH
+## 13.9. Para instalar o SSH
 
 ```bash
 sudo apt install openssh-server -y
 ```
 
-## 9.10. Verificar o Status da Porta 22 do SSH
+## 13.10. Verificar o Status da Porta 22 do SSH
 
 ```bash
 mpi@ubuntu:~/www/dicas_uteis$ netstat -aln | grep ":22"
@@ -400,7 +548,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN
 ```
 
 
-## 9.11. Instalando e configurando o Git no Linux
+## 13.11. Instalando e configurando o Git no Linux
 
 Um programa indispensável para qualquer desenvolvedor é o Git, para utilizá-lo execute o comando abaixo:
 
@@ -422,14 +570,14 @@ git config --global user.email "meumail@mail.com"
 git config --global user.name "Seu Nome"
 ```
 
-# 10. Instalando todos os Compactadores/Descompactadores
+# 14. Instalando todos os Compactadores/Descompactadores
 
 ```
 sudo apt-get install p7zip-full p7zip-rar rar unrar-free p7zip zip
 ```
 
 
-# 11. Instalando o Google Chrome
+# 15. Instalando o Google Chrome
 
 Basta você baixar o arquivo **.deb** em: [google chrome](http://www.google.com.br/chrome)
 
@@ -439,7 +587,7 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
 
 
-# 12. Como instalar o Sublime?
+# 16. Como instalar o Sublime?
 
 ```bash
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -462,7 +610,7 @@ sudo apt-get install sublime-text
 ```
 
 
-# 13. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina
+# 17. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina
 
 **OBS:** um exemplo de utilização é na sua máquina virtual linux para poder ser acessada pelo Windows. Não faça isso nos seus servidores de produção pois é inseguro.
 
@@ -481,7 +629,7 @@ bind-address            = 0.0.0.0
 ```
 
 
-# 14. SSH SEM SENHA
+# 18. SSH SEM SENHA
 
 Gere as chaves de segurança da sua máquina:
 
@@ -533,33 +681,33 @@ IdentityFile ~/.ssh/minhachaveamazon.pem
 
 
 
-# 15. Dicas de Extração/Compactação Linux
+# 19. Dicas de Extração/Compactação Linux
 
-## 15.1. **Como extrair um arquivo .tar.gz**?
+## 19.1. **Como extrair um arquivo .tar.gz**?
 
 ```
 tar -zxvf programa.tar.gz
 ```
 
-## 15.2. **Como extrair um arquivo .tar.bz2**?
+## 19.2. **Como extrair um arquivo .tar.bz2**?
 
 ```
 tar -jxvf programa.tar.bz2
 ```
 
-## 15.3. **Como descompactar um arquivo .bz2**?
+## 19.3. **Como descompactar um arquivo .bz2**?
 
 ```bash
 bunzip2 programa.tar.bz2
 ```
 
-## 15.4. Executa dois comandos em uma linha. Comando para Instalar pacote:
+## 19.4. Executa dois comandos em uma linha. Comando para Instalar pacote:
 
 ```bash
 sudo apt-get update & apt-get install <nome do pacote>
 ```
 
-# BYOBU
+# 20. BYOBU
 
 Para quem usa a linha de comandos (terminal) durante muito tempo como eu, é hora de dar uma lufada de ar fresco e um novo look. Para isso apresento-vos o Byobu, uma aplicação que permite incluir algumas informações do nosso sistema na linha de comandos e incluir algumas cores.
 
@@ -585,7 +733,7 @@ Para desabilitar:
 byobu-disable
 ```
 
-## Etapa 3 - Configuração do multiplexador de back-end
+## 20.1. Etapa 3 - Configuração do multiplexador de back-end
 
 Por padrão, o Byobu usará tmux como multiplexador de back-end. No entanto, se você preferir usar screen, poderá alterar facilmente o back-end ativado.
 
@@ -671,7 +819,7 @@ KEYBINDINGS
 ```
 
 
-## Algumas informações que podem ser apresentadas:
+## 20.2. Algumas informações que podem ser apresentadas:
 Status da bateria
 Informações sobre o CPU
 Data/hora
@@ -689,9 +837,9 @@ Actualizações disponíveis
 etc.
 
 
-# 16. SCREEN LINUX
+# 21. SCREEN LINUX
 
-## 16.1. Objetivo
+## 21.1. Objetivo
 
 Rodar um processo (script) no linux através de um terminal SSH que demorará horas, dias ou nunca se encerrará. Como fechar a sessão sem que o processo seja encerado? Utilizando o Screen.
 
@@ -742,7 +890,7 @@ screen -r rodando_baixador
 Ou, ao invés de digitar o nome, utilize o número da sessão.
 
 
-## 16.2. Resumo dos Comandos Screen
+## 21.2. Resumo dos Comandos Screen
 
 * screen -S <nome_da_janela> : Cria uma sessão com um nome personalizado. Ex: screen -S baixador
 * Ctrl+ a + d : Sai da Sessão (Detaches) sem matar os processos que ficarão rodando em segundo plano.
@@ -751,7 +899,7 @@ Ou, ao invés de digitar o nome, utilize o número da sessão.
 * Ctrl + a + k : Mata a sessão (claro que você deve estar nela) e todos os seus processos
 
 
-## 16.3. COMO COLOCAR O SERVIDOR NODE EXPRESS EM PRODUÇÃO
+## 21.3. COMO COLOCAR O SERVIDOR NODE EXPRESS EM PRODUÇÃO
 
 
 ```
@@ -789,7 +937,7 @@ Eu pessoalmente tenho usado PM2 por cerca de 6 meses e não tive nenhum problema
 Ele também reiniciará seu aplicativo se ele falhar e permitir que você inicie aplicativos automaticamente quando o sistema for reinicializado.
 
 
-## 2.1. DESINSTALANDO VERSÕES ANTERIORES
+## 21.4. DESINSTALANDO VERSÕES ANTERIORES
 
 Primeiro verifique as versões já instaladas:
 
@@ -822,7 +970,7 @@ sudo rm -r /var/log/mongodb
 sudo rm -r /var/lib/mongodb
 ```
 
-## 2.2. INÍCIO - ADD REPOSITÓRIO - MONGO 4.2x
+## 21.5. INÍCIO - ADD REPOSITÓRIO - MONGO 4.2x
 
 Adicione o repositório:
 
@@ -845,7 +993,7 @@ sudo apt update
 sudo apt install mongodb-org
 ```
 
-## 2.3. FINALIZANDO A INSTALAÇÃO
+## 21.6. FINALIZANDO A INSTALAÇÃO
 
 Depois da instalação faça:
 
@@ -854,7 +1002,7 @@ sudo systemctl enable mongod
 sudo service mongod start
 ```
 
-## 2.4. VERIFICAÇÃO DA INSTALAÇÃO DO MONGODB
+## 21.7. VERIFICAÇÃO DA INSTALAÇÃO DO MONGODB
 
 Execute o comando:
 
@@ -876,7 +1024,7 @@ Saída:
 ago 16 11:22:22 mpi-300E5K-300E5Q systemd[1]: Started MongoDB Database Server.
 
 
-## 2.5. VERSÃO DO MONGODB
+## 21.8. VERSÃO DO MONGODB
 
 Verifique a versão do BD:
 
@@ -902,6 +1050,6 @@ Além disso, conecte o MongoDB usando a linha de comando e execute alguns comand
 
 
 
-## 16.4. NODE EXPRESS BEST PRACTICES
+## 21.9. NODE EXPRESS BEST PRACTICES
 
 https://expressjs.com/pt-br/advanced/best-practice-performance.html#code
