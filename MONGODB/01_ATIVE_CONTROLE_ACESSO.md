@@ -86,7 +86,7 @@ use admin
 db.createUser(
     {
         user: "ampere",
-        pwd: "@Ampere159*",
+        pwd: "mymongopass",
         roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
     }
 )
