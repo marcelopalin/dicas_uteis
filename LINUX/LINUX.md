@@ -526,6 +526,18 @@ echo "|_| /_/   \_\_____|___|_| \_|"
 echo "                             "                                  "
 ```
 
+```bash
+echo "                             "
+echo "  ____ ____  __  __          "
+echo " / ___|  _ \|  \/  |         "
+echo "| |   | |_) | |\/| |         "
+echo "| |___|  __/| |  | |         "
+echo " \____|_|   |_|  |_|         "
+echo "                             "                    
+
+
+```
+
 Cole estas linhas no final do arquivo **.bashrc**.
 
 
