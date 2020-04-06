@@ -1,11 +1,10 @@
 <!-- TOC -->
 
 - [1. Mostrando o Prompt de Comando no Windows 10](#1-mostrando-o-prompt-de-comando-no-windows-10)
-    - [1.1. Open Command Here](#11-open-command-here)
-        - [1.1.1. Salve o arquivo (01) como **script01.reg**](#111-salve-o-arquivo-01-como-script01reg)
-        - [1.1.2. Salve o arquivo (02) como **script02.reg**](#112-salve-o-arquivo-02-como-script02reg)
-        - [1.1.3. Execute os scripts respndendo **sim** as perguntas](#113-execute-os-scripts-respndendo-sim-as-perguntas)
-    - [Instalação do Grads no Windows 10](#instalacao-do-grads-no-windows-10)
+  - [1.1. Open Command Here](#11-open-command-here)
+    - [1.1.1. Salve o arquivo (01) como **script01.reg**](#111-salve-o-arquivo-01-como-script01reg)
+    - [1.1.3. Execute os scripts respndendo **sim** as perguntas](#113-execute-os-scripts-respndendo-sim-as-perguntas)
+  - [Instalação do Grads no Windows 10](#instala%c3%a7%c3%a3o-do-grads-no-windows-10)
 
 <!-- /TOC -->
 # 1. Mostrando o Prompt de Comando no Windows 10
@@ -96,56 +95,7 @@ Windows Registry Editor Version 5.00
 "Extended"=""
 ```
 
-### 1.1.2. Salve o arquivo (02) como **script02.reg** 
 
-Edite o conteúdo deste arquivo com o editor de sua preferência (**VSCode**, **NotePad++**) e coloque o seguinte conteúdo nele:
-
-```
-Windows Registry Editor Version 5.00
-
-; GIT
-
-[HKEY_CLASSES_ROOT\Directory\shell\03MenuGit]
-"MUIVerb"="GIT Prompts"
-"Icon"="C:\\Program Files\\Git\\mingw64\\share\\git\\git-for-windows.ico"
-"ExtendedSubCommandsKey"="Directory\\ContextMenus\\MenuGit"
-
-[HKEY_CLASSES_ROOT\Directory\background\shell\03MenuGit]
-"MUIVerb"="GIT Prompts"
-"Icon"="C:\\Program Files\\Git\\mingw64\\share\\git\\git-for-windows.ico"
-"ExtendedSubCommandsKey"="Directory\\ContextMenus\\MenuGit"
-
-
-[HKEY_CLASSES_ROOT\Directory\ContextMenus\MenuGit\shell\git_gui]
-"MUIVerb"="GIT GUI"
-"Icon"="C:\\Program Files\\Git\\mingw64\\share\\git\\git-for-windows.ico"
-
-[HKEY_CLASSES_ROOT\Directory\ContextMenus\MenuGit\shell\git_gui\command]
-@="\"C:\\Program Files\\Git\\cmd\\git-gui.exe\" \"--working-dir\" \"%v.\""
-
-
-[HKEY_CLASSES_ROOT\Directory\ContextMenus\MenuGit\shell\git_shell]
-"MUIVerb"="GIT BASH"
-"Icon"="C:\\Program Files\\Git\\mingw64\\share\\git\\git-for-windows.ico"
-
-[HKEY_CLASSES_ROOT\Directory\ContextMenus\MenuGit\shell\git_shell\command]
-@="\"C:\\Program Files\\Git\\git-bash.exe\" \"--cd=%v.\""
-
-
-; Move Official GIT Entries to the Extended Menu (Shift-Right Click)
-
-[HKEY_CLASSES_ROOT\Directory\shell\git_gui]
-"Extended"=""
-
-[HKEY_CLASSES_ROOT\Directory\background\shell\git_gui]
-"Extended"=""
-
-[HKEY_CLASSES_ROOT\Directory\shell\git_shell]
-"Extended"=""
-
-[HKEY_CLASSES_ROOT\Directory\background\shell\git_shell]
-"Extended"=""
-```
 
 
 ### 1.1.3. Execute os scripts respndendo **sim** as perguntas
