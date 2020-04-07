@@ -22,155 +22,8 @@ Nome: flameshot
 Comando: /usr/bin/flameshot gui
 Tecla: PrintScr
 
-# 4. INSTALAÇÃO DO DRIVER NVIDIA NO UBUNTU 18.04
 
-https://www.linuxbabe.com/ubuntu/install-nvidia-driver-ubuntu-18-04
-
-
-Um pequeno glossário de drivers Nvidia no Ubuntu
-
-Antes de te ensinar a fazer a instalação, a nossa preocupação é que você entenda o que está fazendo, e não que você apenas copie e cole todos os passos sem absorver conhecimento, por isso vamos esclarecer alguns termos que talvez você encontre pelo caminho ao tentar instalar um driver de vídeo Nvidia no Ubuntu:
-
-Binary Driver: Refere-se ao tipo do driver (binário);
-
-Proprietário: Refere-se ao tipo de código do driver, neste caso ele é fechado;
-
-Open Source: Mesmo que o de cima, porém, neste caso o driver tem código aberto;
-
-Legacy Binary Driver: São drivers que tecnicamente não são mais suportados pelos lançamentos oficiais da Nvidia, são utilizados em placas mais antigas, normalmente não recebem atualizações para desempenho, apenas bugfixes;
-
-Nouveau (Xorg/Wayland): Este é o driver open source feito pelo projeto Nouveau, é um driver de vídeo básico que atualmente consegue apenas fazer com que a sua placa de vídeo funcione até que você possa instalar um driver mais adequado, possuindo um desempenho moderado. Ele vem normalmente junto com o Kernel do sistema, versões mais recentes do Kernel podem trazer versões mais recentes do driver Nouveau, ele vem melhorando bastante nas última versões com a ajuda da Nvidia e o árduo trabalho da comunidade, porém, ainda não é a melhor opção para quem quiser jogar;
-
-Testado: Alguns drivers do Ubuntu possuem o atributo "testado", isso significa que este driver foi analisado pela Canonical, empresa que desenvolve o Ubuntu, e é o driver recomendado para a maioria dos dispositivos se a sua intenção for estabilidade do sistema e não necessariamente recursos e desempenho, ele lhe entregará um driver que não irá desestabilizar o Ubuntu, entretanto, provavelmente também não entregará todo o desempenho possível da placa. O Interessante deste driver é que ele pode, em tese, ser usado com qualquer placa da Nvidia que o sistema funcionará sem maiores problemas. Caso a sua intenção não seja jogar, o driver "testado" se mostra uma boa opção.
-
-Updates: Alguns drivers tem ao final de sua nomenclatura a palavra "updates", isso significa que este driver poderá receber atualizações dentro de sua linha de lançamento, por exemplo, o driver 340.93 poderá atualizar para o 340.94 se atualizações saírem para ele, porém, ele nunca mudará sua série, por exemplo, de 340.93 para 341. Alguns drivers não possuem o atributo "updates", desta forma, este driver não receberá atualizações.
-
-
-## 4.1. Instalando o Driver Nvidia
-
-
-Primeiro, abra uma janela do terminal e verifique qual driver está sendo usado para a placa Nvidia com o seguinte comando.
-
-```
-sudo lshw -c display
-```
-
-Você também pode usar em videovez de displaycomo o nome da classe.
-
-```
-sudo lshw -c video
-```
-
-
-```
-sudo lshw -c display
-*-display                 
-       descrição: VGA compatible controller
-       produto: GF108M [GeForce GT 620M/630M/635M/640M LE]
-       fabricante: NVIDIA Corporation
-       ID físico: 0
-       informações do barramento: pci@0000:01:00.0
-       versão: a1
-       largura: 64 bits
-       clock: 33MHz
-       capacidades: pm msi pciexpress vga_controller bus_master cap_list rom
-       configuração: driver=nvidia latency=0
-       recursos: irq:31 memória:f6000000-f6ffffff memória:e0000000-efffffff memória:f0000000-f1ffffff porta de E/S:e000(tamanho=128) memória:f7000000-f707ffff
-  *-display
-       descrição: VGA compatible controller
-       produto: 3rd Gen Core processor Graphics Controller
-       fabricante: Intel Corporation
-       ID físico: 2
-       informações do barramento: pci@0000:00:02.0
-       versão: 09
-       largura: 64 bits
-       clock: 33MHz
-       capacidades: msi pm vga_controller bus_master cap_list rom
-       configuração: driver=i915 latency=0
-       recursos: irq:29 memória:f7400000-f77fffff memória:d0000000-dfffffff porta de E/S:f000(tamanho=64) memória:c0000-dffff
-```
-
-Em seguida, execute o comando a seguir para listar o driver disponível para sua placa Nvidia no repositório padrão do Ubuntu.
-
-```
-sudo ubuntu-drivers devices
-```
-
-```
-mpi@ubuntu:~$ sudo ubuntu-drivers devices
-== /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0 ==
-modalias : pci:v000010DEd00000DE9sv0000144Dsd0000C0D1bc03sc00i00
-vendor   : NVIDIA Corporation
-model    : GF108M [GeForce GT 620M/630M/635M/640M LE]
-driver   : nvidia-304 - third-party free
-driver   : nvidia-340 - distro non-free
-driver   : nvidia-driver-390 - third-party free recommended
-driver   : xserver-xorg-video-nouveau - distro free builtin
-
-```
-
-Como você pode ver, existem 4 drivers disponíveis para o meu GeForce GTX 108M. Dois são drivers proprietários (não livres), recomendados pelo Ubuntu. O outro é o driver Nouveau de código aberto padrão. Pode haver outros drivers para sua placa Nvidia. Para instalar o driver recomendado, execute o seguinte comando.
-
-```
-sudo ubuntu-drivers autoinstall
-```
-
-Instalando o Recomendado:
-
-```
-sudo apt install nvidia-driver-390
-```
-
-## 4.2. Alterando a Placa Principal
-
-Podemos verificar que a placa selecionada é:
-
-```
-mpi@ubuntu:~$ prime-select query
-nvidia
-```
-
-Porém, temos duas placas:
-
-```
-sudo lshw -c display
-  *-display                 
-       descrição: VGA compatible controller
-       produto: GF108M [GeForce GT 620M/630M/635M/640M LE]
-       fabricante: NVIDIA Corporation
-       ID físico: 0
-       informações do barramento: pci@0000:01:00.0
-       versão: a1
-       largura: 64 bits
-       clock: 33MHz
-       capacidades: pm msi pciexpress vga_controller bus_master cap_list rom
-       configuração: driver=nvidia latency=0
-       recursos: irq:31 memória:f6000000-f6ffffff memória:e0000000-efffffff memória:f0000000-f1ffffff porta de E/S:e000(tamanho=128) memória:f7000000-f707ffff
-  *-display
-       descrição: VGA compatible controller
-       produto: 3rd Gen Core processor Graphics Controller
-       fabricante: Intel Corporation
-       ID físico: 2
-       informações do barramento: pci@0000:00:02.0
-       versão: 09
-       largura: 64 bits
-       clock: 33MHz
-       capacidades: msi pm vga_controller bus_master cap_list rom
-       configuração: driver=i915 latency=0
-       recursos: irq:29 memória:f7400000-f77fffff memória:d0000000-dfffffff porta de E/S:f000(tamanho=64) memória:c0000-dffff
-
-```
-
-Para usarmos a Intel, basta executarmos o comando:
-
-```
-sudo prime-select intel
-Info: selecting the intel profile
-```
-
-Pronto!
-
-# 5. INSTALL WPS VIA SNAP NO UBUNTU
+# 4. INSTALL WPS VIA SNAP NO UBUNTU
 
 Depois, você pode instalar a suite WPS Office no Linux via Snap, fazendo o seguinte:
 
@@ -186,7 +39,7 @@ Pronto! Agora, você pode iniciar o programa no menu Aplicativos/Dash/Atividades
 
 Ao executar, você verá que o programa já inicia usando o idioma Português do Brasil.
 
-## 5.1. DESINSTALAR WPS via SNAP
+## 4.1. DESINSTALAR WPS via SNAP
 
 Como desinstalar a suite WPS Office no Linux via Snap em distros que suportam a tecnologia
 Para desinstalar a suite WPS Office via Snap, fazendo o seguinte:
@@ -197,7 +50,7 @@ Passo 2. Depois, se for necessário, desinstale o programa, usando o comando aba
 sudo snap remove wps-office-all-lang-no-internet
 
 
-# 6. DATAGRIP NO UBUNTU LINUX 16.04, 18+
+# 5. DATAGRIP NO UBUNTU LINUX 16.04, 18+
 
 ```bash
 sudo snap install datagrip --classic
@@ -206,16 +59,14 @@ sudo snap install datagrip --classic
 Pronto! Basta buscar pelo DATAGRIP!
 
 
-# 7. INSTALAÇÃO DO MONGODB NO UBUNTU 18
+# 6. INSTALAÇÃO DO MONGODB NO UBUNTU 18
 
 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 
-Objetivo: instalar o MongoDB no Ubuntu 18 ou 19.
+Objetivo: instalar o MongoDB 4.2 no Ubuntu 
 
 
-
-
-# 8. Instalando o editor de texto **joe** para terminal
+# 7. Instalando o editor de texto **joe** para terminal
 
 ```
 sudo apt-get install joe
@@ -240,13 +91,15 @@ CTRL + K + X
 ```
 
 
-# 9. Instalando o Ambiente Virtual do Python
+# 8. Instalando o Ambiente Virtual do Python
 
 ```
 sudo apt install virtualenv python3-virtualenv virtualenvwrapper python3-pip
 ```
 
-# 10. INSTALANDO PHP 7.3
+# 9. INSTALANDO PHP 7.3 no UBUNTU 19 ou 18
+
+obs: no Ubuntu 20 já é php 7.4 naturalmente (veja abaixo como instalar)
 
 ```bash
 sudo apt-get install curl
@@ -273,6 +126,14 @@ sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update 
 sudo apt install php7.3 php7.3-cli php7.3-fpm php-pear php7.3-dev php7.3-json php7.3-pdo php7.3-mysql php7.3-zip php7.3-gd php7.3-mbstring php7.3-curl php7.3-xml php7.3-bcmath php7.3-sqlite3
 ```
+
+# 10. PHP NO UBUNTU 20 JÁ É 7.4
+
+```
+sudo apt-get update 
+sudo apt install php php-cli php-fpm php-pear php-dev php-json php-pdo php-mysql php-zip php-gd php-mbstring php-curl php-xml php-pear php-bcmath php-sqlite3
+```
+
 
 ## 10.1. Configurando PHP 7.3 no Ubuntu
 
@@ -304,12 +165,12 @@ Acesse
 https://composer.github.io/pubkeys.html
 
 Pegue o último HASH:
-a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1
+e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a
 
 Execute:
 
 ```
-php -r "if (hash_file('SHA384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php -r "if (hash_file('SHA384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 ```
 
 Finalmente para instalar faça:
@@ -326,22 +187,25 @@ Para verificar, basta digitar:
 composer -v
 ```
 
-## 10.3. Ajustes COMPOSER
+# NODEJS NO WINDOWS COM NVM
 
-https://medium.com/teknomuslim/simply-boost-laravel-performance-in-production-7e5c63e32ffd
+Acesse https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows
 
-Use Artisan Command
-Laravel comes with a great tool named Artisan command and this is very usefull to boost performance using available artisan command. And here is my common setup:
+https://docs.microsoft.com/pt-br/windows/nodejs/setup-on-windows
 
-php artisan config:cache
-php artisan route:cache
-php artisan optimize --force
+Baixe o arquivo setup.zip - instale e coloque o executável no PATH:
 
-Optimize autoload file using composer command:
+```
+C:\Users\<seu_usuar\AppData\Roaming\nvm
+```
 
-composer dumpautoload --optimize
+Depois é só seguir os comandos descritos em: https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows
 
-# 11. INSTALL NODE JS
+1) nvm list available
+2) nvm install 12.16.1 (versão LTL mais nova agora)
+
+
+# 11. NODEJS - INTALE NODE COM NVM NO LINUX
 
 Instalando o NodeJS utilizando NVM (Node Version Manager)
 

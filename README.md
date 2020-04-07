@@ -14,6 +14,21 @@ https://github.com/lupoDharkael/flameshot
 sudo apt install flameshot
 ```
 
+Como associar a Tecla PrintScr ao Flameshot
+
+
+Remova a associação atual:
+
+```
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot ''
+```
+
+Depois em Configurações -> Dispositivos -> Teclado -> role até embaixo e clique em +
+
+Nome: flameshot
+Comando: /usr/bin/flameshot gui
+Tecla: PrintScr
+
 2. VISUAL STUDIO CODE - VSCODE 
 
 ```
