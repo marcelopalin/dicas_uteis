@@ -22,8 +22,15 @@ Nome: flameshot
 Comando: /usr/bin/flameshot gui
 Tecla: PrintScr
 
+# 4. HOW TO REMOVE LIBREOFFICE
 
-# 4. INSTALL WPS VIA SNAP NO UBUNTU
+sudo apt-get remove --purge libreoffice*
+
+sudo apt-get clean
+
+sudo apt-get autoremove
+
+# 5. INSTALL WPS VIA SNAP NO UBUNTU
 
 Depois, você pode instalar a suite WPS Office no Linux via Snap, fazendo o seguinte:
 
@@ -39,7 +46,7 @@ Pronto! Agora, você pode iniciar o programa no menu Aplicativos/Dash/Atividades
 
 Ao executar, você verá que o programa já inicia usando o idioma Português do Brasil.
 
-## 4.1. DESINSTALAR WPS via SNAP
+## 5.1. DESINSTALAR WPS via SNAP
 
 Como desinstalar a suite WPS Office no Linux via Snap em distros que suportam a tecnologia
 Para desinstalar a suite WPS Office via Snap, fazendo o seguinte:
@@ -50,7 +57,7 @@ Passo 2. Depois, se for necessário, desinstale o programa, usando o comando aba
 sudo snap remove wps-office-all-lang-no-internet
 
 
-# 5. DATAGRIP NO UBUNTU LINUX 16.04, 18+
+# 6. DATAGRIP NO UBUNTU LINUX 16.04, 18+
 
 ```bash
 sudo snap install datagrip --classic
@@ -59,14 +66,14 @@ sudo snap install datagrip --classic
 Pronto! Basta buscar pelo DATAGRIP!
 
 
-# 6. INSTALAÇÃO DO MONGODB NO UBUNTU 18
+# 7. INSTALAÇÃO DO MONGODB NO UBUNTU 18
 
 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 
 Objetivo: instalar o MongoDB 4.2 no Ubuntu 
 
 
-# 7. Instalando o editor de texto **joe** para terminal
+# 8. Instalando o editor de texto **joe** para terminal
 
 ```
 sudo apt-get install joe
@@ -91,13 +98,13 @@ CTRL + K + X
 ```
 
 
-# 8. Instalando o Ambiente Virtual do Python
+# 9. Instalando o Ambiente Virtual do Python
 
 ```
 sudo apt install virtualenv python3-virtualenv virtualenvwrapper python3-pip
 ```
 
-# 9. INSTALANDO PHP 7.3 no UBUNTU 19 ou 18
+# 10. INSTALANDO PHP 7.3 no UBUNTU 19 ou 18
 
 obs: no Ubuntu 20 já é php 7.4 naturalmente (veja abaixo como instalar)
 
@@ -127,7 +134,7 @@ sudo apt-get update
 sudo apt install php7.3 php7.3-cli php7.3-fpm php-pear php7.3-dev php7.3-json php7.3-pdo php7.3-mysql php7.3-zip php7.3-gd php7.3-mbstring php7.3-curl php7.3-xml php7.3-bcmath php7.3-sqlite3
 ```
 
-# 10. PHP NO UBUNTU 20 JÁ É 7.4
+# 11. PHP NO UBUNTU 20 JÁ É 7.4
 
 ```
 sudo apt-get update 
@@ -135,7 +142,7 @@ sudo apt install php php-cli php-fpm php-pear php-dev php-json php-pdo php-mysql
 ```
 
 
-## 10.1. Configurando PHP 7.3 no Ubuntu
+## 11.1. Configurando PHP 7.3 no Ubuntu
 
 Edite o arquivo **php.ini**
 ```bash
@@ -155,7 +162,7 @@ Reinicie o serviço do PHP:
 ```
 
 
-## 10.2. Instalando COMPOSER
+## 11.2. Instalando COMPOSER
 
 ```bash
 curl -sS https://getcomposer.org/installer -o composer-setup.php
@@ -187,7 +194,7 @@ Para verificar, basta digitar:
 composer -v
 ```
 
-# NODEJS NO WINDOWS COM NVM
+# 12. NODEJS NO WINDOWS COM NVM
 
 Acesse https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows
 
@@ -205,7 +212,7 @@ Depois é só seguir os comandos descritos em: https://github.com/coreybutler/nv
 2) nvm install 12.16.1 (versão LTL mais nova agora)
 
 
-# 11. NODEJS - INTALE NODE COM NVM NO LINUX
+# 13. NODEJS - INTALE NODE COM NVM NO LINUX
 
 Instalando o NodeJS utilizando NVM (Node Version Manager)
 
@@ -258,7 +265,7 @@ Use o comando:
 node -v
 ```
 
-# 12. Instalando Mysql 8.0 no Ubuntu, Debian
+# 14. Instalando Mysql 8.0 no Ubuntu, Debian
 
 Fonte: https://www.tecmint.com/install-mysql-8-in-ubuntu/
 
@@ -291,7 +298,7 @@ No final execute:
 sudo mysql_secure_installation
 ```
 
-# 13. Como deletar todos as figuras PNGs do diretório atual e subdiretórios no Linux?
+# 15. Como deletar todos as figuras PNGs do diretório atual e subdiretórios no Linux?
 
 Basta digitar o comando para verificar se os arquivos são encontrados:
 
@@ -306,7 +313,7 @@ find . -name "*.png" -type f -delete
 ```
 
 
-# 14. Listando a Estrutura do Computador
+# 16. Listando a Estrutura do Computador
 
 ```
 $ lsblk
@@ -324,40 +331,40 @@ sdb      8:16   0   1,8T  0 disk
 ```
 
 
-## 14.1. Limpando o Histórico de Comandos do Linux
+## 16.1. Limpando o Histórico de Comandos do Linux
 
 ```bash
 cat /dev/null > ~/.bash_history && history -c 
 ```
 
 
-## 14.2. Saber a quanto tempo o servidor Linux está ligado
+## 16.2. Saber a quanto tempo o servidor Linux está ligado
 
 ```bash
 uptime
 ```
 
-## 14.3. Como remover completamente a instalação do MYSQL do Linux
+## 16.3. Como remover completamente a instalação do MYSQL do Linux
 
 ```bash
 sudo apt-get remove --purge mysql*
 ```
 
 
-## 14.4. Verificando qual distribuição Linux
+## 16.4. Verificando qual distribuição Linux
 
 ```bash
 lsb_release -a
 ```
 
 
-## 14.5. Atualizando o Sistema Operacional
+## 16.5. Atualizando o Sistema Operacional
 
 ```bash
 sudo apt-get update && sudo apt-get upgrade
 ```
 
-## 14.6. Instalando Aptitude
+## 16.6. Instalando Aptitude
 
 ```
 sudo apt install aptitude
@@ -365,7 +372,7 @@ sudo aptitude update & sudo aptitude upgrade
 ```
 
 
-## 14.7. Como configurar o Prompt do Servidor?
+## 16.7. Como configurar o Prompt do Servidor?
 
 No arquivo .bashrc coloque as seguintes linhas:
 
@@ -406,7 +413,7 @@ Cole estas linhas no final do arquivo **.bashrc**.
 
 
 
-## 14.8. Instalando o Serviço de SSH
+## 16.8. Instalando o Serviço de SSH
 
 Primeiro verifique se o serviço já está instalado e rodando com o comando:
 
@@ -430,13 +437,13 @@ Jul 17 16:47:11 ubuntu sshd[56478]: Server listening on :: port 22.
 Jul 17 16:47:11 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
 ```
 
-## 14.9. Para instalar o SSH
+## 16.9. Para instalar o SSH
 
 ```bash
 sudo apt install openssh-server -y
 ```
 
-## 14.10. Verificar o Status da Porta 22 do SSH
+## 16.10. Verificar o Status da Porta 22 do SSH
 
 ```bash
 mpi@ubuntu:~/www/dicas_uteis$ netstat -aln | grep ":22"
@@ -451,7 +458,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN
 ```
 
 
-## 14.11. Instalando e configurando o Git no Linux
+## 16.11. Instalando e configurando o Git no Linux
 
 Um programa indispensável para qualquer desenvolvedor é o Git, para utilizá-lo execute o comando abaixo:
 
@@ -473,14 +480,14 @@ git config --global user.email "meumail@mail.com"
 git config --global user.name "Seu Nome"
 ```
 
-# 15. Instalando todos os Compactadores/Descompactadores
+# 17. Instalando todos os Compactadores/Descompactadores
 
 ```
 sudo apt-get install p7zip-full p7zip-rar rar unrar-free p7zip zip
 ```
 
 
-# 16. Instalando o Google Chrome
+# 18. Instalando o Google Chrome
 
 Basta você baixar o arquivo **.deb** em: [google chrome](http://www.google.com.br/chrome)
 
@@ -490,7 +497,7 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
 
 
-# 17. Como instalar o Sublime?
+# 19. Como instalar o Sublime?
 
 ```bash
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -513,7 +520,7 @@ sudo apt-get install sublime-text
 ```
 
 
-# 18. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina
+# 20. Permitir que seu Banco de Dados MySQL seja acessado de qualquer máquina
 
 **OBS:** um exemplo de utilização é na sua máquina virtual linux para poder ser acessada pelo Windows. Não faça isso nos seus servidores de produção pois é inseguro.
 
@@ -532,7 +539,7 @@ bind-address            = 0.0.0.0
 ```
 
 
-# 19. SSH SEM SENHA
+# 21. SSH SEM SENHA
 
 Gere as chaves de segurança da sua máquina:
 
@@ -584,33 +591,33 @@ IdentityFile ~/.ssh/minhachaveamazon.pem
 
 
 
-# 20. Dicas de Extração/Compactação Linux
+# 22. Dicas de Extração/Compactação Linux
 
-## 20.1. **Como extrair um arquivo .tar.gz**?
+## 22.1. **Como extrair um arquivo .tar.gz**?
 
 ```
 tar -zxvf programa.tar.gz
 ```
 
-## 20.2. **Como extrair um arquivo .tar.bz2**?
+## 22.2. **Como extrair um arquivo .tar.bz2**?
 
 ```
 tar -jxvf programa.tar.bz2
 ```
 
-## 20.3. **Como descompactar um arquivo .bz2**?
+## 22.3. **Como descompactar um arquivo .bz2**?
 
 ```bash
 bunzip2 programa.tar.bz2
 ```
 
-## 20.4. Executa dois comandos em uma linha. Comando para Instalar pacote:
+## 22.4. Executa dois comandos em uma linha. Comando para Instalar pacote:
 
 ```bash
 sudo apt-get update & apt-get install <nome do pacote>
 ```
 
-# 21. BYOBU
+# 23. BYOBU
 
 Para quem usa a linha de comandos (terminal) durante muito tempo como eu, é hora de dar uma lufada de ar fresco e um novo look. Para isso apresento-vos o Byobu, uma aplicação que permite incluir algumas informações do nosso sistema na linha de comandos e incluir algumas cores.
 
@@ -636,7 +643,7 @@ Para desabilitar:
 byobu-disable
 ```
 
-## 21.1. Etapa 3 - Configuração do multiplexador de back-end
+## 23.1. Etapa 3 - Configuração do multiplexador de back-end
 
 Por padrão, o Byobu usará tmux como multiplexador de back-end. No entanto, se você preferir usar screen, poderá alterar facilmente o back-end ativado.
 
@@ -722,7 +729,7 @@ KEYBINDINGS
 ```
 
 
-## 21.2. Algumas informações que podem ser apresentadas:
+## 23.2. Algumas informações que podem ser apresentadas:
 Status da bateria
 Informações sobre o CPU
 Data/hora
@@ -740,9 +747,9 @@ Actualizações disponíveis
 etc.
 
 
-# 22. SCREEN LINUX
+# 24. SCREEN LINUX
 
-## 22.1. Objetivo
+## 24.1. Objetivo
 
 Rodar um processo (script) no linux através de um terminal SSH que demorará horas, dias ou nunca se encerrará. Como fechar a sessão sem que o processo seja encerado? Utilizando o Screen.
 
@@ -793,7 +800,7 @@ screen -r rodando_baixador
 Ou, ao invés de digitar o nome, utilize o número da sessão.
 
 
-## 22.2. Resumo dos Comandos Screen
+## 24.2. Resumo dos Comandos Screen
 
 * screen -S <nome_da_janela> : Cria uma sessão com um nome personalizado. Ex: screen -S baixador
 * Ctrl+ a + d : Sai da Sessão (Detaches) sem matar os processos que ficarão rodando em segundo plano.
@@ -802,7 +809,7 @@ Ou, ao invés de digitar o nome, utilize o número da sessão.
 * Ctrl + a + k : Mata a sessão (claro que você deve estar nela) e todos os seus processos
 
 
-## 22.3. COMO COLOCAR O SERVIDOR NODE EXPRESS EM PRODUÇÃO
+## 24.3. COMO COLOCAR O SERVIDOR NODE EXPRESS EM PRODUÇÃO
 
 
 ```
@@ -840,7 +847,7 @@ Eu pessoalmente tenho usado PM2 por cerca de 6 meses e não tive nenhum problema
 Ele também reiniciará seu aplicativo se ele falhar e permitir que você inicie aplicativos automaticamente quando o sistema for reinicializado.
 
 
-## 22.4. DESINSTALANDO VERSÕES ANTERIORES
+## 24.4. DESINSTALANDO VERSÕES ANTERIORES
 
 Primeiro verifique as versões já instaladas:
 
@@ -873,7 +880,7 @@ sudo rm -r /var/log/mongodb
 sudo rm -r /var/lib/mongodb
 ```
 
-## 22.5. INÍCIO - ADD REPOSITÓRIO - MONGO 4.2x
+## 24.5. INÍCIO - ADD REPOSITÓRIO - MONGO 4.2x
 
 Adicione o repositório:
 
@@ -896,7 +903,7 @@ sudo apt update
 sudo apt install mongodb-org
 ```
 
-## 22.6. FINALIZANDO A INSTALAÇÃO
+## 24.6. FINALIZANDO A INSTALAÇÃO
 
 Depois da instalação faça:
 
@@ -905,7 +912,7 @@ sudo systemctl enable mongod
 sudo service mongod start
 ```
 
-## 22.7. VERIFICAÇÃO DA INSTALAÇÃO DO MONGODB
+## 24.7. VERIFICAÇÃO DA INSTALAÇÃO DO MONGODB
 
 Execute o comando:
 
@@ -927,7 +934,7 @@ Saída:
 ago 16 11:22:22 mpi-300E5K-300E5Q systemd[1]: Started MongoDB Database Server.
 
 
-## 22.8. VERSÃO DO MONGODB
+## 24.8. VERSÃO DO MONGODB
 
 Verifique a versão do BD:
 
@@ -953,6 +960,6 @@ Além disso, conecte o MongoDB usando a linha de comando e execute alguns comand
 
 
 
-## 22.9. NODE EXPRESS BEST PRACTICES
+## 24.9. NODE EXPRESS BEST PRACTICES
 
 https://expressjs.com/pt-br/advanced/best-practice-performance.html#code
