@@ -131,7 +131,7 @@ CTRL + K + X
 # 10. Instalando o Ambiente Virtual do Python
 
 ```
-sudo apt install virtualenv python3-virtualenv virtualenvwrapper python3-pip
+sudo apt install virtualenv python3-pip
 ```
 
 # 11. INSTALANDO PHP 7.3 no UBUNTU 19 ou 18
@@ -264,7 +264,7 @@ Uma vez que os pacotes requeridos estejam instalados, você pode baixar o script
 O número de versão pode ser diferente, mas em geral, você pode baixá-lo com o curl:
 
 ```bash
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 ```
 
 **ATENÇÃO: PRÓXIMO PASSO É ABRIR um NOVO terminal** para carregar o script inserido no seu **.bashrc**
@@ -286,7 +286,7 @@ nvm ls-remote
 Escolhemos a última LATEST LTS - versão estável e instalamos:
 
 ```bash
-nvm install 10.16.3
+nvm install 12.16.2
 ```
 
 Use o comando:
@@ -321,6 +321,8 @@ Depois faça:
 sudo apt-get update
 sudo apt-get install mysql-server
 ```
+
+Obs: no Linux Mint a versão 19.2 (Tricia) é baseado no Ubuntu Bionic.
 
 No final execute:
 
@@ -505,9 +507,9 @@ git config --global credential.helper cache
 
 git config --global credential.helper 'cache --timeout=86400'
 
-git config --global user.email "meumail@mail.com"
+git config --global user.email "meumail@gmail.com"
 
-git config --global user.name "Seu Nome"
+git config --global user.name "Marcelo Palin"
 ```
 
 # 18. Instalando todos os Compactadores/Descompactadores
