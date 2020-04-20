@@ -2,6 +2,18 @@
 
 # 1. DICAS GERAIS LINUX
 
+Solução para quando o apt apresentar o problema de dependências:
+
+Pacotes quebram porque as dependências (bibliotecas de software que são necessárias para que ele seja executado), estão interligadas entre si, muitas vezes  uma mesma biblioteca “abastece” mais de um software, e se você desinstalar um software que tenha dependências que são utilizada por outros softwares este  mesmo deve então não funcionar corretamente.
+
+Pode ocorrer também, interrupções bruscas na hora da instalação (Queda de energia, mal funcionamento  do hardware, dentre outras)  Possivelmente poderá ocorrer também a  quebra de Pacotes.
+
+Para resolver, as vezes é só executar algumas linhas de comando no terminal e… pronto. segue abaixo uma seção de tentativas que sempre me foi útil… espero que sirva ao seu caso.
+
+```
+sudo apt-get install -f && sudo dpkg --configure -a
+```
+
 
 # 2. CAPTURA DE TELA NO LINUX
 
