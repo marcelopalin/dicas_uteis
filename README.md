@@ -210,3 +210,10 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\Directory\background\shell\Powershell]
 "Extended"=""
 ```
+
+# 2. Dicas Git - Git Fetch
+
+O famoso comando **git pull** faz primeiro um **git fetch** seguido de um **git merge origin/master**.
+
+
+
