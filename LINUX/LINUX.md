@@ -14,6 +14,20 @@ Para resolver, as vezes é só executar algumas linhas de comando no terminal e�
 sudo apt-get install -f && sudo dpkg --configure -a
 ```
 
+# Utilizando o comando Locate
+
+```
+sudo apt install mlocate
+```
+
+```
+sudo updatedb &
+```
+
+```
+locate flameshot
+```
+
 
 # 2. CAPTURA DE TELA NO LINUX
 
@@ -21,11 +35,24 @@ Instalar o Flameshot com o comando
 
 # 3. Associar a Tecla PrintScr ao Flameshot
 
+Não instale Flameshot por Snap, instale ele pelo comando:
+
+```
+sudo apt install flameshot
+```
+
+```
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
+```
+
+```
+sudo apt --fix-broken install
+```
 
 Remova a associação atual:
 
 ```
-gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot ''
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
 ```
 
 Depois em Configurações -> Dispositivos -> Teclado -> role até embaixo e clique em +
@@ -36,33 +63,9 @@ Tecla: PrintScr
 
 # 4. INSTALANDO YARN NO UBUNTU 18
 
-https://vitux.com/how-to-install-yarn-npm-client-on-ubuntu-and-manage-dependencies-through-it/
+Instale o NodeJS
 
-```bash
-sudo apt install curl
-```
-
-```bash
-sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-sudo sh -c "echo 'deb https://dl.yarnpkg.com/debian/ stable main' >> /etc/apt/sources.list"
-```
-
-Caso já tenho o Node instalado no Ubuntu 20, faça:
-
-
-```bash
-sudo apt remove cmdtest
-sudo apt-get install yarn
-sudo apt install cmdtest
-```
-
-```
-yarn --version
-0.32+git
-```
-
-
-https://linuxize.com/post/how-to-install-yarn-on-ubuntu-18-04/
+Depois faça apenas npm install -g yarn
 
 # 5. HOW TO REMOVE LIBREOFFICE
 
@@ -110,9 +113,7 @@ Pronto! Basta buscar pelo DATAGRIP!
 
 # 8. INSTALAÇÃO DO MONGODB NO UBUNTU 18
 
-https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
-
-Objetivo: instalar o MongoDB 4.2 no Ubuntu 
+Dica: utilize o Docker para instalar o MongoDB.
 
 
 # 9. Instalando o editor de texto **joe** para terminal
