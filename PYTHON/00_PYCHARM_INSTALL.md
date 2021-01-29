@@ -38,10 +38,7 @@ sudo apt-get remove o oracle-java11-installer
 # INSTALANDO O PYCHARM
 
 ``` bash
-cd /opt/
-/opt$ mkdir jetbrains
-/opt$ sudo mkdir jetbrains
-/opt$ sudo chown -R $USER:$USER jetbrains/
+snap search pycharm
 ```
 
 Extração do pycharm onde você baixou (Downloads) o arquivo digite:
